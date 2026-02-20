@@ -1,0 +1,132 @@
+{
+  "categories": [
+    {
+      "id": "greetings",
+      "name_ja": "挨拶・基本表現",
+      "name_zh": "打招呼",
+      "icon": "wave",
+      "color": "#4CAF50",
+      "description_ja": "日常の挨拶、お礼、謝罪など基本的な表現"
+    },
+    {
+      "id": "numbers",
+      "name_ja": "数字・量詞",
+      "name_zh": "數字量詞",
+      "icon": "hash",
+      "color": "#2196F3",
+      "description_ja": "数字、序数、よく使う量詞"
+    },
+    {
+      "id": "basic_verbs",
+      "name_ja": "基本動詞",
+      "name_zh": "基本動詞",
+      "icon": "arrow",
+      "color": "#607D8B",
+      "description_ja": "日常でよく使う基本的な動詞"
+    },
+    {
+      "id": "family",
+      "name_ja": "家族・人間関係",
+      "name_zh": "家庭人際",
+      "icon": "home",
+      "color": "#FF9800",
+      "description_ja": "家族の呼び方、人間関係の表現"
+    },
+    {
+      "id": "body",
+      "name_ja": "体・健康",
+      "name_zh": "身體健康",
+      "icon": "person",
+      "color": "#E91E63",
+      "description_ja": "体の部位、健康・病気に関する語彙"
+    },
+    {
+      "id": "food",
+      "name_ja": "食べ物・飲み物",
+      "name_zh": "食物飲料",
+      "icon": "bowl",
+      "color": "#FF5722",
+      "description_ja": "台湾料理を中心とした食べ物・飲み物の語彙"
+    },
+    {
+      "id": "clothing",
+      "name_ja": "衣服・装飾品",
+      "name_zh": "衣服飾品",
+      "icon": "shirt",
+      "color": "#9C27B0",
+      "description_ja": "衣類、アクセサリー、ファッション関連"
+    },
+    {
+      "id": "home_furniture",
+      "name_ja": "住宅・家具",
+      "name_zh": "住宅家具",
+      "icon": "sofa",
+      "color": "#795548",
+      "description_ja": "家の部屋、家具、家電製品"
+    },
+    {
+      "id": "daily_time",
+      "name_ja": "日常活動・時間",
+      "name_zh": "日常時間",
+      "icon": "clock",
+      "color": "#3F51B5",
+      "description_ja": "時間の表現、曜日、日常的な活動"
+    },
+    {
+      "id": "transport",
+      "name_ja": "交通・旅行",
+      "name_zh": "交通旅遊",
+      "icon": "bus",
+      "color": "#00BCD4",
+      "description_ja": "台湾の交通手段、旅行に必要な語彙"
+    },
+    {
+      "id": "shopping",
+      "name_ja": "買い物・お金",
+      "name_zh": "購物金錢",
+      "icon": "cart",
+      "color": "#8BC34A",
+      "description_ja": "買い物、値段交渉、お金に関する語彙"
+    },
+    {
+      "id": "entertainment",
+      "name_ja": "娯楽・趣味",
+      "name_zh": "娛樂嗜好",
+      "icon": "music",
+      "color": "#F44336",
+      "description_ja": "趣味、スポーツ、エンタメ関連の語彙"
+    },
+    {
+      "id": "education_work",
+      "name_ja": "教育・仕事",
+      "name_zh": "教育工作",
+      "icon": "book",
+      "color": "#009688",
+      "description_ja": "学校、仕事、職業に関する語彙"
+    },
+    {
+      "id": "adjectives",
+      "name_ja": "形容詞・描写",
+      "name_zh": "形容描述",
+      "icon": "star",
+      "color": "#FFC107",
+      "description_ja": "物事の性質・状態・様子を表す形容詞"
+    },
+    {
+      "id": "emotions",
+      "name_ja": "感情・気持ち",
+      "name_zh": "情感心情",
+      "icon": "heart",
+      "color": "#FF4081",
+      "description_ja": "喜怒哀楽など感情を表す語彙"
+    },
+    {
+      "id": "taiwan_specific",
+      "name_ja": "台湾特有語彙",
+      "name_zh": "台灣特有",
+      "icon": "flag",
+      "color": "#3F51B5",
+      "description_ja": "台湾でしか使わない表現・台湾式中国語"
+    }
+  ]
+}

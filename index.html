@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="台湾華語（繁体字）を日本語話者向けに学ぶフラッシュカードアプリ。間隔反復システム（SRS）で1,000語マスターを目指す。">
+  <meta name="theme-color" content="#E53935">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="台湾華語">
+  <title>台湾華語フラッシュカード</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇹🇼</text></svg>">
+
+  <!-- Google Fonts: 繁体字 + 日本語 UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/flashcard.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+<div id="app">
+  <!-- サイドバーナビ（デスクトップ） -->
+  <nav class="nav-sidebar" id="nav-sidebar" role="navigation" aria-label="メインナビゲーション">
+  </nav>
+
+  <!-- メインコンテンツ -->
+  <main class="main-content" id="main-content">
+
+    <!-- ホーム画面 -->
+    <div class="view" id="view-home" role="main" aria-label="ホーム"></div>
+
+    <!-- 学習セッション -->
+    <div class="view" id="view-study" role="main" aria-label="学習"></div>
+
+    <!-- 単語帳（ブラウズ） -->
+    <div class="view" id="view-browse" role="main" aria-label="単語帳"></div>
+
+    <!-- 統計 -->
+    <div class="view" id="view-stats" role="main" aria-label="統計"></div>
+
+    <!-- 設定 -->
+    <div class="view" id="view-settings" role="main" aria-label="設定"></div>
+
+  </main>
+
+  <!-- ボトムナビ（モバイル） -->
+  <nav class="nav-bottom" id="nav-bottom" role="navigation" aria-label="ボトムナビゲーション">
+  </nav>
+</div>
+
+<!-- アプリ起動 -->
+<script type="module" src="js/app.js"></script>
+
+<!-- Service Worker フォールバック（JS モジュール非対応ブラウザ向けメッセージ） -->
+<noscript>
+  <style>
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: sans-serif; text-align: center; padding: 20px; }
+  </style>
+  <p>このアプリは JavaScript が必要です。ブラウザで JavaScript を有効にしてください。</p>
+</noscript>
+
+</body>
+</html>
