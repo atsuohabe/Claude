@@ -286,14 +286,11 @@ async function renderStudySetup() {
           <div id="category-filter-container"></div>
         </div>
 
-        <button class="btn btn--primary btn--full" id="begin-session-btn"
-          ${dueIds.length === 0 && newToday === 0 ? 'disabled' : ''}>
-          ${dueIds.length === 0 && newToday === 0
-            ? '今日の学習は完了しています'
-            : `学習開始 (${dueIds.length + newToday}枚)`}
+        <button class="btn btn--primary btn--full" id="begin-session-btn">
+          ${dueIds.length === 0 && newToday === 0 ? '全カードを復習する' : '学習開始'}
         </button>
         ${dueIds.length === 0 && newToday === 0
-          ? '<p class="text-muted text-sm" style="text-align:center;margin-top:var(--space-3)">素晴らしい！今日のカードは全て完了しました。</p>'
+          ? '<p class="text-muted text-sm" style="text-align:center;margin-top:var(--space-3)">今日の学習は完了しています。これまで学習した全カードを復習できます。</p>'
           : ''}
       </div>
 
@@ -316,7 +313,17 @@ async function renderStudySetup() {
 
   // 学習開始ボタン
   container.querySelector('#begin-session-btn')?.addEventListener('click', async () => {
-    await startStudySession(container);
+    if (dueIds.length === 0 && newToday === 0) {
+      // 今日の分は完了 → 既習全カードを復習
+      const learnedIds = Object.keys(Store.getAllCards()).map(Number);
+      if (learnedIds.length === 0) {
+        toast('まだ学習したカードがありません。', 'info');
+        return;
+      }
+      await startStudySession(container, learnedIds);
+    } else {
+      await startStudySession(container);
+    }
   });
 }
 
@@ -499,10 +506,7 @@ function renderBrowse() {
     card.className = 'word-card';
     card.innerHTML = `
       <div class="word-card__top">
-        <div>
-          <div class="word-card__hanzi">${escapeHtml(word.hanzi)}</div>
-          <div class="word-card__pinyin">${escapeHtml(word.pinyin)}</div>
-        </div>
+        <div class="word-card__hanzi">${escapeHtml(word.hanzi)}</div>
         <button class="word-card__speak-btn" aria-label="発音を聴く" title="発音を聴く">🔊</button>
       </div>
       <div class="word-card__meaning">${escapeHtml(word.meaning_ja || '')}</div>
@@ -524,7 +528,8 @@ function showWordDetail(word, srsData) {
     <div style="text-align:center;margin-bottom:var(--space-6)">
       <div class="hanzi" style="font-size:4rem;margin-bottom:var(--space-2)">${escapeHtml(word.hanzi)}</div>
       <div style="font-size:1.2rem;color:var(--color-text-muted)">${escapeHtml(word.pinyin)}</div>
-      <div style="font-size:1.5rem;font-weight:700;margin-top:var(--space-3)">${escapeHtml(word.meaning_ja || word.meaning_en || '')}</div>
+      <div style="font-size:1.5rem;font-weight:700;margin-top:var(--space-3)">${escapeHtml(word.meaning_ja || '')}</div>
+      ${word.meaning_en ? `<div style="font-size:1.1rem;color:var(--color-text-muted);margin-top:var(--space-1)">${escapeHtml(word.meaning_en)}</div>` : ''}
     </div>
     ${word.example_sentence?.hanzi ? `
       <div class="card__example">
@@ -542,7 +547,7 @@ function showWordDetail(word, srsData) {
       </div>
     ` : '<div class="text-sm text-muted" style="margin-top:var(--space-4)">まだ学習していません</div>'}
   `;
-  modal({ title: word.hanzi, content });
+  modal({ title: '', content });
 }
 
 // ─── 統計ページ ──────────────────────────────────────────────────────

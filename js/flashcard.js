@@ -17,10 +17,21 @@ export function speakWord(text) {
   if (!text || !window.speechSynthesis) return;
   const rate = Store.getSettings().ttsRate ?? 0.8;
   window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'zh-TW';
-  utterance.rate = rate;
-  speechSynthesis.speak(utterance);
+
+  function speak() {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'zh-TW';
+    utterance.rate = rate;
+    speechSynthesis.speak(utterance);
+  }
+
+  // Desktop Chrome loads voices asynchronously
+  const voices = speechSynthesis.getVoices();
+  if (voices.length > 0) {
+    speak();
+  } else {
+    speechSynthesis.addEventListener('voiceschanged', speak, { once: true });
+  }
 }
 
 // ─── 声調カラー変換 ───────────────────────────────────────────────────
