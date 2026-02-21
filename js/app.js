@@ -6,7 +6,7 @@
 import { Store } from './store.js';
 import { Vocab } from './vocab.js';
 import { Session } from './session.js';
-import { Flashcard } from './flashcard.js';
+import { Flashcard, speakWord } from './flashcard.js';
 import { renderStats, getOverview, updateProgressRing } from './stats.js';
 import {
   toast,
@@ -167,7 +167,6 @@ function renderHome() {
     <div class="page">
       <div class="dashboard-hero">
         <div class="dashboard-hero__title">台湾華語フラッシュカード</div>
-        <div class="dashboard-hero__subtitle">繁体字・ピンイン・日本語で学ぶ台湾中国語</div>
 
         <div class="dashboard-hero__ring">
           <svg class="progress-ring" viewBox="0 0 120 120">
@@ -321,8 +320,10 @@ async function renderStudySetup() {
   });
 }
 
-async function startStudySession(container) {
-  const started = await Session.start({ categories: _selectedCategories });
+async function startStudySession(container, wordIds = null) {
+  const started = wordIds
+    ? await Session.startWithIds(wordIds)
+    : await Session.start({ categories: _selectedCategories });
 
   if (!started) {
     toast('学習するカードがありません。明日また来てください！', 'info');
@@ -402,6 +403,7 @@ function handleUndo() {
 }
 
 function showSessionComplete(container) {
+  const lastWordIds = Session.getLastSessionWordIds();
   const stats = Session.end();
   _keyboardDetach?.detach();
   _keyboardDetach = null;
@@ -430,12 +432,21 @@ function showSessionComplete(container) {
           </div>
         </div>
 
-        <button class="btn btn--primary btn--lg" onclick="location.hash='#home'">
-          ホームへ戻る
-        </button>
+        <div style="display:flex;flex-direction:column;gap:var(--space-3);width:100%;max-width:320px">
+          <button class="btn btn--secondary btn--lg btn--full" id="review-again-btn">
+            もう一度練習する
+          </button>
+          <button class="btn btn--primary btn--lg btn--full" onclick="location.hash='#home'">
+            ホームへ戻る
+          </button>
+        </div>
       </div>
     </div>
   `;
+
+  container.querySelector('#review-again-btn')?.addEventListener('click', () => {
+    startStudySession(container, lastWordIds);
+  });
 }
 
 // ─── 単語帳（ブラウズ）────────────────────────────────────────────────
@@ -487,12 +498,22 @@ function renderBrowse() {
     const card = document.createElement('div');
     card.className = 'word-card';
     card.innerHTML = `
-      <div class="word-card__hanzi">${escapeHtml(word.hanzi)}</div>
-      <div class="word-card__pinyin">${escapeHtml(word.pinyin)}</div>
+      <div class="word-card__top">
+        <div>
+          <div class="word-card__hanzi">${escapeHtml(word.hanzi)}</div>
+          <div class="word-card__pinyin">${escapeHtml(word.pinyin)}</div>
+        </div>
+        <button class="word-card__speak-btn" aria-label="発音を聴く" title="発音を聴く">🔊</button>
+      </div>
       <div class="word-card__meaning">${escapeHtml(word.meaning_ja || '')}</div>
+      ${word.meaning_en ? `<div class="word-card__meaning-en">${escapeHtml(word.meaning_en)}</div>` : ''}
       <div class="word-card__state word-card__state--${state}"></div>
     `;
     card.addEventListener('click', () => showWordDetail(word, srs));
+    card.querySelector('.word-card__speak-btn').addEventListener('click', e => {
+      e.stopPropagation();
+      speakWord(word.hanzi);
+    });
     grid.appendChild(card);
   }
 }

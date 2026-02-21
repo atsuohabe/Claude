@@ -25,6 +25,7 @@ let _sessionStats = {
   startTime: null,
 };
 let _pendingUpdates = {};  // wordId → 更新済み SRS データ（まとめて保存）
+let _lastSessionWordIds = []; // 直前のセッションで学習した単語 ID
 
 // ─── セッション API ───────────────────────────────────────────────────
 
@@ -70,6 +71,7 @@ export const Session = {
 
     // キューを構築（復習 → 新規を散りばめる）
     _queue = _buildQueue(dueIds, newIds);
+    _lastSessionWordIds = [...new Set(_queue.map(item => item.wordId))];
     _currentIndex = 0;
     _history = [];
     _pendingUpdates = {};
@@ -174,6 +176,35 @@ export const Session = {
     _sessionStats.reviewed = Math.max(0, _sessionStats.reviewed - 1);
 
     return true;
+  },
+
+  /** 直前のセッションで学習した単語 ID リストを返す */
+  getLastSessionWordIds() {
+    return [..._lastSessionWordIds];
+  },
+
+  /**
+   * 指定した単語 ID リストでセッションを開始する（SRS due 状態を無視）
+   * @param {number[]} wordIds
+   * @returns {boolean}
+   */
+  async startWithIds(wordIds) {
+    const allCards = Store.getAllCards();
+    _queue = wordIds.map(id => {
+      const srsData = allCards[String(id)] || newCardData(Number(id));
+      return { wordId: Number(id), srsData, isNew: false };
+    });
+    _lastSessionWordIds = [...wordIds];
+    _currentIndex = 0;
+    _history = [];
+    _pendingUpdates = {};
+    _sessionStats = {
+      reviewed: 0,
+      correct: 0,
+      newCards: 0,
+      startTime: Date.now(),
+    };
+    return _queue.length > 0;
   },
 
   /** セッションを終了し、保留中の更新を全て保存する */

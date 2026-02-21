@@ -238,10 +238,10 @@
 
 /* English meaning (back) */
 .card__meaning-en {
-  font-size: clamp(13px, 3vw, 16px);
+  font-size: var(--size-meaning);
+  font-weight: 600;
   color: var(--color-text-muted);
   margin-bottom: var(--space-3);
-  font-style: italic;
 }
 
 .card__number {
