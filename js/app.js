@@ -506,7 +506,10 @@ function renderBrowse() {
     card.className = 'word-card';
     card.innerHTML = `
       <div class="word-card__top">
-        <div class="word-card__hanzi">${escapeHtml(word.hanzi)}</div>
+        <div>
+          <div class="word-card__hanzi">${escapeHtml(word.hanzi)}</div>
+          <div class="word-card__pinyin">${escapeHtml(word.pinyin)}</div>
+        </div>
         <button class="word-card__speak-btn" aria-label="発音を聴く" title="発音を聴く">🔊</button>
       </div>
       <div class="word-card__meaning">${escapeHtml(word.meaning_ja || '')}</div>
