@@ -5,6 +5,23 @@
 
 import { attachGestures } from './gestures.js';
 import { RATING, intervalToLabel, previewIntervals } from './srs.js';
+import { Store } from './store.js';
+
+// ─── 発声機能（Web Speech API） ──────────────────────────────────────
+
+/**
+ * 台湾華語（zh-TW）で指定テキストを読み上げる
+ * @param {string} text - 読み上げるテキスト（漢字）
+ */
+export function speakWord(text) {
+  if (!text || !window.speechSynthesis) return;
+  const rate = Store.getSettings().ttsRate ?? 0.8;
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'zh-TW';
+  utterance.rate = rate;
+  speechSynthesis.speak(utterance);
+}
 
 // ─── 声調カラー変換 ───────────────────────────────────────────────────
 
@@ -177,6 +194,11 @@ export class Flashcard {
     this._renderFront(wordData);
     this._renderBack(wordData, srsData);
     this._updateRatingIntervals(srsData);
+
+    // 自動読み上げ（設定で有効な場合）
+    if (Store.getSettings().autoplayAudio) {
+      setTimeout(() => speakWord(wordData.hanzi), 50);
+    }
   }
 
   _renderFront(word) {
@@ -202,12 +224,23 @@ export class Flashcard {
     const hanzi = el('div', 'card__hanzi-main hanzi');
     hanzi.textContent = word.hanzi;
 
+    // 発声ボタン
+    const speakBtn = el('button', 'speak-btn');
+    speakBtn.setAttribute('aria-label', '発音を聴く');
+    speakBtn.setAttribute('title', '発音を聴く');
+    speakBtn.textContent = '🔊';
+    speakBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // カードフリップを防ぐ
+      speakWord(word.hanzi);
+    });
+
     // ヒント
     const hint = el('div', 'card__hint');
     hint.innerHTML = `<span>タップして答えを見る</span>`;
 
     this.front.appendChild(meta);
     this.front.appendChild(hanzi);
+    this.front.appendChild(speakBtn);
     this.front.appendChild(hint);
   }
 

@@ -6,6 +6,7 @@
 import { Store } from './store.js';
 import { getMasteredCount, getLearningCount, getCardStateCounts, getForecast } from './srs.js';
 import { animateCounter } from './ui.js';
+import { Vocab } from './vocab.js';
 
 // ─── 統計集計 ────────────────────────────────────────────────────────
 
@@ -17,14 +18,16 @@ export function getOverview() {
   const learning = getLearningCount();
   const allCards = Store.getAllCards();
   const totalSeen = Object.keys(allCards).length;
-  const notStarted = 1000 - totalSeen;
+  const totalWords = Vocab.getLoadedCount() || 160;
+  const notStarted = totalWords - totalSeen;
 
   return {
     mastered,
     learning,
     totalSeen,
+    total: totalWords,
     notStarted: Math.max(0, notStarted),
-    percentage: Math.round((mastered / 1000) * 100),
+    percentage: Math.round((mastered / totalWords) * 100),
   };
 }
 
@@ -248,7 +251,7 @@ export function renderStats(container) {
  * @param {{ mastered: number, learning: number }} counts
  */
 export function updateProgressRing(svg, { mastered, learning }) {
-  const TOTAL = 1000;
+  const TOTAL = Vocab.getLoadedCount() || 160;
   const CIRCUMFERENCE = 2 * Math.PI * 52; // r=52
 
   const masteredPct = Math.min(mastered / TOTAL, 1);
