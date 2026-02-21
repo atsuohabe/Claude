@@ -1,0 +1,3202 @@
+[
+  {
+    "id": 1,
+    "hanzi": "我",
+    "pinyin": "wŏ",
+    "pinyin_tones": "wŏ5",
+    "meaning_ja": "私",
+    "meaning_en": "I / me",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 1,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 2,
+    "hanzi": "你/妳",
+    "pinyin": "nĭ",
+    "pinyin_tones": "nĭ5",
+    "meaning_ja": "あなた/あなた(女性)",
+    "meaning_en": "you",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 2,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 3,
+    "hanzi": "他/她",
+    "pinyin": "tā",
+    "pinyin_tones": "ta1",
+    "meaning_ja": "彼/彼女",
+    "meaning_en": "he / she",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 3,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 4,
+    "hanzi": "我們",
+    "pinyin": "wŏmen",
+    "pinyin_tones": "wŏmen5",
+    "meaning_ja": "私たち",
+    "meaning_en": "we / us",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 4,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 5,
+    "hanzi": "你們/妳們",
+    "pinyin": "nĭmen",
+    "pinyin_tones": "nĭmen5",
+    "meaning_ja": "あなたたち/あなたたち（女性）",
+    "meaning_en": "you (plural)",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 5,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 6,
+    "hanzi": "他們/她們",
+    "pinyin": "tāmen",
+    "pinyin_tones": "tamen1",
+    "meaning_ja": "彼ら/彼女たち",
+    "meaning_en": "they",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 6,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 7,
+    "hanzi": "您",
+    "pinyin": "nín",
+    "pinyin_tones": "nin2",
+    "meaning_ja": "あなた（敬称）",
+    "meaning_en": "you (polite)",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 7,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 8,
+    "hanzi": "誰",
+    "pinyin": "shéi",
+    "pinyin_tones": "shei2",
+    "meaning_ja": "誰",
+    "meaning_en": "who",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 8,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 9,
+    "hanzi": "姓名",
+    "pinyin": "xìngmíng",
+    "pinyin_tones": "xingming2",
+    "meaning_ja": "姓名、フルネーム（姓と名）",
+    "meaning_en": "full name",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 9,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 10,
+    "hanzi": "人",
+    "pinyin": "rén",
+    "pinyin_tones": "ren2",
+    "meaning_ja": "人",
+    "meaning_en": "person / people",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 10,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 11,
+    "hanzi": "國",
+    "pinyin": "guó",
+    "pinyin_tones": "guo2",
+    "meaning_ja": "国",
+    "meaning_en": "country",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 11,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 12,
+    "hanzi": "中國",
+    "pinyin": "zhōngguó",
+    "pinyin_tones": "zhongguo2",
+    "meaning_ja": "中国",
+    "meaning_en": "China",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 12,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 13,
+    "hanzi": "美國",
+    "pinyin": "měiguó",
+    "pinyin_tones": "meiguo2",
+    "meaning_ja": "アメリカ",
+    "meaning_en": "USA",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 13,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 14,
+    "hanzi": "日本",
+    "pinyin": "rìběn",
+    "pinyin_tones": "riben3",
+    "meaning_ja": "日本",
+    "meaning_en": "Japan",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 14,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 15,
+    "hanzi": "台灣/臺灣",
+    "pinyin": "táiwān",
+    "pinyin_tones": "taiwan1",
+    "meaning_ja": "台湾",
+    "meaning_en": "Taiwan",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 15,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 16,
+    "hanzi": "名字(˙ㄗ)",
+    "pinyin": "míngzi",
+    "pinyin_tones": "mingzi2",
+    "meaning_ja": "名前",
+    "meaning_en": "name",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 16,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 17,
+    "hanzi": "家",
+    "pinyin": "jiā",
+    "pinyin_tones": "jia1",
+    "meaning_ja": "家",
+    "meaning_en": "home / family",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 17,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 18,
+    "hanzi": "電話",
+    "pinyin": "diànhuà",
+    "pinyin_tones": "dianhua4",
+    "meaning_ja": "電話",
+    "meaning_en": "telephone / phone number",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 18,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 19,
+    "hanzi": "時間",
+    "pinyin": "shíjiān",
+    "pinyin_tones": "shijian1",
+    "meaning_ja": "時間",
+    "meaning_en": "time",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 19,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 20,
+    "hanzi": "小時",
+    "pinyin": "xiăoshí",
+    "pinyin_tones": "xiăoshi2",
+    "meaning_ja": "時間（～時間という単位）",
+    "meaning_en": "hour",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 20,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 21,
+    "hanzi": "現在",
+    "pinyin": "xiànzài",
+    "pinyin_tones": "xianzai4",
+    "meaning_ja": "今",
+    "meaning_en": "now",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 21,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 22,
+    "hanzi": "今年",
+    "pinyin": "jīnnián",
+    "pinyin_tones": "jinnian2",
+    "meaning_ja": "今年",
+    "meaning_en": "this year",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 22,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 23,
+    "hanzi": "今天",
+    "pinyin": "jīntiān",
+    "pinyin_tones": "jintian1",
+    "meaning_ja": "今日",
+    "meaning_en": "today",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 23,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 24,
+    "hanzi": "明天",
+    "pinyin": "míngtiān",
+    "pinyin_tones": "mingtian1",
+    "meaning_ja": "明日",
+    "meaning_en": "tomorrow",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 24,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 25,
+    "hanzi": "昨天",
+    "pinyin": "zuótiān",
+    "pinyin_tones": "zuotian1",
+    "meaning_ja": "昨日",
+    "meaning_en": "yesterday",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 25,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 26,
+    "hanzi": "早上",
+    "pinyin": "zăoshàng",
+    "pinyin_tones": "zăoshang4",
+    "meaning_ja": "朝",
+    "meaning_en": "morning",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 26,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 27,
+    "hanzi": "上午",
+    "pinyin": "shàngwŭ",
+    "pinyin_tones": "shangwŭ4",
+    "meaning_ja": "午前",
+    "meaning_en": "AM / late morning",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 27,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 28,
+    "hanzi": "中午",
+    "pinyin": "zhōngwŭ",
+    "pinyin_tones": "zhongwŭ1",
+    "meaning_ja": "昼時",
+    "meaning_en": "noon",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 28,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 29,
+    "hanzi": "下午",
+    "pinyin": "xiàwŭ",
+    "pinyin_tones": "xiawŭ4",
+    "meaning_ja": "午後",
+    "meaning_en": "afternoon",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 29,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 30,
+    "hanzi": "晚上",
+    "pinyin": "wănshàng",
+    "pinyin_tones": "wănshang4",
+    "meaning_ja": "夜",
+    "meaning_en": "evening / night",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 30,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 31,
+    "hanzi": "一",
+    "pinyin": "yī",
+    "pinyin_tones": "yi1",
+    "meaning_ja": "1",
+    "meaning_en": "one",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 31,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 32,
+    "hanzi": "二",
+    "pinyin": "èr",
+    "pinyin_tones": "er4",
+    "meaning_ja": "2",
+    "meaning_en": "two",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 32,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 33,
+    "hanzi": "三",
+    "pinyin": "sān",
+    "pinyin_tones": "san1",
+    "meaning_ja": "3",
+    "meaning_en": "three",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 33,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 34,
+    "hanzi": "四",
+    "pinyin": "sì",
+    "pinyin_tones": "si4",
+    "meaning_ja": "4",
+    "meaning_en": "four",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 34,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 35,
+    "hanzi": "五",
+    "pinyin": "wŭ",
+    "pinyin_tones": "wŭ5",
+    "meaning_ja": "5",
+    "meaning_en": "five",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 35,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 36,
+    "hanzi": "六",
+    "pinyin": "liù",
+    "pinyin_tones": "liu4",
+    "meaning_ja": "6",
+    "meaning_en": "six",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 36,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 37,
+    "hanzi": "七",
+    "pinyin": "qī",
+    "pinyin_tones": "qi1",
+    "meaning_ja": "7",
+    "meaning_en": "seven",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 37,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 38,
+    "hanzi": "八",
+    "pinyin": "bā",
+    "pinyin_tones": "ba1",
+    "meaning_ja": "8",
+    "meaning_en": "eight",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 38,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 39,
+    "hanzi": "九",
+    "pinyin": "jiŭ",
+    "pinyin_tones": "jiŭ5",
+    "meaning_ja": "9",
+    "meaning_en": "nine",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 39,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 40,
+    "hanzi": "十",
+    "pinyin": "shí",
+    "pinyin_tones": "shi2",
+    "meaning_ja": "10",
+    "meaning_en": "ten",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 40,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 41,
+    "hanzi": "兩",
+    "pinyin": "liăng",
+    "pinyin_tones": "liăng5",
+    "meaning_ja": "2（数量、分量を言う時）",
+    "meaning_en": "two (before measure words)",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 41,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 42,
+    "hanzi": "時候",
+    "pinyin": "shíhòu",
+    "pinyin_tones": "shihou4",
+    "meaning_ja": "時",
+    "meaning_en": "when / time",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 42,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 43,
+    "hanzi": "百",
+    "pinyin": "băi",
+    "pinyin_tones": "băi5",
+    "meaning_ja": "100",
+    "meaning_en": "hundred",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 43,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 44,
+    "hanzi": "半",
+    "pinyin": "bàn",
+    "pinyin_tones": "ban4",
+    "meaning_ja": "（時刻の）半、半分の",
+    "meaning_en": "half",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 44,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 45,
+    "hanzi": "千",
+    "pinyin": "qiān",
+    "pinyin_tones": "qian1",
+    "meaning_ja": "千",
+    "meaning_en": "thousand",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 45,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 46,
+    "hanzi": "爸爸/爸",
+    "pinyin": "bàba/bà",
+    "pinyin_tones": "baba/ba4",
+    "meaning_ja": "お父さん",
+    "meaning_en": "dad",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 46,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 47,
+    "hanzi": "媽媽/媽",
+    "pinyin": "māma/mā",
+    "pinyin_tones": "mama/ma1",
+    "meaning_ja": "お母さん",
+    "meaning_en": "mom",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 47,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 48,
+    "hanzi": "哥哥/哥",
+    "pinyin": "gēge/gē",
+    "pinyin_tones": "gege/ge1",
+    "meaning_ja": "お兄さん",
+    "meaning_en": "older brother",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 48,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 49,
+    "hanzi": "弟弟/弟",
+    "pinyin": "dìdi/dì",
+    "pinyin_tones": "didi/di4",
+    "meaning_ja": "弟",
+    "meaning_en": "younger brother",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 49,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 50,
+    "hanzi": "姊姊/姐姐/姊/姐",
+    "pinyin": "jiějie/jiě",
+    "pinyin_tones": "jiejie/jie3",
+    "meaning_ja": "お姉さん",
+    "meaning_en": "older sister",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 50,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 51,
+    "hanzi": "妹妹/妹",
+    "pinyin": "mèimei/mèi",
+    "pinyin_tones": "meimei/mei4",
+    "meaning_ja": "妹",
+    "meaning_en": "younger sister",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 51,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 52,
+    "hanzi": "小孩(子)",
+    "pinyin": "xiăohái(zi)",
+    "pinyin_tones": "xiăohai(zi)2",
+    "meaning_ja": "子ども",
+    "meaning_en": "child",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 52,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 53,
+    "hanzi": "的",
+    "pinyin": "de",
+    "pinyin_tones": "de5",
+    "meaning_ja": "～の",
+    "meaning_en": "possessive particle",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 53,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 54,
+    "hanzi": "第",
+    "pinyin": "dì",
+    "pinyin_tones": "di4",
+    "meaning_ja": "第～",
+    "meaning_en": "ordinal marker (No.)",
+    "part_of_speech": "determiner",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 54,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 55,
+    "hanzi": "分",
+    "pinyin": "fēn",
+    "pinyin_tones": "fen1",
+    "meaning_ja": "（時刻の）～分",
+    "meaning_en": "minute / point",
+    "part_of_speech": "measure_word",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 55,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 56,
+    "hanzi": "點",
+    "pinyin": "diăn",
+    "pinyin_tones": "diăn5",
+    "meaning_ja": "（時刻の）～時、～点",
+    "meaning_en": "o'clock / dot",
+    "part_of_speech": "measure_word",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 56,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 57,
+    "hanzi": "個",
+    "pinyin": "ge",
+    "pinyin_tones": "ge5",
+    "meaning_ja": "～個、～人",
+    "meaning_en": "general measure word",
+    "part_of_speech": "measure_word",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 57,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 58,
+    "hanzi": "歲",
+    "pinyin": "suì",
+    "pinyin_tones": "sui4",
+    "meaning_ja": "～歳",
+    "meaning_en": "years old",
+    "part_of_speech": "measure_word",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 58,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 59,
+    "hanzi": "年",
+    "pinyin": "nián",
+    "pinyin_tones": "nian2",
+    "meaning_ja": "～年間",
+    "meaning_en": "year",
+    "part_of_speech": "measure_word",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 59,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 60,
+    "hanzi": "住",
+    "pinyin": "zhù",
+    "pinyin_tones": "zhu4",
+    "meaning_ja": "住む、泊まる",
+    "meaning_en": "to live / stay",
+    "part_of_speech": "verb",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 60,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 61,
+    "hanzi": "來",
+    "pinyin": "lái",
+    "pinyin_tones": "lai2",
+    "meaning_ja": "来る",
+    "meaning_en": "to come",
+    "part_of_speech": "verb",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 61,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 62,
+    "hanzi": "是",
+    "pinyin": "shì",
+    "pinyin_tones": "shi4",
+    "meaning_ja": "～は···だ",
+    "meaning_en": "to be (is/are)",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 62,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 63,
+    "hanzi": "姓",
+    "pinyin": "xìng",
+    "pinyin_tones": "xing4",
+    "meaning_ja": "～という姓だ",
+    "meaning_en": "surname",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 63,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 64,
+    "hanzi": "覺得",
+    "pinyin": "juéde",
+    "pinyin_tones": "juede2",
+    "meaning_ja": "～と思う、～と感じる、～の気がする",
+    "meaning_en": "to feel / think",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 64,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 65,
+    "hanzi": "喜歡",
+    "pinyin": "xĭhuān",
+    "pinyin_tones": "xĭhuan1",
+    "meaning_ja": "好きだ",
+    "meaning_en": "to like",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 65,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 66,
+    "hanzi": "打電話",
+    "pinyin": "dădiànhuà",
+    "pinyin_tones": "dădianhua4",
+    "meaning_ja": "電話をかける",
+    "meaning_en": "to make a phone call",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 66,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 67,
+    "hanzi": "漂亮",
+    "pinyin": "piàolìang",
+    "pinyin_tones": "piaoliang4",
+    "meaning_ja": "綺麗だ、美しい",
+    "meaning_en": "pretty",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 67,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 68,
+    "hanzi": "高",
+    "pinyin": "gāo",
+    "pinyin_tones": "gao1",
+    "meaning_ja": "高い",
+    "meaning_en": "tall / high",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 68,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 69,
+    "hanzi": "老",
+    "pinyin": "lăo",
+    "pinyin_tones": "lăo5",
+    "meaning_ja": "老いた、古い／いつも～（親しみを込めて姓の前につけることも）",
+    "meaning_en": "old",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 69,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 70,
+    "hanzi": "好",
+    "pinyin": "hăo",
+    "pinyin_tones": "hăo5",
+    "meaning_ja": "よい、(「＋動詞」で)～しやすい、(「＋形容詞」で)すごく",
+    "meaning_en": "good",
+    "part_of_speech": "adverb",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 70,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 71,
+    "hanzi": "很",
+    "pinyin": "hěn",
+    "pinyin_tones": "hen3",
+    "meaning_ja": "（形容詞の肯定形につけて、対比のニュアンスを消す副詞）",
+    "meaning_en": "very",
+    "part_of_speech": "adverb",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 71,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 72,
+    "hanzi": "真",
+    "pinyin": "zhēn",
+    "pinyin_tones": "zhen1",
+    "meaning_ja": "本当に",
+    "meaning_en": "really",
+    "part_of_speech": "adverb",
+    "category": "greetings",
+    "context": "個人資料",
+    "frequency_rank": 72,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 73,
+    "hanzi": "電腦",
+    "pinyin": "diànnăo",
+    "pinyin_tones": "diannăo4",
+    "meaning_ja": "コンピュータ",
+    "meaning_en": "computer",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "工作",
+    "frequency_rank": 73,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 74,
+    "hanzi": "老師",
+    "pinyin": "lăoshī",
+    "pinyin_tones": "lăoshi1",
+    "meaning_ja": "先生",
+    "meaning_en": "teacher",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "工作",
+    "frequency_rank": 74,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 75,
+    "hanzi": "買",
+    "pinyin": "măi",
+    "pinyin_tones": "măi5",
+    "meaning_ja": "買う",
+    "meaning_en": "to buy",
+    "part_of_speech": "verb",
+    "category": "education_work",
+    "context": "工作",
+    "frequency_rank": 75,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 76,
+    "hanzi": "忙",
+    "pinyin": "máng",
+    "pinyin_tones": "mang2",
+    "meaning_ja": "忙しい",
+    "meaning_en": "busy",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "工作",
+    "frequency_rank": 76,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 77,
+    "hanzi": "學生",
+    "pinyin": "xuéshēng",
+    "pinyin_tones": "xuesheng1",
+    "meaning_ja": "学生",
+    "meaning_en": "student",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 77,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 78,
+    "hanzi": "大學",
+    "pinyin": "dàxué",
+    "pinyin_tones": "daxue2",
+    "meaning_ja": "大学",
+    "meaning_en": "university",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 78,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 79,
+    "hanzi": "學校",
+    "pinyin": "xuéxiào",
+    "pinyin_tones": "xuexiao4",
+    "meaning_ja": "学校",
+    "meaning_en": "school",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 79,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 80,
+    "hanzi": "中文",
+    "pinyin": "zhōngwén",
+    "pinyin_tones": "zhongwen2",
+    "meaning_ja": "中国語",
+    "meaning_en": "Chinese (language)",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 80,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 81,
+    "hanzi": "同學",
+    "pinyin": "tóngxué",
+    "pinyin_tones": "tongxue2",
+    "meaning_ja": "クラスメート、同級生",
+    "meaning_en": "classmate",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 81,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 82,
+    "hanzi": "字",
+    "pinyin": "zì",
+    "pinyin_tones": "zi4",
+    "meaning_ja": "字",
+    "meaning_en": "character",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 82,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 83,
+    "hanzi": "筆",
+    "pinyin": "bĭ",
+    "pinyin_tones": "bĭ5",
+    "meaning_ja": "ペン、文字を書いたり、絵を描いたりする道具の総称",
+    "meaning_en": "pen",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 83,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 84,
+    "hanzi": "學",
+    "pinyin": "xué",
+    "pinyin_tones": "xue2",
+    "meaning_ja": "学ぶ、習う、練習する",
+    "meaning_en": "to study",
+    "part_of_speech": "verb",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 84,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 85,
+    "hanzi": "問",
+    "pinyin": "wèn",
+    "pinyin_tones": "wen4",
+    "meaning_ja": "質問する",
+    "meaning_en": "to ask",
+    "part_of_speech": "verb",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 85,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 86,
+    "hanzi": "說",
+    "pinyin": "shuō",
+    "pinyin_tones": "shuo1",
+    "meaning_ja": "話す",
+    "meaning_en": "to say / speak",
+    "part_of_speech": "verb",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 86,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 87,
+    "hanzi": "寫",
+    "pinyin": "xiě",
+    "pinyin_tones": "xie3",
+    "meaning_ja": "書く",
+    "meaning_en": "to write",
+    "part_of_speech": "verb",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 87,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 88,
+    "hanzi": "聽",
+    "pinyin": "tīng",
+    "pinyin_tones": "ting1",
+    "meaning_ja": "聞く",
+    "meaning_en": "to listen",
+    "part_of_speech": "verb",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 88,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 89,
+    "hanzi": "對",
+    "pinyin": "duì",
+    "pinyin_tones": "dui4",
+    "meaning_ja": "正しい／～に対して／～について",
+    "meaning_en": "correct / right",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 89,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 90,
+    "hanzi": "能",
+    "pinyin": "néng",
+    "pinyin_tones": "neng2",
+    "meaning_ja": "（先天的能力が備わっていたり、条件を充たしていたりして）～できる",
+    "meaning_en": "can / be able to",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 90,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 91,
+    "hanzi": "可以",
+    "pinyin": "kěyĭ",
+    "pinyin_tones": "keyĭ3",
+    "meaning_ja": "（条件を充たしていたり、許可を得たりして）～できる",
+    "meaning_en": "may / can",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 91,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 92,
+    "hanzi": "上課",
+    "pinyin": "shàngkè",
+    "pinyin_tones": "shangke4",
+    "meaning_ja": "授業を受ける、授業をする",
+    "meaning_en": "to attend class",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 92,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 93,
+    "hanzi": "知道",
+    "pinyin": "zhīdào",
+    "pinyin_tones": "zhidao4",
+    "meaning_ja": "知っている、わかる",
+    "meaning_en": "to know",
+    "part_of_speech": "noun",
+    "category": "education_work",
+    "context": "教育",
+    "frequency_rank": 93,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 94,
+    "hanzi": "電視(機)",
+    "pinyin": "diànshì(jī)",
+    "pinyin_tones": "dianshi(ji)1",
+    "meaning_ja": "テレビ",
+    "meaning_en": "TV (set)",
+    "part_of_speech": "noun",
+    "category": "home_furniture",
+    "context": "房屋與家庭、環境",
+    "frequency_rank": 94,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 95,
+    "hanzi": "水",
+    "pinyin": "shuĭ",
+    "pinyin_tones": "shuĭ5",
+    "meaning_ja": "水",
+    "meaning_en": "water",
+    "part_of_speech": "noun",
+    "category": "home_furniture",
+    "context": "房屋與家庭、環境",
+    "frequency_rank": 95,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 96,
+    "hanzi": "久",
+    "pinyin": "jiŭ",
+    "pinyin_tones": "jiŭ5",
+    "meaning_ja": "長い時間（久しい）",
+    "meaning_en": "(a) long time",
+    "part_of_speech": "noun",
+    "category": "daily_time",
+    "context": "日常生活",
+    "frequency_rank": 96,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 97,
+    "hanzi": "早",
+    "pinyin": "zăo",
+    "pinyin_tones": "zăo5",
+    "meaning_ja": "早い／朝",
+    "meaning_en": "early",
+    "part_of_speech": "noun",
+    "category": "entertainment",
+    "context": "閒暇時間、娛樂",
+    "frequency_rank": 97,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 98,
+    "hanzi": "再",
+    "pinyin": "zài",
+    "pinyin_tones": "zai4",
+    "meaning_ja": "もう一度",
+    "meaning_en": "again",
+    "part_of_speech": "adverb",
+    "category": "entertainment",
+    "context": "閒暇時間、娛樂",
+    "frequency_rank": 98,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 99,
+    "hanzi": "書",
+    "pinyin": "shū",
+    "pinyin_tones": "shu1",
+    "meaning_ja": "本",
+    "meaning_en": "book",
+    "part_of_speech": "noun",
+    "category": "entertainment",
+    "context": "閒暇時間、娛樂",
+    "frequency_rank": 99,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 100,
+    "hanzi": "電影",
+    "pinyin": "diànyĭng",
+    "pinyin_tones": "dianyĭng4",
+    "meaning_ja": "映画",
+    "meaning_en": "movie",
+    "part_of_speech": "noun",
+    "category": "entertainment",
+    "context": "閒暇時間、娛樂",
+    "frequency_rank": 100,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 101,
+    "hanzi": "以前",
+    "pinyin": "yĭqián",
+    "pinyin_tones": "yĭqian2",
+    "meaning_ja": "以前、～までに",
+    "meaning_en": "before / previously",
+    "part_of_speech": "noun",
+    "category": "entertainment",
+    "context": "閒暇時間、娛樂",
+    "frequency_rank": 101,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 102,
+    "hanzi": "以後",
+    "pinyin": "yĭhòu",
+    "pinyin_tones": "yĭhou4",
+    "meaning_ja": "以後、～以降",
+    "meaning_en": "after / later",
+    "part_of_speech": "noun",
+    "category": "entertainment",
+    "context": "閒暇時間、娛樂",
+    "frequency_rank": 102,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 103,
+    "hanzi": "走",
+    "pinyin": "zŏu",
+    "pinyin_tones": "zŏu5",
+    "meaning_ja": "歩く、その場を離れる(行く、帰る)",
+    "meaning_en": "to walk / to go",
+    "part_of_speech": "verb",
+    "category": "entertainment",
+    "context": "閒暇時間、娛樂",
+    "frequency_rank": 103,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 104,
+    "hanzi": "等",
+    "pinyin": "děng",
+    "pinyin_tones": "deng3",
+    "meaning_ja": "待つ",
+    "meaning_en": "to wait",
+    "part_of_speech": "verb",
+    "category": "entertainment",
+    "context": "閒暇時間、娛樂",
+    "frequency_rank": 104,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 105,
+    "hanzi": "看",
+    "pinyin": "kàn",
+    "pinyin_tones": "kan4",
+    "meaning_ja": "見る",
+    "meaning_en": "to look / watch / read",
+    "part_of_speech": "verb",
+    "category": "entertainment",
+    "context": "閒暇時間、娛樂",
+    "frequency_rank": 105,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 106,
+    "hanzi": "就",
+    "pinyin": "jiù",
+    "pinyin_tones": "jiu4",
+    "meaning_ja": "すぐに／もう／～するとすぐ（副詞）",
+    "meaning_en": "then / right away",
+    "part_of_speech": "adverb",
+    "category": "entertainment",
+    "context": "閒暇時間、娛樂",
+    "frequency_rank": 106,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 107,
+    "hanzi": "什麼/甚麼",
+    "pinyin": "shénme",
+    "pinyin_tones": "shenme2",
+    "meaning_ja": "何",
+    "meaning_en": "what",
+    "part_of_speech": "noun",
+    "category": "family",
+    "context": "與他人的關係",
+    "frequency_rank": 107,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 108,
+    "hanzi": "朋友",
+    "pinyin": "péngyŏu",
+    "pinyin_tones": "pengyŏu2",
+    "meaning_ja": "友達",
+    "meaning_en": "friend",
+    "part_of_speech": "noun",
+    "category": "family",
+    "context": "與他人的關係",
+    "frequency_rank": 108,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 109,
+    "hanzi": "東西",
+    "pinyin": "dōngxi",
+    "pinyin_tones": "dongxi1",
+    "meaning_ja": "物",
+    "meaning_en": "thing / stuff",
+    "part_of_speech": "noun",
+    "category": "family",
+    "context": "與他人的關係",
+    "frequency_rank": 109,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 110,
+    "hanzi": "吧",
+    "pinyin": "ba",
+    "pinyin_tones": "ba5",
+    "meaning_ja": "～しょう、～したら（文末に置いて、相手にある動作を勧めたり、誘いかけたりする。断定を避ける。）",
+    "meaning_en": "sentence particle (suggestion)",
+    "part_of_speech": "noun",
+    "category": "family",
+    "context": "與他人的關係",
+    "frequency_rank": 110,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 111,
+    "hanzi": "呢",
+    "pinyin": "ne",
+    "pinyin_tones": "ne5",
+    "meaning_ja": "～は？",
+    "meaning_en": "sentence particle (\"and...?\")",
+    "part_of_speech": "noun",
+    "category": "family",
+    "context": "與他人的關係",
+    "frequency_rank": 111,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 112,
+    "hanzi": "嗎",
+    "pinyin": "ma",
+    "pinyin_tones": "ma5",
+    "meaning_ja": "～か（文末に置いて疑問文を作る）",
+    "meaning_en": "question particle",
+    "part_of_speech": "noun",
+    "category": "family",
+    "context": "與他人的關係",
+    "frequency_rank": 112,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 113,
+    "hanzi": "找",
+    "pinyin": "zhăo",
+    "pinyin_tones": "zhăo5",
+    "meaning_ja": "探す、(目的をもって)会いに行く、連絡をとる",
+    "meaning_en": "to look for",
+    "part_of_speech": "verb",
+    "category": "family",
+    "context": "與他人的關係",
+    "frequency_rank": 113,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 114,
+    "hanzi": "做",
+    "pinyin": "zuò",
+    "pinyin_tones": "zuo4",
+    "meaning_ja": "する、作る",
+    "meaning_en": "to do / make",
+    "part_of_speech": "verb",
+    "category": "family",
+    "context": "與他人的關係",
+    "frequency_rank": 114,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 115,
+    "hanzi": "再見",
+    "pinyin": "zàijiàn",
+    "pinyin_tones": "zaijian4",
+    "meaning_ja": "またね、さようなら",
+    "meaning_en": "goodbye",
+    "part_of_speech": "noun",
+    "category": "family",
+    "context": "與他人的關係",
+    "frequency_rank": 115,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 116,
+    "hanzi": "怎麼樣",
+    "pinyin": "zěnmeyàng",
+    "pinyin_tones": "zenmeyang4",
+    "meaning_ja": "どうですか",
+    "meaning_en": "how is it / how about",
+    "part_of_speech": "noun",
+    "category": "family",
+    "context": "與他人的關係",
+    "frequency_rank": 116,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 117,
+    "hanzi": "叫",
+    "pinyin": "jiào",
+    "pinyin_tones": "jiao4",
+    "meaning_ja": "呼ぶ、名前を～と言う",
+    "meaning_en": "to be called / to call",
+    "part_of_speech": "noun",
+    "category": "family",
+    "context": "與他人的關係",
+    "frequency_rank": 117,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 118,
+    "hanzi": "謝謝",
+    "pinyin": "xièxie",
+    "pinyin_tones": "xiexie4",
+    "meaning_ja": "ありがとう",
+    "meaning_en": "thanks",
+    "part_of_speech": "noun",
+    "category": "family",
+    "context": "與他人的關係",
+    "frequency_rank": 118,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 119,
+    "hanzi": "對不起",
+    "pinyin": "duìbùqĭ",
+    "pinyin_tones": "duibuqĭ4",
+    "meaning_ja": "ごめんなさい",
+    "meaning_en": "sorry",
+    "part_of_speech": "noun",
+    "category": "family",
+    "context": "與他人的關係",
+    "frequency_rank": 119,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 120,
+    "hanzi": "請問",
+    "pinyin": "qĭngwèn",
+    "pinyin_tones": "qĭngwen4",
+    "meaning_ja": "ちょっとお尋ねしますが。",
+    "meaning_en": "excuse me / may I ask",
+    "part_of_speech": "noun",
+    "category": "family",
+    "context": "與他人的關係",
+    "frequency_rank": 120,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 121,
+    "hanzi": "這",
+    "pinyin": "zhè",
+    "pinyin_tones": "zhe4",
+    "meaning_ja": "\"こそあど\"の \"こ・そ\"",
+    "meaning_en": "this",
+    "part_of_speech": "determiner",
+    "category": "transport",
+    "context": "旅行",
+    "frequency_rank": 121,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 122,
+    "hanzi": "那",
+    "pinyin": "nà",
+    "pinyin_tones": "na4",
+    "meaning_ja": "\"こそあど\"の \"そ・あ\"",
+    "meaning_en": "that",
+    "part_of_speech": "determiner",
+    "category": "transport",
+    "context": "旅行",
+    "frequency_rank": 122,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 123,
+    "hanzi": "公共汽車/公車",
+    "pinyin": "gōnggòngqìchē/gōngchē",
+    "pinyin_tones": "gonggongqiche/gongche1",
+    "meaning_ja": "バス",
+    "meaning_en": "bus",
+    "part_of_speech": "noun",
+    "category": "transport",
+    "context": "旅行",
+    "frequency_rank": 123,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 124,
+    "hanzi": "車(子)",
+    "pinyin": "chē(zi)",
+    "pinyin_tones": "che(zi)1",
+    "meaning_ja": "車",
+    "meaning_en": "car / vehicle",
+    "part_of_speech": "noun",
+    "category": "transport",
+    "context": "旅行",
+    "frequency_rank": 124,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 125,
+    "hanzi": "到",
+    "pinyin": "dào",
+    "pinyin_tones": "dao4",
+    "meaning_ja": "着く",
+    "meaning_en": "to arrive / to reach",
+    "part_of_speech": "verb",
+    "category": "transport",
+    "context": "旅行",
+    "frequency_rank": 125,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 126,
+    "hanzi": "去",
+    "pinyin": "qù",
+    "pinyin_tones": "qu4",
+    "meaning_ja": "行く",
+    "meaning_en": "to go",
+    "part_of_speech": "verb",
+    "category": "transport",
+    "context": "旅行",
+    "frequency_rank": 126,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 127,
+    "hanzi": "回",
+    "pinyin": "huí",
+    "pinyin_tones": "hui2",
+    "meaning_ja": "帰る、戻る",
+    "meaning_en": "to return",
+    "part_of_speech": "verb",
+    "category": "transport",
+    "context": "旅行",
+    "frequency_rank": 127,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 128,
+    "hanzi": "坐",
+    "pinyin": "zuò",
+    "pinyin_tones": "zuo4",
+    "meaning_ja": "座る",
+    "meaning_en": "to sit / to take (transport)",
+    "part_of_speech": "noun",
+    "category": "transport",
+    "context": "旅行",
+    "frequency_rank": 128,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 129,
+    "hanzi": "這裡/這裏/這兒",
+    "pinyin": "zhèlĭ/zhèr",
+    "pinyin_tones": "zhelĭ/zher4",
+    "meaning_ja": "ここ、そこ",
+    "meaning_en": "here",
+    "part_of_speech": "noun",
+    "category": "transport",
+    "context": "旅行",
+    "frequency_rank": 129,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 130,
+    "hanzi": "那裡/那裏/那兒",
+    "pinyin": "nàlĭ/nàr",
+    "pinyin_tones": "nalĭ/nar4",
+    "meaning_ja": "そこ、あそこ",
+    "meaning_en": "there",
+    "part_of_speech": "noun",
+    "category": "transport",
+    "context": "旅行",
+    "frequency_rank": 130,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 131,
+    "hanzi": "哪裡/哪裏/哪兒",
+    "pinyin": "nălĭ/năr",
+    "pinyin_tones": "nălĭ/năr5",
+    "meaning_ja": "どこ",
+    "meaning_en": "where",
+    "part_of_speech": "noun",
+    "category": "transport",
+    "context": "旅行",
+    "frequency_rank": 131,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 132,
+    "hanzi": "開車",
+    "pinyin": "kāichē",
+    "pinyin_tones": "kaiche1",
+    "meaning_ja": "車を運転する",
+    "meaning_en": "to drive",
+    "part_of_speech": "noun",
+    "category": "transport",
+    "context": "旅行",
+    "frequency_rank": 132,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 133,
+    "hanzi": "錢",
+    "pinyin": "qián",
+    "pinyin_tones": "qian2",
+    "meaning_ja": "お金",
+    "meaning_en": "money",
+    "part_of_speech": "noun",
+    "category": "shopping",
+    "context": "購物",
+    "frequency_rank": 133,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 134,
+    "hanzi": "多少",
+    "pinyin": "duōshăo",
+    "pinyin_tones": "duoshăo1",
+    "meaning_ja": "どれくらい、いくつ（量）",
+    "meaning_en": "how many / how much",
+    "part_of_speech": "noun",
+    "category": "shopping",
+    "context": "購物",
+    "frequency_rank": 134,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 135,
+    "hanzi": "給",
+    "pinyin": "gěi",
+    "pinyin_tones": "gei3",
+    "meaning_ja": "与える、あげる、～のために",
+    "meaning_en": "to give",
+    "part_of_speech": "verb",
+    "category": "shopping",
+    "context": "購物",
+    "frequency_rank": 135,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 136,
+    "hanzi": "貴",
+    "pinyin": "guì",
+    "pinyin_tones": "gui4",
+    "meaning_ja": "（値段が）高い",
+    "meaning_en": "expensive",
+    "part_of_speech": "noun",
+    "category": "shopping",
+    "context": "購物",
+    "frequency_rank": 136,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 137,
+    "hanzi": "便宜",
+    "pinyin": "piányí",
+    "pinyin_tones": "pianyi2",
+    "meaning_ja": "安い",
+    "meaning_en": "cheap",
+    "part_of_speech": "noun",
+    "category": "shopping",
+    "context": "購物",
+    "frequency_rank": 137,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 138,
+    "hanzi": "大",
+    "pinyin": "dà",
+    "pinyin_tones": "da4",
+    "meaning_ja": "大きい",
+    "meaning_en": "big",
+    "part_of_speech": "noun",
+    "category": "shopping",
+    "context": "購物",
+    "frequency_rank": 138,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 139,
+    "hanzi": "小",
+    "pinyin": "xiăo",
+    "pinyin_tones": "xiăo5",
+    "meaning_ja": "小さい",
+    "meaning_en": "small",
+    "part_of_speech": "noun",
+    "category": "shopping",
+    "context": "購物",
+    "frequency_rank": 139,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 140,
+    "hanzi": "難",
+    "pinyin": "nán",
+    "pinyin_tones": "nan2",
+    "meaning_ja": "難しい",
+    "meaning_en": "difficult",
+    "part_of_speech": "noun",
+    "category": "shopping",
+    "context": "購物",
+    "frequency_rank": 140,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 141,
+    "hanzi": "容易",
+    "pinyin": "róngyì",
+    "pinyin_tones": "rongyi4",
+    "meaning_ja": "易しい",
+    "meaning_en": "easy",
+    "part_of_speech": "noun",
+    "category": "shopping",
+    "context": "購物",
+    "frequency_rank": 141,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 142,
+    "hanzi": "有",
+    "pinyin": "yŏu",
+    "pinyin_tones": "yŏu5",
+    "meaning_ja": "有る、持っている",
+    "meaning_en": "to have",
+    "part_of_speech": "noun",
+    "category": "shopping",
+    "context": "購物",
+    "frequency_rank": 142,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 143,
+    "hanzi": "想",
+    "pinyin": "xiăng",
+    "pinyin_tones": "xiăng5",
+    "meaning_ja": "思う、～したい",
+    "meaning_en": "to want / to think",
+    "part_of_speech": "noun",
+    "category": "shopping",
+    "context": "購物",
+    "frequency_rank": 143,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 144,
+    "hanzi": "幾",
+    "pinyin": "jĭ",
+    "pinyin_tones": "jĭ5",
+    "meaning_ja": "いくつ（一桁の数字に使う）、何番目",
+    "meaning_en": "how many / several",
+    "part_of_speech": "determiner",
+    "category": "food",
+    "context": "飲食",
+    "frequency_rank": 144,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 145,
+    "hanzi": "塊",
+    "pinyin": "kuài",
+    "pinyin_tones": "kuai4",
+    "meaning_ja": "（お金の単位\"元\" の話し言葉、かたまり状のものを数える量詞）",
+    "meaning_en": "(money) dollar / piece",
+    "part_of_speech": "measure_word",
+    "category": "food",
+    "context": "飲食",
+    "frequency_rank": 145,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 146,
+    "hanzi": "位",
+    "pinyin": "wèi",
+    "pinyin_tones": "wei4",
+    "meaning_ja": "人数を数える丁寧な量詞",
+    "meaning_en": "polite measure word (people)",
+    "part_of_speech": "measure_word",
+    "category": "food",
+    "context": "飲食",
+    "frequency_rank": 146,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 147,
+    "hanzi": "飯",
+    "pinyin": "fàn",
+    "pinyin_tones": "fan4",
+    "meaning_ja": "ご飯、食事",
+    "meaning_en": "rice / meal",
+    "part_of_speech": "noun",
+    "category": "food",
+    "context": "飲食",
+    "frequency_rank": 147,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 148,
+    "hanzi": "吃",
+    "pinyin": "chī",
+    "pinyin_tones": "chi1",
+    "meaning_ja": "食べる",
+    "meaning_en": "to eat",
+    "part_of_speech": "verb",
+    "category": "food",
+    "context": "飲食",
+    "frequency_rank": 148,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 149,
+    "hanzi": "請",
+    "pinyin": "qĭng",
+    "pinyin_tones": "qĭng5",
+    "meaning_ja": "どうぞ～して下さい、お願いする",
+    "meaning_en": "please / to invite",
+    "part_of_speech": "verb",
+    "category": "food",
+    "context": "飲食",
+    "frequency_rank": 149,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 150,
+    "hanzi": "也",
+    "pinyin": "yě",
+    "pinyin_tones": "ye3",
+    "meaning_ja": "～も",
+    "meaning_en": "also",
+    "part_of_speech": "adverb",
+    "category": "greetings",
+    "context": "其他",
+    "frequency_rank": 150,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 151,
+    "hanzi": "不",
+    "pinyin": "bù",
+    "pinyin_tones": "bu4",
+    "meaning_ja": "～ではない、～しない（習慣的な動作や未来の動作の否定に使う）",
+    "meaning_en": "not (negation)",
+    "part_of_speech": "adverb",
+    "category": "greetings",
+    "context": "其他",
+    "frequency_rank": 151,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 152,
+    "hanzi": "沒",
+    "pinyin": "méi",
+    "pinyin_tones": "mei2",
+    "meaning_ja": "～ない（\"有\"や動作の完了等の否定に使う）",
+    "meaning_en": "not / without",
+    "part_of_speech": "adverb",
+    "category": "greetings",
+    "context": "其他",
+    "frequency_rank": 152,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 153,
+    "hanzi": "都",
+    "pinyin": "dōu",
+    "pinyin_tones": "dou1",
+    "meaning_ja": "どちらも、みんな",
+    "meaning_en": "all",
+    "part_of_speech": "adverb",
+    "category": "greetings",
+    "context": "其他",
+    "frequency_rank": 153,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 154,
+    "hanzi": "只",
+    "pinyin": "zhĭ",
+    "pinyin_tones": "zhĭ5",
+    "meaning_ja": "～だけ",
+    "meaning_en": "only",
+    "part_of_speech": "adverb",
+    "category": "greetings",
+    "context": "其他",
+    "frequency_rank": 154,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 155,
+    "hanzi": "可是",
+    "pinyin": "kěshì",
+    "pinyin_tones": "keshi4",
+    "meaning_ja": "しかし",
+    "meaning_en": "but",
+    "part_of_speech": "conjunction",
+    "category": "greetings",
+    "context": "其他",
+    "frequency_rank": 155,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 156,
+    "hanzi": "還是",
+    "pinyin": "háishì",
+    "pinyin_tones": "haishi4",
+    "meaning_ja": "それとも、やはり",
+    "meaning_en": "still / better to",
+    "part_of_speech": "conjunction",
+    "category": "greetings",
+    "context": "其他",
+    "frequency_rank": 156,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 157,
+    "hanzi": "了",
+    "pinyin": "le",
+    "pinyin_tones": "le5",
+    "meaning_ja": "（動作の完了や状況の変化を表す）",
+    "meaning_en": "completed / changed state particle",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "其他",
+    "frequency_rank": 157,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 158,
+    "hanzi": "得",
+    "pinyin": "de",
+    "pinyin_tones": "de5",
+    "meaning_ja": "（動詞・形容詞と補語との間に置く助詞）",
+    "meaning_en": "must / have to",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "其他",
+    "frequency_rank": 158,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 159,
+    "hanzi": "過",
+    "pinyin": "guò",
+    "pinyin_tones": "guo4",
+    "meaning_ja": "～したことがある（動詞の後ろに置き経験を表す助詞）",
+    "meaning_en": "experience (have done)",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "其他",
+    "frequency_rank": 159,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  },
+  {
+    "id": 160,
+    "hanzi": "沒有",
+    "pinyin": "méiyŏu",
+    "pinyin_tones": "meiyŏu2",
+    "meaning_ja": "ない／持っていない／（過去の否定）～しなかった",
+    "meaning_en": "to not have",
+    "part_of_speech": "noun",
+    "category": "greetings",
+    "context": "其他",
+    "frequency_rank": 160,
+    "difficulty": 1,
+    "example_sentence": {
+      "hanzi": "",
+      "pinyin": "",
+      "meaning_ja": ""
+    },
+    "notes_ja": "",
+    "taiwan_specific": false
+  }
+]
