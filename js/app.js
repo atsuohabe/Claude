@@ -48,7 +48,7 @@ async function init() {
 
   // Service Worker 登録
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(() => {});
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
   }
 }
 
@@ -174,7 +174,7 @@ function renderHome() {
             <circle class="progress-ring__bg" cx="60" cy="60" r="52"/>
             <circle class="progress-ring__track--learning" cx="60" cy="60" r="52"/>
             <circle class="progress-ring__track--mastered" cx="60" cy="60" r="52"/>
-            <g class="progress-ring__text" transform="translate(60,60)">
+            <g class="progress-ring__text" transform="translate(60,60) rotate(90)">
               <text class="progress-ring__number" dy="-8" text-anchor="middle">0</text>
               <text class="progress-ring__label" dy="10" text-anchor="middle">/ 1000 語</text>
               <text class="progress-ring__label" dy="24" text-anchor="middle" style="font-size:9px;fill:var(--color-text-muted)">習得済み</text>

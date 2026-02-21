@@ -12,9 +12,9 @@ let categories = [];
 let loadedChunks = new Set();
 
 const CHUNK_FILES = {
-  core: '/data/vocab-core.json',
-  everyday: '/data/vocab-everyday.json',
-  advanced: '/data/vocab-advanced.json',
+  core: './data/vocab-core.json',
+  everyday: './data/vocab-everyday.json',
+  advanced: './data/vocab-advanced.json',
 };
 
 // ─── 読み込み ────────────────────────────────────────────────────────
@@ -146,7 +146,7 @@ async function _loadChunk(name) {
 async function _loadCategories() {
   if (categories.length > 0) return;
   try {
-    const resp = await fetch('/data/categories.json', { cache: 'force-cache' });
+    const resp = await fetch('./data/categories.json', { cache: 'force-cache' });
     if (!resp.ok) return;
     const data = await resp.json();
     categories = data.categories || [];
