@@ -204,13 +204,10 @@ export class Flashcard {
   _renderFront(word) {
     this.front.innerHTML = '';
 
-    // メタ情報（カテゴリバッジ + カード番号）
+    // メタ情報（カード番号のみ、カテゴリバッジは非表示）
     const meta = el('div', 'card__front-meta');
-    const badge = el('span', 'card__badge');
-    badge.textContent = word.category_label || word.category || '';
     const num = el('span', 'card__number');
     num.textContent = `#${word.id}`;
-    meta.appendChild(badge);
     meta.appendChild(num);
 
     // 台湾特有フラグ
@@ -220,19 +217,25 @@ export class Flashcard {
       meta.insertBefore(twBadge, num);
     }
 
-    // 漢字（大）
+    // 漢字（大）- 文字数に応じてフォントサイズを調整して1行表示
     const hanzi = el('div', 'card__hanzi-main hanzi');
     hanzi.textContent = word.hanzi;
+    const len = (word.hanzi || '').length;
+    if (len <= 2) hanzi.style.fontSize = 'clamp(64px, 15vw, 96px)';
+    else if (len <= 4) hanzi.style.fontSize = 'clamp(48px, 12vw, 72px)';
+    else if (len <= 6) hanzi.style.fontSize = 'clamp(36px, 9vw, 54px)';
+    else hanzi.style.fontSize = 'clamp(24px, 6vw, 40px)';
+
+    // ピンイン（表面）
+    const pinyinEl = el('div', 'card__pinyin card__pinyin--front');
+    pinyinEl.innerHTML = parsePinyinToHTML(word.pinyin);
 
     // 発声ボタン
     const speakBtn = el('button', 'speak-btn');
     speakBtn.setAttribute('aria-label', '発音を聴く');
     speakBtn.setAttribute('title', '発音を聴く');
     speakBtn.textContent = '🔊';
-    speakBtn.addEventListener('click', (e) => {
-      e.stopPropagation(); // カードフリップを防ぐ
-      speakWord(word.hanzi);
-    });
+    speakBtn.addEventListener('click', () => speakWord(word.hanzi));
 
     // ヒント
     const hint = el('div', 'card__hint');
@@ -240,6 +243,7 @@ export class Flashcard {
 
     this.front.appendChild(meta);
     this.front.appendChild(hanzi);
+    this.front.appendChild(pinyinEl);
     this.front.appendChild(speakBtn);
     this.front.appendChild(hint);
   }
@@ -263,8 +267,15 @@ export class Flashcard {
 
     // 日本語意味（大）
     const meaning = el('div', 'card__meaning');
-    meaning.textContent = word.meaning_ja || word.meaning_en || '';
+    meaning.textContent = word.meaning_ja || '';
     backInner.appendChild(meaning);
+
+    // 英語意味（日本語の下）
+    if (word.meaning_en) {
+      const meaningEn = el('div', 'card__meaning-en');
+      meaningEn.textContent = word.meaning_en;
+      backInner.appendChild(meaningEn);
+    }
 
     // 品詞
     if (word.part_of_speech) {

@@ -26,25 +26,25 @@
   --size-pinyin: clamp(18px, 4vw, 24px);
   --size-meaning: clamp(24px, 6vw, 36px);
 
-  /* Colors - light theme */
-  --color-bg: #FAFAF8;
+  /* Colors - light theme (monotone) */
+  --color-bg: #F5F5F5;
   --color-surface: #FFFFFF;
   --color-surface-raised: #FFFFFF;
-  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border: rgba(0, 0, 0, 0.10);
   --color-text: #1A1A1A;
   --color-text-muted: #6B7280;
   --color-text-subtle: #9CA3AF;
-  --color-primary: #E53935;
-  --color-primary-light: #FFEBEE;
-  --color-primary-dark: #B71C1C;
-  --color-accent: #1565C0;
-  --color-success: #2E7D32;
-  --color-success-light: #E8F5E9;
-  --color-warning: #E65100;
-  --color-warning-light: #FFF3E0;
-  --color-info-light: #E3F2FD;
-  --color-info: #0D47A1;
-  --color-card-shadow: rgba(0, 0, 0, 0.10);
+  --color-primary: #1A1A1A;
+  --color-primary-light: #EEEEEE;
+  --color-primary-dark: #000000;
+  --color-accent: #424242;
+  --color-success: #424242;
+  --color-success-light: #F0F0F0;
+  --color-warning: #616161;
+  --color-warning-light: #F5F5F5;
+  --color-info-light: #EEEEEE;
+  --color-info: #424242;
+  --color-card-shadow: rgba(0, 0, 0, 0.08);
 
   /* Tone colors (standard linguistic convention) */
   --tone-1: #E53935;
