@@ -24,22 +24,36 @@ TAIWAN_CATS = {"taiwan_specific"}
 LEVEL_MAP: dict[str, int] = {
     "準備級一級": 1, "準備級二級": 1,
     "novice1": 1, "novice 1": 1, "novice2": 1, "novice 2": 1,
-    "入門": 1, "基礎": 1,
+    "入門級": 1, "入門": 1, "基礎級": 1, "基礎": 1,
     "a1": 1, "a2": 1,
-    "b1": 2, "b2": 2,
-    "c1": 3, "c2": 3,
+    "進階級": 2, "b1": 2, "b2": 2,
+    "高階級": 3, "c1": 3, "c2": 3,
     "進階": 2, "高階": 3,
 }
 
 # 声調記号 → (基母音, 声調番号)
+# ブレーブ記号（旧式）とカロン記号（現代標準）の両方をサポート
 DIACRITIC_TABLE: dict[str, tuple[str, str]] = {
+    # 現代標準ピンイン（カロン）
     'ā':('a','1'), 'á':('a','2'), 'ǎ':('a','3'), 'à':('a','4'),
     'ē':('e','1'), 'é':('e','2'), 'ě':('e','3'), 'è':('e','4'),
     'ī':('i','1'), 'í':('i','2'), 'ǐ':('i','3'), 'ì':('i','4'),
     'ō':('o','1'), 'ó':('o','2'), 'ǒ':('o','3'), 'ò':('o','4'),
     'ū':('u','1'), 'ú':('u','2'), 'ǔ':('u','3'), 'ù':('u','4'),
     'ǖ':('ü','1'), 'ǘ':('ü','2'), 'ǚ':('ü','3'), 'ǜ':('ü','4'),
+    # ブレーブ記号（旧式・TOCFL Excelで使用）→ 第3声として扱う
+    'ă':('a','3'), 'ĕ':('e','3'), 'ĭ':('i','3'),
+    'ŏ':('o','3'), 'ŭ':('u','3'),
 }
+
+# ブレーブ → カロン変換テーブル（piyin正規化用）
+BREVE_TO_CARON = str.maketrans({
+    'ă': 'ǎ', 'ĕ': 'ě', 'ĭ': 'ǐ', 'ŏ': 'ǒ', 'ŭ': 'ǔ',
+})
+
+def normalize_pinyin(pinyin: str) -> str:
+    """ブレーブ記号をカロン記号に正規化してピンインを標準化する"""
+    return pinyin.translate(BREVE_TO_CARON)
 
 def to_pinyin_tones(pinyin: str) -> str:
     """nǐ hǎo → ni3 hao3"""
@@ -57,15 +71,56 @@ def to_pinyin_tones(pinyin: str) -> str:
         result.append(cleaned + tone)
     return " ".join(result)
 
-CATEGORY_POS: dict[str, str] = {
-    "basic_verbs": "verb",
-    "adjectives": "adjective",
-    "numbers": "number",
-    "greetings": "interjection",
+# TOCFL 任務領域（コンテキスト）→ カテゴリID マッピング
+CONTEXT_TO_CATEGORY: dict[str, str] = {
+    "個人資料": "family",
+    "家庭": "family",
+    "家人": "family",
+    "人際關係": "family",
+    "食物": "food",
+    "飲食": "food",
+    "食": "food",
+    "購物": "shopping",
+    "商業": "shopping",
+    "交通": "transport",
+    "旅遊": "transport",
+    "旅行": "transport",
+    "教育": "education_work",
+    "工作": "education_work",
+    "娛樂": "entertainment",
+    "休閒": "entertainment",
+    "身體": "body",
+    "健康": "body",
+    "衣服": "clothing",
+    "服飾": "clothing",
+    "住家": "home_furniture",
+    "居家": "home_furniture",
+    "時間": "daily_time",
+    "日常": "daily_time",
+    "數字": "numbers",
+    "量詞": "numbers",
+    "感情": "emotions",
+    "情感": "emotions",
 }
 
-def guess_pos(category: str) -> str:
-    return CATEGORY_POS.get(category, "noun")
+def context_to_category(context: str) -> str:
+    """任務領域（コンテキスト）をカテゴリIDに変換する"""
+    for key, cat in CONTEXT_TO_CATEGORY.items():
+        if key in context:
+            return cat
+    return "greetings"  # デフォルト
+
+# 詞類（品詞）→ part_of_speech マッピング
+POS_MAP: dict[str, str] = {
+    "n": "noun", "v": "verb", "a": "adjective", "adv": "adverb",
+    "prep": "preposition", "conj": "conjunction", "int": "interjection",
+    "pron": "pronoun", "m": "classifier", "aux": "auxiliary",
+    "adj": "adjective", "num": "number",
+}
+
+def map_pos(raw_pos: str) -> str:
+    """品詞コード（N, V, A 等）を英語に変換する"""
+    return POS_MAP.get(raw_pos.lower().strip(), "noun")
 
 def sheet_difficulty(sheet_name: str) -> int:
     key = sheet_name.strip().lower()
@@ -77,16 +132,21 @@ def sheet_difficulty(sheet_name: str) -> int:
 # ────────────────────────────────────────────────
 # ヘッダー解析
 # ────────────────────────────────────────────────
-HANZI_ALIASES  = ["hanzi", "漢字", "繁体字", "中文", "華語", "詞語"]
-PINYIN_ALIASES = ["pinyin", "拼音", "ピンイン"]
-JA_ALIASES     = ["meaning_ja", "日本語", "日本語意味", "意味(日)", "和訳"]
+HANZI_ALIASES  = ["hanzi", "漢字", "繁体字", "中文", "華語", "詞語", "詞彙", "vocabulary"]
+PINYIN_ALIASES = ["pinyin", "拼音", "ピンイン", "漢語拼音"]
+JA_ALIASES     = ["meaning_ja", "日本語", "日本語意味", "意味(日)", "和訳", "japanese"]
 EN_ALIASES     = ["meaning_en", "english", "英語", "英語意味", "英訳"]
-CAT_ALIASES    = ["category", "カテゴリ", "分類", "品詞", "詞類"]
+CAT_ALIASES    = ["category", "カテゴリ", "分類", "任務領域", "context", "domain"]
+POS_ALIASES    = ["品詞", "詞類", "part", "parts of speech", "pos"]
+
+def _normalize_header(h: str) -> str:
+    """複数行ヘッダー（改行含む）を正規化：最初の行のみ取得・小文字化・空白除去"""
+    return h.split('\n')[0].strip().lower()
 
 def find_col(header: list[str], aliases: list[str]) -> int | None:
     for alias in aliases:
         for i, h in enumerate(header):
-            if alias.lower() == h.lower().strip():
+            if alias.lower() == _normalize_header(h):
                 return i
     return None
 
@@ -98,7 +158,7 @@ def parse_sheet(sheet, difficulty: int, start_id: int) -> list[dict]:
     # ヘッダー行を探す（最初の5行以内）
     header_idx = 0
     for idx, row in enumerate(rows[:5]):
-        cells = [str(c).lower().strip() if c else "" for c in row]
+        cells = [_normalize_header(str(c)) if c else "" for c in row]
         if any(a.lower() in cells for a in HANZI_ALIASES):
             header_idx = idx
             break
@@ -110,10 +170,11 @@ def parse_sheet(sheet, difficulty: int, start_id: int) -> list[dict]:
     ci_ja     = find_col(header, JA_ALIASES)
     ci_en     = find_col(header, EN_ALIASES)
     ci_cat    = find_col(header, CAT_ALIASES)
+    ci_pos    = find_col(header, POS_ALIASES)
 
     if ci_hanzi is None:
         print(f"  ⚠️  漢字列が見つかりません（シート: {sheet.title}）。スキップします。")
-        print(f"     ヘッダー: {header}")
+        print(f"     ヘッダー: {[_normalize_header(h) for h in header]}")
         return []
 
     def cell(row, idx) -> str:
@@ -130,8 +191,11 @@ def parse_sheet(sheet, difficulty: int, start_id: int) -> list[dict]:
         if not hanzi:
             continue
 
-        cat    = cell(row, ci_cat) or "greetings"
-        pinyin = cell(row, ci_pinyin)
+        context = cell(row, ci_cat) or ""
+        raw_pos = cell(row, ci_pos) or ""
+        pinyin_raw = cell(row, ci_pinyin)
+        # ブレーブ→カロン正規化
+        pinyin = normalize_pinyin(pinyin_raw) if pinyin_raw else ""
 
         words.append({
             "id": word_id,
@@ -140,13 +204,14 @@ def parse_sheet(sheet, difficulty: int, start_id: int) -> list[dict]:
             "pinyin_tones": to_pinyin_tones(pinyin) if pinyin else "",
             "meaning_ja": cell(row, ci_ja),
             "meaning_en": cell(row, ci_en),
-            "part_of_speech": guess_pos(cat),
-            "category": cat,
+            "part_of_speech": map_pos(raw_pos) if raw_pos else "noun",
+            "category": context_to_category(context),
+            "category_label": context,
             "frequency_rank": word_id,
             "difficulty": difficulty,
             "example_sentence": {"hanzi": "", "pinyin": "", "meaning_ja": ""},
             "notes_ja": "",
-            "taiwan_specific": cat in TAIWAN_CATS,
+            "taiwan_specific": False,
         })
         word_id += 1
 

@@ -18,6 +18,7 @@ const DEFAULT_SETTINGS = {
   theme: 'auto',        // 'auto' | 'light' | 'dark'
   showPinyinOnFront: false,
   autoplayAudio: false,
+  ttsRate: 0.8,         // 読み上げ速度（0.5〜1.5）
   studyCategories: [],  // [] = all categories
 };
 
