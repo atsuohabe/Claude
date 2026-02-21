@@ -48,7 +48,7 @@ async function init() {
 
   // Service Worker 登録
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(() => {});
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
   }
 }
 
@@ -174,9 +174,9 @@ function renderHome() {
             <circle class="progress-ring__bg" cx="60" cy="60" r="52"/>
             <circle class="progress-ring__track--learning" cx="60" cy="60" r="52"/>
             <circle class="progress-ring__track--mastered" cx="60" cy="60" r="52"/>
-            <g class="progress-ring__text" transform="translate(60,60)">
+            <g class="progress-ring__text" transform="translate(60,60) rotate(90)">
               <text class="progress-ring__number" dy="-8" text-anchor="middle">0</text>
-              <text class="progress-ring__label" dy="10" text-anchor="middle">/ 1000 語</text>
+              <text class="progress-ring__label" dy="10" text-anchor="middle">/ ${Vocab.getLoadedCount()} 語</text>
               <text class="progress-ring__label" dy="24" text-anchor="middle" style="font-size:9px;fill:var(--color-text-muted)">習得済み</text>
             </g>
           </svg>
@@ -205,7 +205,7 @@ function renderHome() {
       <div class="surface-card" style="margin-top:var(--space-4)">
         <div class="section-title" style="margin-bottom:var(--space-3)">進捗バー</div>
         <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--color-text-muted);margin-bottom:var(--space-2)">
-          <span>習得済み: ${overview.mastered}語</span>
+          <span>習得済み: ${overview.mastered}語 / ${Vocab.getLoadedCount()}語</span>
           <span>${overview.percentage}%</span>
         </div>
         <div class="progress-bar">
@@ -579,6 +579,35 @@ function renderSettings() {
       </div>
 
       <div class="surface-card" style="margin-bottom:var(--space-4)">
+        <div class="section-title" style="margin-bottom:var(--space-4)">発声機能（TTS）</div>
+
+        <div class="settings-row">
+          <div>
+            <div class="settings-row__label">自動読み上げ</div>
+            <div class="settings-row__desc">カード表示時に自動で発音を再生する</div>
+          </div>
+          <select class="select" id="setting-autoplay">
+            <option value="off" ${!settings.autoplayAudio ? 'selected' : ''}>オフ</option>
+            <option value="on" ${settings.autoplayAudio ? 'selected' : ''}>オン</option>
+          </select>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div class="settings-row__label">読み上げ速度</div>
+            <div class="settings-row__desc">1.0x が標準速度</div>
+          </div>
+          <select class="select" id="setting-tts-rate">
+            <option value="0.5" ${(settings.ttsRate || 0.8) == 0.5 ? 'selected' : ''}>0.5x（ゆっくり）</option>
+            <option value="0.7" ${(settings.ttsRate || 0.8) == 0.7 ? 'selected' : ''}>0.7x</option>
+            <option value="0.8" ${(settings.ttsRate || 0.8) == 0.8 ? 'selected' : ''}>0.8x（推奨）</option>
+            <option value="1.0" ${(settings.ttsRate || 0.8) == 1.0 ? 'selected' : ''}>1.0x（標準）</option>
+            <option value="1.2" ${(settings.ttsRate || 0.8) == 1.2 ? 'selected' : ''}>1.2x（速い）</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="surface-card" style="margin-bottom:var(--space-4)">
         <div class="section-title" style="margin-bottom:var(--space-4)">データ管理</div>
 
         <div style="display:flex;flex-direction:column;gap:var(--space-3)">
@@ -613,6 +642,16 @@ function renderSettings() {
   container.querySelector('#setting-theme')?.addEventListener('change', e => {
     setTheme(e.target.value);
     toast('テーマを変更しました', 'success');
+  });
+
+  container.querySelector('#setting-autoplay')?.addEventListener('change', e => {
+    Store.updateSettings({ autoplayAudio: e.target.value === 'on' });
+    toast('設定を保存しました', 'success');
+  });
+
+  container.querySelector('#setting-tts-rate')?.addEventListener('change', e => {
+    Store.updateSettings({ ttsRate: Number(e.target.value) });
+    toast('設定を保存しました', 'success');
   });
 
   // エクスポート

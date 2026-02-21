@@ -193,8 +193,6 @@
 }
 
 .progress-ring__text {
-  transform: rotate(90deg);
-  transform-origin: center;
   text-anchor: middle;
   dominant-baseline: middle;
 }
