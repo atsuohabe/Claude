@@ -158,8 +158,13 @@ function renderHome() {
   const overview = getOverview();
   const allCards = Store.getAllCards();
   const dueCount = getDueCardIds(999).length;
+  const settings = Store.getSettings();
+  const todayH = new Date().toDateString();
+  const todayNewCountH = Store.getHistory()
+    .filter(r => new Date(r.date).toDateString() === todayH)
+    .reduce((sum, r) => sum + (r.newCards || 0), 0);
   const newCount = Math.min(
-    Store.getSettings().dailyNewLimit,
+    Math.max(0, settings.dailyNewLimit - todayNewCountH),
     Vocab.getAllWordIds().filter(id => !allCards[String(id)]).length
   );
 
@@ -259,7 +264,13 @@ async function renderStudySetup() {
   const newLimit = settings.dailyNewLimit;
 
   const newAvailable = allWordIds.filter(id => !allCards[String(id)]).length;
-  const newToday = Math.min(newLimit, newAvailable);
+  // 今日すでに導入した新規カード数を引いて、残り枠を正確に計算
+  const today = new Date().toDateString();
+  const todayNewCount = Store.getHistory()
+    .filter(r => new Date(r.date).toDateString() === today)
+    .reduce((sum, r) => sum + (r.newCards || 0), 0);
+  const remainingNewLimit = Math.max(0, newLimit - todayNewCount);
+  const newToday = Math.min(remainingNewLimit, newAvailable);
 
   container.innerHTML = `
     <div class="page page--study">
