@@ -1,32 +1,35 @@
 /**
  * sw.js - Service Worker（オフライン対応）
  * アプリファイルをキャッシュして、ネットワーク不要で動作させる
+ * GitHub Pages（サブパス）にも対応
  */
 
-const CACHE_NAME = 'cmf-v1';
+const CACHE_NAME = 'cmf-v2';
+
+// sw.js の置き場所からベースパスを動的に取得
+// localhost: '/'  /  GitHub Pages: '/Claude/'
+const BASE = new URL('./', self.location.href).pathname;
 
 const CORE_ASSETS = [
-  '/index.html',
-  '/css/base.css',
-  '/css/layout.css',
-  '/css/flashcard.css',
-  '/css/components.css',
-  '/js/app.js',
-  '/js/srs.js',
-  '/js/store.js',
-  '/js/vocab.js',
-  '/js/flashcard.js',
-  '/js/session.js',
-  '/js/stats.js',
-  '/js/gestures.js',
-  '/js/ui.js',
-  '/data/categories.json',
-  '/data/vocab-core.json',
+  `${BASE}index.html`,
+  `${BASE}css/base.css`,
+  `${BASE}css/flashcard.css`,
+  `${BASE}css/components.css`,
+  `${BASE}js/app.js`,
+  `${BASE}js/srs.js`,
+  `${BASE}js/store.js`,
+  `${BASE}js/vocab.js`,
+  `${BASE}js/flashcard.js`,
+  `${BASE}js/session.js`,
+  `${BASE}js/stats.js`,
+  `${BASE}js/gestures.js`,
+  `${BASE}js/ui.js`,
+  `${BASE}data/vocab-core.json`,
 ];
 
 const LAZY_ASSETS = [
-  '/data/vocab-everyday.json',
-  '/data/vocab-advanced.json',
+  `${BASE}data/vocab-everyday.json`,
+  `${BASE}data/vocab-advanced.json`,
 ];
 
 // ─── インストール ────────────────────────────────────────────────────
@@ -65,7 +68,7 @@ self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
 
   // 語彙 JSON は Cache First（大きいファイルのため）
-  if (url.pathname.startsWith('/data/')) {
+  if (url.pathname.startsWith(BASE + 'data/')) {
     event.respondWith(cacheFirst(event.request));
     return;
   }
