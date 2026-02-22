@@ -57,12 +57,22 @@ export const Session = {
       });
     }
 
-    // 新規カードを取得
-    let allWordIds = Vocab.getAllWordIds();
+    // 新規カードを取得（studyLevel でフィルタ）
+    const studyLevel = options.studyLevel ?? settings.studyLevel ?? 'all';
+    let allWordIds = Vocab.getFilteredWordIds(studyLevel);
     if (filterCategories?.length > 0) {
       allWordIds = allWordIds.filter(id => {
         const word = Vocab.getWord(id);
         return word && filterCategories.includes(word.category);
+      });
+    }
+
+    // studyLevel に基づいて due カードもフィルタ
+    if (studyLevel !== 'all') {
+      const targetNoviceLevel = studyLevel === 'novice1' ? 1 : 2;
+      dueIds = dueIds.filter(id => {
+        const word = Vocab.getWord(Number(id));
+        return word && (word.novice_level || 1) === targetNoviceLevel;
       });
     }
 

@@ -77,6 +77,29 @@ export const Vocab = {
     return Object.values(wordsMap).filter(w => w.difficulty === level);
   },
 
+  /** 準備級レベルでフィルタ（1=一級/Novice 1, 2=二級/Novice 2） */
+  getByNoviceLevel(level) {
+    return Object.values(wordsMap)
+      .filter(w => (w.novice_level || 1) === level)
+      .sort((a, b) => (a.frequency_rank || a.id) - (b.frequency_rank || b.id));
+  },
+
+  /**
+   * studyLevel 設定に基づいてフィルタした単語一覧を返す
+   * @param {'all'|'novice1'|'novice2'} studyLevel
+   */
+  getFilteredWords(studyLevel) {
+    if (!studyLevel || studyLevel === 'all') return this.getAllWords();
+    if (studyLevel === 'novice1') return this.getByNoviceLevel(1);
+    if (studyLevel === 'novice2') return this.getByNoviceLevel(2);
+    return this.getAllWords();
+  },
+
+  /** studyLevel 設定に基づいた単語 ID 一覧 */
+  getFilteredWordIds(studyLevel) {
+    return this.getFilteredWords(studyLevel).map(w => w.id);
+  },
+
   /** 台湾特有語彙のみ */
   getTaiwanSpecific() {
     return Object.values(wordsMap).filter(w => w.taiwan_specific);
