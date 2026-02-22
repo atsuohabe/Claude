@@ -1,4 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="80" fill="#1A1A1A"/>
-  <text x="256" y="380" font-size="380" text-anchor="middle" font-family="serif">🇹🇼</text>
+  <!-- アプリ背景 -->
+  <rect width="512" height="512" rx="88" fill="#0F172A"/>
+
+  <!-- 裏カード（青）: 日英 -->
+  <rect x="164" y="52" width="292" height="208" rx="22" fill="#1D4ED8"/>
+  <text x="310" y="179"
+        font-size="108" text-anchor="middle"
+        font-family="sans-serif" font-weight="700" fill="white">日英</text>
+
+  <!-- 表カード（赤）: 台 -->
+  <rect x="56" y="180" width="292" height="208" rx="22" fill="#EF4444"/>
+  <text x="202" y="320"
+        font-size="148" text-anchor="middle"
+        font-family="serif" fill="white">台</text>
+
+  <!-- ⇄ バッジ（右下） -->
+  <circle cx="426" cy="426" r="56" fill="#0F172A"/>
+  <circle cx="426" cy="426" r="47" fill="#475569"/>
+  <text x="426" y="444"
+        font-size="46" text-anchor="middle"
+        font-family="sans-serif" fill="white">⇄</text>
 </svg>
