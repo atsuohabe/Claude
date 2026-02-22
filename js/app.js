@@ -168,6 +168,9 @@ function renderHome() {
     Vocab.getAllWordIds().filter(id => !allCards[String(id)]).length
   );
 
+  const totalSeenPct = overview.total > 0
+    ? Math.round((overview.totalSeen / overview.total) * 100) : 0;
+
   container.innerHTML = `
     <div class="page">
       <div class="dashboard-hero">
@@ -181,7 +184,7 @@ function renderHome() {
             <g class="progress-ring__text" transform="translate(60,60) rotate(90)">
               <text class="progress-ring__number" dy="-8" text-anchor="middle">0</text>
               <text class="progress-ring__label" dy="10" text-anchor="middle">/ ${Vocab.getLoadedCount()} 語</text>
-              <text class="progress-ring__label" dy="24" text-anchor="middle" style="font-size:9px;fill:var(--color-text-muted)">習得済み</text>
+              <text class="progress-ring__label" dy="24" text-anchor="middle" style="font-size:9px;fill:var(--color-text-muted)">覚えた</text>
             </g>
           </svg>
         </div>
@@ -196,7 +199,11 @@ function renderHome() {
             <span class="queue-pill__label">新規</span>
           </div>
           <div class="queue-pill">
-            <span class="queue-pill__number" style="color:var(--color-success)">${overview.mastered}</span>
+            <span class="queue-pill__number">${overview.totalSeen}</span>
+            <span class="queue-pill__label">覚えた</span>
+          </div>
+          <div class="queue-pill">
+            <span class="queue-pill__number">${overview.mastered}</span>
             <span class="queue-pill__label">習得済み</span>
           </div>
         </div>
@@ -207,21 +214,21 @@ function renderHome() {
       </div>
 
       <div class="surface-card" style="margin-top:var(--space-4)">
-        <div class="section-title" style="margin-bottom:var(--space-3)">進捗バー</div>
+        <div class="section-title" style="margin-bottom:var(--space-3)">進捗</div>
         <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--color-text-muted);margin-bottom:var(--space-2)">
-          <span>習得済み: ${overview.mastered}語 / ${Vocab.getLoadedCount()}語</span>
-          <span>${overview.percentage}%</span>
+          <span>覚えた: ${overview.totalSeen}語 / ${Vocab.getLoadedCount()}語</span>
+          <span>${totalSeenPct}%</span>
         </div>
         <div class="progress-bar">
-          <div class="progress-bar__fill progress-bar__fill--green" style="width:${overview.percentage}%"></div>
+          <div class="progress-bar__fill progress-bar__fill--primary" style="width:${totalSeenPct}%"></div>
         </div>
-        <div style="display:flex;gap:var(--space-4);margin-top:var(--space-4);font-size:0.75rem">
+        <div style="display:flex;gap:var(--space-4);margin-top:var(--space-4);font-size:0.75rem;flex-wrap:wrap">
           <span style="display:flex;align-items:center;gap:6px">
-            <span style="width:10px;height:10px;border-radius:50%;background:#4CAF50;display:inline-block"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:var(--color-text);display:inline-block"></span>
             習得済み: ${overview.mastered}
           </span>
           <span style="display:flex;align-items:center;gap:6px">
-            <span style="width:10px;height:10px;border-radius:50%;background:#FF9800;display:inline-block"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:var(--color-text-muted);display:inline-block"></span>
             学習中: ${overview.learning}
           </span>
           <span style="display:flex;align-items:center;gap:6px">
@@ -233,12 +240,13 @@ function renderHome() {
     </div>
   `;
 
-  // プログレスリング更新
+  // プログレスリング更新（覚えた数を中央に表示）
   const svg = container.querySelector('.progress-ring');
   if (svg) {
     updateProgressRing(svg, {
       mastered: overview.mastered,
       learning: overview.learning,
+      totalSeen: overview.totalSeen,
     });
   }
 
@@ -279,15 +287,15 @@ async function renderStudySetup() {
       <div class="surface-card" style="margin-bottom:var(--space-4)">
         <div style="display:flex;gap:var(--space-4);margin-bottom:var(--space-4)">
           <div class="stat-tile" style="flex:1">
-            <div class="stat-tile__number" style="color:#E53935">${dueIds.length}</div>
+            <div class="stat-tile__number">${dueIds.length}</div>
             <div class="stat-tile__label">復習カード</div>
           </div>
           <div class="stat-tile" style="flex:1">
-            <div class="stat-tile__number" style="color:#2196F3">${newToday}</div>
+            <div class="stat-tile__number">${newToday}</div>
             <div class="stat-tile__label">新規カード</div>
           </div>
           <div class="stat-tile" style="flex:1">
-            <div class="stat-tile__number" style="color:#4CAF50">${overview.mastered}</div>
+            <div class="stat-tile__number">${overview.mastered}</div>
             <div class="stat-tile__label">習得済み</div>
           </div>
         </div>
@@ -298,10 +306,10 @@ async function renderStudySetup() {
         </div>
 
         <button class="btn btn--primary btn--full" id="begin-session-btn">
-          ${dueIds.length === 0 && newToday === 0 ? '全カードを復習する' : '学習開始'}
+          ${dueIds.length === 0 && newToday === 0 ? 'ランダム10枚を復習する' : '学習開始'}
         </button>
         ${dueIds.length === 0 && newToday === 0
-          ? '<p class="text-muted text-sm" style="text-align:center;margin-top:var(--space-3)">今日の学習は完了しています。これまで学習した全カードを復習できます。</p>'
+          ? '<p class="text-muted text-sm" style="text-align:center;margin-top:var(--space-3)">今日の学習は完了しています。学習済みカードからランダムに10枚を復習します。</p>'
           : ''}
       </div>
 
@@ -325,12 +333,14 @@ async function renderStudySetup() {
   // 学習開始ボタン
   container.querySelector('#begin-session-btn')?.addEventListener('click', async () => {
     if (dueIds.length === 0 && newToday === 0) {
-      // 今日の分は完了 → 既習全カードを復習
-      const learnedIds = Object.keys(Store.getAllCards()).map(Number);
-      if (learnedIds.length === 0) {
+      // 今日の分は完了 → 学習済みからランダム10枚を復習
+      const allLearnedIds = Object.keys(Store.getAllCards()).map(Number);
+      if (allLearnedIds.length === 0) {
         toast('まだ学習したカードがありません。', 'info');
         return;
       }
+      const shuffled = [...allLearnedIds].sort(() => Math.random() - 0.5);
+      const learnedIds = shuffled.slice(0, 10);
       await startStudySession(container, learnedIds);
     } else {
       await startStudySession(container);
