@@ -4,7 +4,6 @@
  */
 
 import { attachGestures } from './gestures.js';
-import { RATING, intervalToLabel, previewIntervals } from './srs.js';
 import { Store } from './store.js';
 
 // ─── 発声機能（Web Speech API） ──────────────────────────────────────
@@ -128,9 +127,9 @@ export class Flashcard {
 
     // スワイプインジケーター
     this.swipeRight = el('div', 'swipe-indicator swipe-indicator--right');
-    this.swipeRight.textContent = '良い ✓';
+    this.swipeRight.textContent = '覚えた ✓';
     this.swipeLeft = el('div', 'swipe-indicator swipe-indicator--left');
-    this.swipeLeft.textContent = 'もう一度 ✗';
+    this.swipeLeft.textContent = 'まだまだ ✗';
 
     this.card.appendChild(this.front);
     this.card.appendChild(this.back);
@@ -149,24 +148,15 @@ export class Flashcard {
 
   _buildRatingButtons() {
     const ratings = [
-      { key: 'again', label: 'もう一度', rating: RATING.AGAIN },
-      { key: 'hard',  label: '難しい',   rating: RATING.HARD },
-      { key: 'good',  label: '良い',     rating: RATING.GOOD },
-      { key: 'easy',  label: '簡単',     rating: RATING.EASY },
+      { key: 'not-yet',    label: 'まだまだ' },
+      { key: 'remembered', label: '覚えた' },
     ];
 
     this.ratingButtons = {};
-    for (const { key, label, rating } of ratings) {
+    for (const { key, label } of ratings) {
       const btn = el('button', `rating-btn rating-btn--${key}`);
-      const labelEl = el('span');
-      labelEl.textContent = label;
-      const intervalEl = el('span', 'rating-btn__interval');
-      intervalEl.textContent = '';
-      btn.appendChild(labelEl);
-      btn.appendChild(intervalEl);
-      btn.addEventListener('click', () => this._onRated(rating));
-      btn.dataset.intervalEl = '';
-      btn._intervalEl = intervalEl;
+      btn.textContent = label;
+      btn.addEventListener('click', () => this._onRated(key));
       this.ratingButtons[key] = btn;
       this.ratingContainer.appendChild(btn);
     }
@@ -178,10 +168,8 @@ export class Flashcard {
     this._gestureDetach = attachGestures(this.card, {
       onTap: () => this._handleFlip(),
       onFlip: () => this._handleFlip(),
-      onAgain: () => this._flipped && this._onRated(RATING.AGAIN),
-      onGood: () => this._flipped && this._onRated(RATING.GOOD),
-      onHard: () => this._flipped && this._onRated(RATING.HARD),
-      onEasy: () => this._flipped && this._onRated(RATING.EASY),
+      onRemembered: () => this._flipped && this._onRated('remembered'),
+      onNotYet: () => this._flipped && this._onRated('not-yet'),
       onDrag: (dx, dy) => this._onDrag(dx, dy),
     });
   }
@@ -204,7 +192,6 @@ export class Flashcard {
 
     this._renderFront(wordData);
     this._renderBack(wordData, srsData);
-    this._updateRatingIntervals(srsData);
 
     // 自動読み上げ（設定で有効な場合）
     if (Store.getSettings().autoplayAudio) {
@@ -321,19 +308,6 @@ export class Flashcard {
     this.back.appendChild(backInner);
   }
 
-  _updateRatingIntervals(srsData) {
-    const intervals = previewIntervals(srsData);
-    const keys = ['again', 'hard', 'good', 'easy'];
-    const ratingKeys = [RATING.AGAIN, RATING.HARD, RATING.GOOD, RATING.EASY];
-
-    keys.forEach((key, i) => {
-      const btn = this.ratingButtons[key];
-      if (btn && btn._intervalEl) {
-        btn._intervalEl.textContent = intervalToLabel(intervals[ratingKeys[i]]);
-      }
-    });
-  }
-
   // ─── フリップ ────────────────────────────────────────────────────
 
   _handleFlip() {
@@ -373,7 +347,7 @@ export class Flashcard {
     if (!this._flipped) return; // 裏面が見えていない場合は評価させない
 
     // 却下アニメーション
-    const animClass = rating >= 2 ? 'dismiss-right' : 'dismiss-left';
+    const animClass = rating === 'remembered' ? 'dismiss-right' : 'dismiss-left';
     this.card.classList.add(animClass);
     this.ratingContainer.classList.remove('visible');
     this.swipeRight.classList.remove('visible');

@@ -6,11 +6,10 @@
 import { Store } from './store.js';
 import { Vocab } from './vocab.js';
 import {
-  calculateNextReview,
+  calculateNextReviewSimple,
   getDueCardIds,
   getNewCardIds,
   newCardData,
-  RATING,
 } from './srs.js';
 
 // ─── セッション状態 ───────────────────────────────────────────────────
@@ -111,34 +110,35 @@ export const Session = {
 
   /**
    * 評価を送信して次のカードへ進む
-   * @param {number} rating - RATING.AGAIN(0) ～ RATING.EASY(3)
+   * @param {'remembered'|'not-yet'} rating
    */
   submitRating(rating) {
     if (this.isComplete()) return;
 
     const item = _queue[_currentIndex];
-    const updatedSRS = calculateNextReview(item.srsData, rating);
 
-    // 履歴に記録
-    _history.push({ wordId: item.wordId, rating, srsData: updatedSRS });
-
-    // 保留中の更新に追加
-    _pendingUpdates[String(item.wordId)] = updatedSRS;
-
-    // 統計更新
-    _sessionStats.reviewed++;
-    if (rating >= RATING.HARD) _sessionStats.correct++;
-    if (item.isNew) _sessionStats.newCards++;
-
-    // 「もう一度」の場合はキューの後ろへ再追加（最大2回まで）
-    if (rating === RATING.AGAIN && (item.againCount || 0) < 2) {
+    if (rating === 'not-yet') {
+      // まだまだ：キュー末尾に再追加（回数制限なし）
       _queue.push({
         ...item,
-        srsData: updatedSRS,
         isNew: false,
-        againCount: (item.againCount || 0) + 1,
+        attemptCount: (item.attemptCount || 0) + 1,
       });
+      _currentIndex++;
+      _sessionStats.reviewed++;
+      return;
     }
+
+    // 覚えた：試行回数ベースで SRS 計算して保存
+    const attempts = (item.attemptCount || 0) + 1;
+    const updatedSRS = calculateNextReviewSimple(item.srsData, attempts);
+
+    _history.push({ wordId: item.wordId, rating, srsData: updatedSRS });
+    _pendingUpdates[String(item.wordId)] = updatedSRS;
+
+    _sessionStats.reviewed++;
+    _sessionStats.correct++;
+    if (item.isNew) _sessionStats.newCards++;
 
     _currentIndex++;
 
@@ -148,7 +148,7 @@ export const Session = {
     }
   },
 
-  /** 1つ前のカードに戻る（undo） */
+  /** 1つ前のカード（「覚えた」と記録したもの）に戻る */
   undo() {
     if (_history.length === 0 || _currentIndex === 0) return false;
 
@@ -157,20 +157,8 @@ export const Session = {
 
     // 直前の SRS 状態に戻す
     _queue[_currentIndex].srsData = Store.getCard(String(last.wordId)) || _queue[_currentIndex].srsData;
+    _queue[_currentIndex].attemptCount = 0;
     delete _pendingUpdates[String(last.wordId)];
-
-    // 再追加したカードがあれば除去
-    if (last.rating === RATING.AGAIN) {
-      // キューの末尾から same wordId の再追加を取り除く
-      const lastIdx = _queue.length - 1;
-      if (
-        lastIdx > _currentIndex &&
-        _queue[lastIdx].wordId === last.wordId &&
-        _queue[lastIdx].againCount
-      ) {
-        _queue.pop();
-      }
-    }
 
     // 統計修正
     _sessionStats.reviewed = Math.max(0, _sessionStats.reviewed - 1);

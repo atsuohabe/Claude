@@ -314,8 +314,8 @@
 /* Rating buttons container */
 .rating-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-2);
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
   padding: 0 var(--space-4) var(--space-4);
   opacity: 0;
   pointer-events: none;
@@ -329,87 +329,50 @@
   transform: translateY(0);
 }
 
-@media (max-width: 400px) {
-  .rating-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 /* Rating buttons */
 .rating-btn {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  padding: var(--space-3) var(--space-2);
+  padding: var(--space-4) var(--space-2);
   border-radius: var(--radius-md);
   font-family: var(--font-ui);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
   border: 2px solid transparent;
   cursor: pointer;
   transition: all var(--transition-fast);
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-  line-height: 1.2;
 }
 
 .rating-btn:active {
   transform: scale(0.95);
 }
 
-.rating-btn__interval {
-  font-size: 0.65rem;
-  font-weight: 400;
-  opacity: 0.8;
-}
-
-.rating-btn--again {
+.rating-btn--not-yet {
   background: #F5F5F5;
   color: #424242;
   border-color: #E0E0E0;
 }
-.rating-btn--again:hover {
+.rating-btn--not-yet:hover {
   background: #EEEEEE;
   border-color: #BDBDBD;
 }
 
-.rating-btn--hard {
-  background: #EEEEEE;
-  color: #424242;
-  border-color: #E0E0E0;
-}
-.rating-btn--hard:hover {
-  background: #E0E0E0;
-  border-color: #9E9E9E;
-}
-
-.rating-btn--good {
+.rating-btn--remembered {
   background: #424242;
   color: #FFFFFF;
   border-color: #424242;
 }
-.rating-btn--good:hover {
+.rating-btn--remembered:hover {
   background: #212121;
   border-color: #212121;
 }
 
-.rating-btn--easy {
-  background: #1A1A1A;
-  color: #FFFFFF;
-  border-color: #1A1A1A;
-}
-.rating-btn--easy:hover {
-  background: #000000;
-  border-color: #000000;
-}
-
 /* Dark theme rating buttons */
-[data-theme="dark"] .rating-btn--again { background: #2A2A2A; color: #BDBDBD; border-color: #3A3A3A; }
-[data-theme="dark"] .rating-btn--hard  { background: #333333; color: #BDBDBD; border-color: #444444; }
-[data-theme="dark"] .rating-btn--good  { background: #9E9E9E; color: #000000; border-color: #9E9E9E; }
-[data-theme="dark"] .rating-btn--easy  { background: #E0E0E0; color: #000000; border-color: #E0E0E0; }
+[data-theme="dark"] .rating-btn--not-yet    { background: #2A2A2A; color: #BDBDBD; border-color: #3A3A3A; }
+[data-theme="dark"] .rating-btn--remembered { background: #E0E0E0; color: #000000; border-color: #E0E0E0; }
 
 /* Study session header */
 .study-header {

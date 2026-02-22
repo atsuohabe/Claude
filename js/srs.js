@@ -242,6 +242,22 @@ export function getForecast(days = 14) {
   return forecast;
 }
 
+// ─── 覚えた/まだまだ方式 ─────────────────────────────────────────────
+
+/**
+ * セッション内の試行回数から次回レビューを計算する
+ * @param {object} card - 現在のカード SRS データ
+ * @param {number} sessionAttempts - 何回表示されて覚えたか（1 = 一発で覚えた）
+ * @returns {object} 更新された SRS データ
+ */
+export function calculateNextReviewSimple(card, sessionAttempts) {
+  const rating = sessionAttempts <= 1 ? RATING.EASY
+               : sessionAttempts === 2 ? RATING.GOOD
+               : sessionAttempts === 3 ? RATING.HARD
+               : RATING.AGAIN;
+  return calculateNextReview(card, rating);
+}
+
 // ─── 次回インターバルのプレビュー ────────────────────────────────────
 
 /**
