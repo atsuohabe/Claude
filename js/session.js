@@ -69,11 +69,8 @@ export const Session = {
 
     // studyLevel に基づいて due カードもフィルタ
     if (studyLevel !== 'all') {
-      const targetNoviceLevel = studyLevel === 'novice1' ? 1 : 2;
-      dueIds = dueIds.filter(id => {
-        const word = Vocab.getWord(Number(id));
-        return word && (word.novice_level || 1) === targetNoviceLevel;
-      });
+      const filteredSet = new Set(allWordIds.map(String));
+      dueIds = dueIds.filter(id => filteredSet.has(String(id)));
     }
 
     const newIds = getNewCardIds(allWordIds, remainingNew);
