@@ -634,7 +634,7 @@
   font-size: clamp(1.2rem, 4vw, 1.5rem);
   font-weight: 700;
   color: var(--color-text);
-  margin-bottom: var(--space-1);
+  margin-bottom: var(--space-6);
 }
 
 .dashboard-hero__subtitle {
