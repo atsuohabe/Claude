@@ -30,6 +30,9 @@ const CORE_ASSETS = [
   `${BASE}data/vocab-core.json`,
   `${BASE}data/vocab-everyday.json`,
   `${BASE}data/vocab-advanced.json`,
+  `${BASE}apple-touch-icon.png`,
+  `${BASE}icon-192.png`,
+  `${BASE}icon-512.png`,
 ];
 
 // ─── インストール ────────────────────────────────────────────────────
