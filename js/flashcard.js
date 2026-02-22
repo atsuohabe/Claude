@@ -251,24 +251,22 @@ export class Flashcard {
 
     const backInner = el('div', 'card__back');
 
-    // ヘッダー：漢字（小）+ ピンイン
-    const header = el('div', 'card__back-header');
+    // 漢字（小、中央）
     const hanziSmall = el('div', 'card__hanzi-small hanzi');
     hanziSmall.textContent = word.hanzi;
+    backInner.appendChild(hanziSmall);
 
+    // ピンイン（中央）
     const pinyinEl = el('div', 'card__pinyin');
     pinyinEl.innerHTML = parsePinyinToHTML(word.pinyin);
+    backInner.appendChild(pinyinEl);
 
-    header.appendChild(hanziSmall);
-    header.appendChild(pinyinEl);
-    backInner.appendChild(header);
-
-    // 日本語意味（大）
+    // 日本語意味（大、中央）
     const meaning = el('div', 'card__meaning');
     meaning.textContent = word.meaning_ja || '';
     backInner.appendChild(meaning);
 
-    // 英語意味（日本語の下）
+    // 英語意味（直下、小さめ）
     if (word.meaning_en) {
       const meaningEn = el('div', 'card__meaning-en');
       meaningEn.textContent = word.meaning_en;
@@ -279,7 +277,7 @@ export class Flashcard {
     if (word.part_of_speech) {
       const pos = el('div', 'text-muted text-sm');
       pos.textContent = word.part_of_speech;
-      pos.style.marginBottom = 'var(--space-3)';
+      pos.style.marginTop = 'var(--space-2)';
       backInner.appendChild(pos);
     }
 

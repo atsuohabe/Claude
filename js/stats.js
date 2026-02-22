@@ -128,10 +128,10 @@ export function renderStats(container) {
 
   const stateDefs = [
     { key: 'new',      label: '未学習',         color: '#E0E0E0' },
-    { key: 'learning', label: '学習中',          color: '#9E9E9E' },
-    { key: 'young',    label: '若い',            color: '#616161' },
-    { key: 'mature',   label: '成熟（習得済み）', color: '#212121' },
-    { key: 'burned',   label: '定着済み',        color: '#000000' },
+    { key: 'learning', label: '学習中',         color: '#9E9E9E' },
+    { key: 'young',    label: '覚えた（練習中）', color: '#616161' },
+    { key: 'mature',   label: '習得済み',        color: '#212121' },
+    { key: 'burned',   label: '完全定着',        color: '#000000' },
   ];
 
   const total = Object.values(stateCounts).reduce((a, b) => a + b, 0) || 1;
