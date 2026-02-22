@@ -253,12 +253,23 @@ export const Session = {
  * 復習カードと新規カードを混ぜてキューを構築する
  * 復習カードを優先し、新規カードを均等に散りばめる
  */
+function _shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 function _buildQueue(dueIds, newIds) {
   const queue = [];
   const allCards = Store.getAllCards();
 
+  // 復習カードをランダム順に並べる
+  const shuffledDueIds = _shuffle([...dueIds]);
+
   // 復習カード
-  for (const id of dueIds) {
+  for (const id of shuffledDueIds) {
     const srsData = allCards[String(id)] || newCardData(Number(id));
     queue.push({ wordId: Number(id), srsData, isNew: false });
   }
@@ -270,9 +281,9 @@ function _buildQueue(dueIds, newIds) {
   }
 
   // 新規カードを均等に分散（最初の復習10枚の後に挿入）
-  if (newIds.length > 0 && dueIds.length > 0) {
-    const newItems = queue.splice(dueIds.length); // 新規を一旦取り出す
-    const step = Math.max(3, Math.floor(dueIds.length / newIds.length));
+  if (newIds.length > 0 && shuffledDueIds.length > 0) {
+    const newItems = queue.splice(shuffledDueIds.length); // 新規を一旦取り出す
+    const step = Math.max(3, Math.floor(shuffledDueIds.length / newIds.length));
     for (let i = 0; i < newItems.length; i++) {
       const insertAt = Math.min(step * (i + 1), queue.length);
       queue.splice(insertAt + i, 0, newItems[i]);
