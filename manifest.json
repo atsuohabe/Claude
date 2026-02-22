@@ -1,0 +1,22 @@
+{
+  "name": "台湾華語フラッシュカード",
+  "short_name": "台湾華語",
+  "description": "台湾華語（繁体字）を日本語話者向けに学ぶフラッシュカードアプリ。間隔反復システム（SRS）で1,226語マスターを目指す。",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1A1A1A",
+  "theme_color": "#1A1A1A",
+  "lang": "ja",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["education", "lifestyle"],
+  "screenshots": [],
+  "prefer_related_applications": false
+}
