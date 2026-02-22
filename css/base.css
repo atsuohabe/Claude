@@ -46,12 +46,12 @@
   --color-info: #424242;
   --color-card-shadow: rgba(0, 0, 0, 0.08);
 
-  /* Tone colors (standard linguistic convention) */
-  --tone-1: #E53935;
-  --tone-2: #2E7D32;
-  --tone-3: #1565C0;
-  --tone-4: #6A1B9A;
-  --tone-5: #757575;
+  /* Tone colors (unified monotone) */
+  --tone-1: var(--color-text);
+  --tone-2: var(--color-text);
+  --tone-3: var(--color-text);
+  --tone-4: var(--color-text);
+  --tone-5: var(--color-text-muted);
 
   /* Transitions */
   --transition-fast: 150ms ease;

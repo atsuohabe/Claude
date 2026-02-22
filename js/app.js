@@ -191,14 +191,6 @@ function renderHome() {
 
         <div class="queue-row">
           <div class="queue-pill">
-            <span class="queue-pill__number" id="due-count">${dueCount}</span>
-            <span class="queue-pill__label">復習</span>
-          </div>
-          <div class="queue-pill">
-            <span class="queue-pill__number" id="new-count">${newCount}</span>
-            <span class="queue-pill__label">新規</span>
-          </div>
-          <div class="queue-pill">
             <span class="queue-pill__number">${overview.totalSeen}</span>
             <span class="queue-pill__label">覚えた</span>
           </div>
@@ -287,12 +279,8 @@ async function renderStudySetup() {
       <div class="surface-card" style="margin-bottom:var(--space-4)">
         <div style="display:flex;gap:var(--space-4);margin-bottom:var(--space-4)">
           <div class="stat-tile" style="flex:1">
-            <div class="stat-tile__number">${dueIds.length}</div>
-            <div class="stat-tile__label">復習カード</div>
-          </div>
-          <div class="stat-tile" style="flex:1">
-            <div class="stat-tile__number">${newToday}</div>
-            <div class="stat-tile__label">新規カード</div>
+            <div class="stat-tile__number">${overview.totalSeen}</div>
+            <div class="stat-tile__label">覚えた</div>
           </div>
           <div class="stat-tile" style="flex:1">
             <div class="stat-tile__number">${overview.mastered}</div>
@@ -478,6 +466,7 @@ function showSessionComplete(container) {
 // ─── 単語帳（ブラウズ）────────────────────────────────────────────────
 
 let _browseCategory = '';
+let _browseSort = 'rank'; // 'rank' | 'learned' | 'mastered'
 
 function renderBrowse() {
   const container = $('view-browse');
@@ -485,18 +474,44 @@ function renderBrowse() {
 
   const categories = Vocab.getCategories();
   const allCards = Store.getAllCards();
-  const words = _browseCategory
+  let words = _browseCategory
     ? Vocab.getByCategory(_browseCategory)
-    : Vocab.getAllWords().slice(0, 100); // デフォルトは最初の100語
+    : Vocab.getAllWords().slice(0, 200);
+
+  // ソート
+  if (_browseSort === 'learned') {
+    words = [...words].sort((a, b) => {
+      const aHas = !!allCards[String(a.id)];
+      const bHas = !!allCards[String(b.id)];
+      if (aHas && !bHas) return -1;
+      if (!aHas && bHas) return 1;
+      return 0;
+    });
+  } else if (_browseSort === 'mastered') {
+    words = [...words].sort((a, b) => {
+      const aI = allCards[String(a.id)]?.interval || 0;
+      const bI = allCards[String(b.id)]?.interval || 0;
+      return bI - aI;
+    });
+  }
+
+  const sortLabels = { rank: '頻度順', learned: '覚えた順', mastered: '習得順' };
 
   container.innerHTML = `
     <div class="page page--wide">
       <h1 class="page-title">単語帳</h1>
 
-      <div id="browse-filter" style="margin-bottom:var(--space-4)"></div>
+      <div id="browse-filter" style="margin-bottom:var(--space-3)"></div>
+
+      <div style="display:flex;gap:var(--space-2);margin-bottom:var(--space-4);flex-wrap:wrap">
+        ${['rank','learned','mastered'].map(s => `
+          <button class="category-pill ${_browseSort === s ? 'active' : ''}" data-sort="${s}">
+            ${sortLabels[s]}
+          </button>`).join('')}
+      </div>
 
       <p class="text-sm text-muted" style="margin-bottom:var(--space-3)">
-        ${_browseCategory ? `${words.length}語` : `全 ${Vocab.getLoadedCount()} 語（最初の100語を表示）`}
+        ${_browseCategory ? `${words.length}語` : `全 ${Vocab.getLoadedCount()} 語（上位200語）`}
       </p>
 
       <div class="card-grid" id="browse-grid"></div>
@@ -514,6 +529,14 @@ function renderBrowse() {
       renderBrowse();
     }
   );
+
+  // ソートボタン
+  container.querySelectorAll('[data-sort]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      _browseSort = btn.dataset.sort;
+      renderBrowse();
+    });
+  });
 
   // 単語カードを描画
   const grid = container.querySelector('#browse-grid');
