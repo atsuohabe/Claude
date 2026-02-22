@@ -684,11 +684,11 @@ function renderSettings() {
             <div class="settings-row__desc">学習・復習するカードの範囲</div>
           </div>
           <select class="select" id="setting-study-level">
-            <option value="all"     ${settings.studyLevel === 'all'     ? 'selected' : ''}>全体（全レベル：1,212語）</option>
+            <option value="all"     ${settings.studyLevel === 'all'     ? 'selected' : ''}>全体（全レベル：1,226語）</option>
             <option value="novice1" ${settings.studyLevel === 'novice1' ? 'selected' : ''}>準備級一級（Novice 1）・160語</option>
-            <option value="novice2" ${settings.studyLevel === 'novice2' ? 'selected' : ''}>準備級二級（Novice 2）・233語</option>
-            <option value="level1"  ${settings.studyLevel === 'level1'  ? 'selected' : ''}>入門級（Level 1）・340語</option>
-            <option value="level2"  ${settings.studyLevel === 'level2'  ? 'selected' : ''}>基礎級（Level 2）・479語</option>
+            <option value="novice2" ${settings.studyLevel === 'novice2' ? 'selected' : ''}>準備級二級（Novice 2）・234語</option>
+            <option value="level1"  ${settings.studyLevel === 'level1'  ? 'selected' : ''}>入門級（Level 1）・347語</option>
+            <option value="level2"  ${settings.studyLevel === 'level2'  ? 'selected' : ''}>基礎級（Level 2）・485語</option>
           </select>
         </div>
       </div>
