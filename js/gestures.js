@@ -31,6 +31,7 @@ export function attachGestures(element, handlers) {
 
   function onPointerDown(e) {
     if (e.button !== undefined && e.button !== 0) return; // 右クリック除外
+    if (e.target.closest('button')) return; // ボタンクリックはカードフリップを起こさない
     startX = e.clientX;
     startY = e.clientY;
     currentX = e.clientX;

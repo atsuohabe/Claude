@@ -267,6 +267,13 @@
   border-color: var(--color-primary);
 }
 
+.word-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-1);
+}
+
 .word-card__hanzi {
   font-family: var(--font-hanzi);
   font-size: 1.8rem;
@@ -284,6 +291,40 @@
 .word-card__meaning {
   font-size: 0.9rem;
   font-weight: 500;
+}
+
+.word-card__meaning-en {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.word-card__speak-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.word-card__speak-btn:hover {
+  background: var(--color-bg);
+  border-color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+.word-card__speak-btn:active {
+  transform: scale(0.95);
 }
 
 .word-card__state {

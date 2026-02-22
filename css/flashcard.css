@@ -113,7 +113,7 @@
   line-height: 1.1;
   text-align: center;
   color: var(--color-text);
-  margin: auto 0;
+  white-space: nowrap;
 }
 
 .card__hint {
@@ -218,13 +218,30 @@
   border-radius: var(--radius-full);
   font-size: 0.7rem;
   font-weight: 600;
-  background: var(--color-primary-light);
-  color: var(--color-primary);
+  background: #EEEEEE;
+  color: #616161;
 }
 
 .card__badge--taiwan {
-  background: #E3F2FD;
-  color: #1565C0;
+  background: #E0E0E0;
+  color: #424242;
+}
+
+/* Front pinyin */
+.card__pinyin--front {
+  font-size: clamp(14px, 3.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.4;
+  margin-top: var(--space-2);
+  letter-spacing: 0.02em;
+}
+
+/* English meaning (back) */
+.card__meaning-en {
+  font-size: var(--size-meaning);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
 }
 
 .card__number {
@@ -282,12 +299,12 @@
 
 .swipe-indicator--right {
   left: var(--space-6);
-  color: var(--color-success);
+  color: #424242;
 }
 
 .swipe-indicator--left {
   right: var(--space-6);
-  color: var(--color-primary);
+  color: #757575;
 }
 
 .swipe-indicator.visible {
@@ -349,46 +366,50 @@
 }
 
 .rating-btn--again {
-  background: #FFEBEE;
-  color: #C62828;
+  background: #F5F5F5;
+  color: #424242;
+  border-color: #E0E0E0;
 }
 .rating-btn--again:hover {
-  background: #FFCDD2;
-  border-color: #EF9A9A;
+  background: #EEEEEE;
+  border-color: #BDBDBD;
 }
 
 .rating-btn--hard {
-  background: #FFF3E0;
-  color: #E65100;
+  background: #EEEEEE;
+  color: #424242;
+  border-color: #E0E0E0;
 }
 .rating-btn--hard:hover {
-  background: #FFE0B2;
-  border-color: #FFCC80;
+  background: #E0E0E0;
+  border-color: #9E9E9E;
 }
 
 .rating-btn--good {
-  background: #E8F5E9;
-  color: #1B5E20;
+  background: #424242;
+  color: #FFFFFF;
+  border-color: #424242;
 }
 .rating-btn--good:hover {
-  background: #C8E6C9;
-  border-color: #A5D6A7;
+  background: #212121;
+  border-color: #212121;
 }
 
 .rating-btn--easy {
-  background: #E3F2FD;
-  color: #0D47A1;
+  background: #1A1A1A;
+  color: #FFFFFF;
+  border-color: #1A1A1A;
 }
 .rating-btn--easy:hover {
-  background: #BBDEFB;
-  border-color: #90CAF9;
+  background: #000000;
+  border-color: #000000;
 }
 
 /* Dark theme rating buttons */
-[data-theme="dark"] .rating-btn--again { background: #4A1515; color: #EF9A9A; }
-[data-theme="dark"] .rating-btn--hard  { background: #3D2200; color: #FFCC80; }
-[data-theme="dark"] .rating-btn--good  { background: #1B3A1B; color: #A5D6A7; }
-[data-theme="dark"] .rating-btn--easy  { background: #0D2550; color: #90CAF9; }
+[data-theme="dark"] .rating-btn--again { background: #2A2A2A; color: #BDBDBD; border-color: #3A3A3A; }
+[data-theme="dark"] .rating-btn--hard  { background: #333333; color: #BDBDBD; border-color: #444444; }
+[data-theme="dark"] .rating-btn--good  { background: #9E9E9E; color: #000000; border-color: #9E9E9E; }
+[data-theme="dark"] .rating-btn--easy  { background: #E0E0E0; color: #000000; border-color: #E0E0E0; }
 
 /* Study session header */
 .study-header {

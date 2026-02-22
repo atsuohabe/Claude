@@ -6,7 +6,7 @@
 import { Store } from './store.js';
 import { Vocab } from './vocab.js';
 import { Session } from './session.js';
-import { Flashcard } from './flashcard.js';
+import { Flashcard, speakWord } from './flashcard.js';
 import { renderStats, getOverview, updateProgressRing } from './stats.js';
 import {
   toast,
@@ -158,8 +158,13 @@ function renderHome() {
   const overview = getOverview();
   const allCards = Store.getAllCards();
   const dueCount = getDueCardIds(999).length;
+  const settings = Store.getSettings();
+  const todayH = new Date().toDateString();
+  const todayNewCountH = Store.getHistory()
+    .filter(r => new Date(r.date).toDateString() === todayH)
+    .reduce((sum, r) => sum + (r.newCards || 0), 0);
   const newCount = Math.min(
-    Store.getSettings().dailyNewLimit,
+    Math.max(0, settings.dailyNewLimit - todayNewCountH),
     Vocab.getAllWordIds().filter(id => !allCards[String(id)]).length
   );
 
@@ -167,7 +172,6 @@ function renderHome() {
     <div class="page">
       <div class="dashboard-hero">
         <div class="dashboard-hero__title">台湾華語フラッシュカード</div>
-        <div class="dashboard-hero__subtitle">繁体字・ピンイン・日本語で学ぶ台湾中国語</div>
 
         <div class="dashboard-hero__ring">
           <svg class="progress-ring" viewBox="0 0 120 120">
@@ -260,7 +264,13 @@ async function renderStudySetup() {
   const newLimit = settings.dailyNewLimit;
 
   const newAvailable = allWordIds.filter(id => !allCards[String(id)]).length;
-  const newToday = Math.min(newLimit, newAvailable);
+  // 今日すでに導入した新規カード数を引いて、残り枠を正確に計算
+  const today = new Date().toDateString();
+  const todayNewCount = Store.getHistory()
+    .filter(r => new Date(r.date).toDateString() === today)
+    .reduce((sum, r) => sum + (r.newCards || 0), 0);
+  const remainingNewLimit = Math.max(0, newLimit - todayNewCount);
+  const newToday = Math.min(remainingNewLimit, newAvailable);
 
   container.innerHTML = `
     <div class="page page--study">
@@ -287,14 +297,11 @@ async function renderStudySetup() {
           <div id="category-filter-container"></div>
         </div>
 
-        <button class="btn btn--primary btn--full" id="begin-session-btn"
-          ${dueIds.length === 0 && newToday === 0 ? 'disabled' : ''}>
-          ${dueIds.length === 0 && newToday === 0
-            ? '今日の学習は完了しています'
-            : `学習開始 (${dueIds.length + newToday}枚)`}
+        <button class="btn btn--primary btn--full" id="begin-session-btn">
+          ${dueIds.length === 0 && newToday === 0 ? '全カードを復習する' : '学習開始'}
         </button>
         ${dueIds.length === 0 && newToday === 0
-          ? '<p class="text-muted text-sm" style="text-align:center;margin-top:var(--space-3)">素晴らしい！今日のカードは全て完了しました。</p>'
+          ? '<p class="text-muted text-sm" style="text-align:center;margin-top:var(--space-3)">今日の学習は完了しています。これまで学習した全カードを復習できます。</p>'
           : ''}
       </div>
 
@@ -317,12 +324,24 @@ async function renderStudySetup() {
 
   // 学習開始ボタン
   container.querySelector('#begin-session-btn')?.addEventListener('click', async () => {
-    await startStudySession(container);
+    if (dueIds.length === 0 && newToday === 0) {
+      // 今日の分は完了 → 既習全カードを復習
+      const learnedIds = Object.keys(Store.getAllCards()).map(Number);
+      if (learnedIds.length === 0) {
+        toast('まだ学習したカードがありません。', 'info');
+        return;
+      }
+      await startStudySession(container, learnedIds);
+    } else {
+      await startStudySession(container);
+    }
   });
 }
 
-async function startStudySession(container) {
-  const started = await Session.start({ categories: _selectedCategories });
+async function startStudySession(container, wordIds = null) {
+  const started = wordIds
+    ? await Session.startWithIds(wordIds)
+    : await Session.start({ categories: _selectedCategories });
 
   if (!started) {
     toast('学習するカードがありません。明日また来てください！', 'info');
@@ -402,6 +421,7 @@ function handleUndo() {
 }
 
 function showSessionComplete(container) {
+  const lastWordIds = Session.getLastSessionWordIds();
   const stats = Session.end();
   _keyboardDetach?.detach();
   _keyboardDetach = null;
@@ -430,12 +450,21 @@ function showSessionComplete(container) {
           </div>
         </div>
 
-        <button class="btn btn--primary btn--lg" onclick="location.hash='#home'">
-          ホームへ戻る
-        </button>
+        <div style="display:flex;flex-direction:column;gap:var(--space-3);width:100%;max-width:320px">
+          <button class="btn btn--secondary btn--lg btn--full" id="review-again-btn">
+            もう一度練習する
+          </button>
+          <button class="btn btn--primary btn--lg btn--full" onclick="location.hash='#home'">
+            ホームへ戻る
+          </button>
+        </div>
       </div>
     </div>
   `;
+
+  container.querySelector('#review-again-btn')?.addEventListener('click', () => {
+    startStudySession(container, lastWordIds);
+  });
 }
 
 // ─── 単語帳（ブラウズ）────────────────────────────────────────────────
@@ -487,12 +516,22 @@ function renderBrowse() {
     const card = document.createElement('div');
     card.className = 'word-card';
     card.innerHTML = `
-      <div class="word-card__hanzi">${escapeHtml(word.hanzi)}</div>
-      <div class="word-card__pinyin">${escapeHtml(word.pinyin)}</div>
+      <div class="word-card__top">
+        <div>
+          <div class="word-card__hanzi">${escapeHtml(word.hanzi)}</div>
+          <div class="word-card__pinyin">${escapeHtml(word.pinyin)}</div>
+        </div>
+        <button class="word-card__speak-btn" aria-label="発音を聴く" title="発音を聴く">🔊</button>
+      </div>
       <div class="word-card__meaning">${escapeHtml(word.meaning_ja || '')}</div>
+      ${word.meaning_en ? `<div class="word-card__meaning-en">${escapeHtml(word.meaning_en)}</div>` : ''}
       <div class="word-card__state word-card__state--${state}"></div>
     `;
     card.addEventListener('click', () => showWordDetail(word, srs));
+    card.querySelector('.word-card__speak-btn').addEventListener('click', e => {
+      e.stopPropagation();
+      speakWord(word.hanzi);
+    });
     grid.appendChild(card);
   }
 }
@@ -503,7 +542,8 @@ function showWordDetail(word, srsData) {
     <div style="text-align:center;margin-bottom:var(--space-6)">
       <div class="hanzi" style="font-size:4rem;margin-bottom:var(--space-2)">${escapeHtml(word.hanzi)}</div>
       <div style="font-size:1.2rem;color:var(--color-text-muted)">${escapeHtml(word.pinyin)}</div>
-      <div style="font-size:1.5rem;font-weight:700;margin-top:var(--space-3)">${escapeHtml(word.meaning_ja || word.meaning_en || '')}</div>
+      <div style="font-size:1.5rem;font-weight:700;margin-top:var(--space-3)">${escapeHtml(word.meaning_ja || '')}</div>
+      ${word.meaning_en ? `<div style="font-size:1.1rem;color:var(--color-text-muted);margin-top:var(--space-1)">${escapeHtml(word.meaning_en)}</div>` : ''}
     </div>
     ${word.example_sentence?.hanzi ? `
       <div class="card__example">
@@ -521,7 +561,7 @@ function showWordDetail(word, srsData) {
       </div>
     ` : '<div class="text-sm text-muted" style="margin-top:var(--space-4)">まだ学習していません</div>'}
   `;
-  modal({ title: word.hanzi, content });
+  modal({ title: '', content });
 }
 
 // ─── 統計ページ ──────────────────────────────────────────────────────
