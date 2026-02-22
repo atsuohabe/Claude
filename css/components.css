@@ -647,6 +647,32 @@
   margin-bottom: var(--space-6);
 }
 
+/* Level badge (home & study setup) */
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-4);
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.level-badge:hover {
+  opacity: 0.85;
+}
+
+.level-badge--sm {
+  padding: 2px var(--space-2);
+  font-size: 0.7rem;
+  margin-bottom: 0;
+}
+
 /* Today's queue pills */
 .queue-row {
   display: flex;

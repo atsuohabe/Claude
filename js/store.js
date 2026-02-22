@@ -20,6 +20,7 @@ const DEFAULT_SETTINGS = {
   autoplayAudio: false,
   ttsRate: 0.8,         // 読み上げ速度（0.5〜1.5）
   studyCategories: [],  // [] = all categories
+  studyLevel: 'all',   // 'all' | 'novice1' | 'novice2'
 };
 
 export const Store = {

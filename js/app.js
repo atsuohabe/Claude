@@ -159,22 +159,31 @@ function renderHome() {
   const allCards = Store.getAllCards();
   const dueCount = getDueCardIds(999).length;
   const settings = Store.getSettings();
+  const studyLevel = settings.studyLevel || 'all';
   const todayH = new Date().toDateString();
   const todayNewCountH = Store.getHistory()
     .filter(r => new Date(r.date).toDateString() === todayH)
     .reduce((sum, r) => sum + (r.newCards || 0), 0);
+  const filteredWordIds = Vocab.getFilteredWordIds(studyLevel);
   const newCount = Math.min(
     Math.max(0, settings.dailyNewLimit - todayNewCountH),
-    Vocab.getAllWordIds().filter(id => !allCards[String(id)]).length
+    filteredWordIds.filter(id => !allCards[String(id)]).length
   );
 
-  const totalSeenPct = overview.total > 0
-    ? Math.round((overview.totalSeen / overview.total) * 100) : 0;
+  const levelLabels = { all: '全体', novice1: 'Novice 1', novice2: 'Novice 2' };
+  const levelLabel = levelLabels[studyLevel] || '全体';
+  const filteredTotal = filteredWordIds.length;
+  const filteredSeen = filteredWordIds.filter(id => !!allCards[String(id)]).length;
+  const totalSeenPct = filteredTotal > 0
+    ? Math.round((filteredSeen / filteredTotal) * 100) : 0;
 
   container.innerHTML = `
     <div class="page">
       <div class="dashboard-hero">
         <div class="dashboard-hero__title">台湾華語フラッシュカード</div>
+        <div class="level-badge" id="home-level-badge" title="タップしてレベルを変更">
+          ${levelLabel}
+        </div>
 
         <div class="dashboard-hero__ring">
           <svg class="progress-ring" viewBox="0 0 120 120">
@@ -183,7 +192,7 @@ function renderHome() {
             <circle class="progress-ring__track--mastered" cx="60" cy="60" r="52"/>
             <g class="progress-ring__text" transform="translate(60,60) rotate(90)">
               <text class="progress-ring__number" dy="-8" text-anchor="middle">0</text>
-              <text class="progress-ring__label" dy="10" text-anchor="middle">/ ${Vocab.getLoadedCount()} 語</text>
+              <text class="progress-ring__label" dy="10" text-anchor="middle">/ ${filteredTotal} 語</text>
               <text class="progress-ring__label" dy="24" text-anchor="middle" style="font-size:9px;fill:var(--color-text-muted)">覚えた</text>
             </g>
           </svg>
@@ -191,11 +200,11 @@ function renderHome() {
 
         <div class="queue-row">
           <div class="queue-pill">
-            <span class="queue-pill__number">${overview.totalSeen}</span>
+            <span class="queue-pill__number">${filteredSeen}</span>
             <span class="queue-pill__label">覚えた</span>
           </div>
           <div class="queue-pill">
-            <span class="queue-pill__number">${overview.mastered}</span>
+            <span class="queue-pill__number">${filteredWordIds.filter(id => (allCards[String(id)]?.interval || 0) >= 21).length}</span>
             <span class="queue-pill__label">習得済み</span>
           </div>
         </div>
@@ -208,7 +217,7 @@ function renderHome() {
       <div class="surface-card" style="margin-top:var(--space-4)">
         <div class="section-title" style="margin-bottom:var(--space-3)">進捗</div>
         <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--color-text-muted);margin-bottom:var(--space-2)">
-          <span>覚えた: ${overview.totalSeen}語 / ${Vocab.getLoadedCount()}語</span>
+          <span>覚えた: ${filteredSeen}語 / ${filteredTotal}語</span>
           <span>${totalSeenPct}%</span>
         </div>
         <div class="progress-bar">
@@ -232,15 +241,26 @@ function renderHome() {
     </div>
   `;
 
-  // プログレスリング更新（覚えた数を中央に表示）
+  // プログレスリング更新（選択レベルのデータで表示）
   const svg = container.querySelector('.progress-ring');
   if (svg) {
+    const filteredMastered = filteredWordIds.filter(id => (allCards[String(id)]?.interval || 0) >= 21).length;
+    const filteredLearning = filteredWordIds.filter(id => {
+      const c = allCards[String(id)];
+      return c && (c.interval || 0) < 21;
+    }).length;
     updateProgressRing(svg, {
-      mastered: overview.mastered,
-      learning: overview.learning,
-      totalSeen: overview.totalSeen,
+      mastered: filteredMastered,
+      learning: filteredLearning,
+      totalSeen: filteredSeen,
+      total: filteredTotal,
     });
   }
+
+  // レベルバッジをタップ → 設定ページへ
+  container.querySelector('#home-level-badge')?.addEventListener('click', () => {
+    location.hash = '#settings';
+  });
 
   // 学習開始ボタン
   container.querySelector('#start-study-btn')?.addEventListener('click', () => {
@@ -289,7 +309,12 @@ async function renderStudySetup() {
         </div>
 
         <div style="margin-bottom:var(--space-4)">
-          <div class="section-title" style="margin-bottom:var(--space-3);font-size:0.9rem">カテゴリフィルター</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-3)">
+            <div class="section-title" style="font-size:0.9rem;margin-bottom:0">カテゴリフィルター</div>
+            <span class="level-badge level-badge--sm" style="cursor:pointer" onclick="location.hash='#settings'" title="設定でレベルを変更">
+              ${{ all: '全体', novice1: 'Novice 1', novice2: 'Novice 2' }[settings.studyLevel] || '全体'}
+            </span>
+          </div>
           <div id="category-filter-container"></div>
         </div>
 
@@ -467,6 +492,7 @@ function showSessionComplete(container) {
 
 let _browseCategory = '';
 let _browseSort = 'rank'; // 'rank' | 'learned' | 'mastered'
+let _browseLevel = 'all'; // 'all' | 'novice1' | 'novice2'
 
 function renderBrowse() {
   const container = $('view-browse');
@@ -476,7 +502,13 @@ function renderBrowse() {
   const allCards = Store.getAllCards();
   let words = _browseCategory
     ? Vocab.getByCategory(_browseCategory)
-    : Vocab.getAllWords().slice(0, 200);
+    : Vocab.getFilteredWords(_browseLevel === 'all' ? 'all' : _browseLevel).slice(0, 300);
+
+  // レベルフィルター（カテゴリ指定時も適用）
+  if (_browseLevel !== 'all') {
+    const targetLevel = _browseLevel === 'novice1' ? 1 : 2;
+    words = words.filter(w => (w.novice_level || 1) === targetLevel);
+  }
 
   // ソート／フィルター
   const MATURE_INTERVAL = 21;
@@ -489,6 +521,7 @@ function renderBrowse() {
   }
 
   const sortLabels = { rank: '頻度順', learned: '覚えた順', mastered: '習得順' };
+  const levelLabels = { all: '全体', novice1: 'Novice 1', novice2: 'Novice 2' };
 
   // 件数ラベル
   let countLabel;
@@ -499,12 +532,20 @@ function renderBrowse() {
   } else if (_browseCategory) {
     countLabel = `${words.length}語`;
   } else {
-    countLabel = `全 ${Vocab.getLoadedCount()} 語（上位200語）`;
+    const levelStr = _browseLevel === 'all' ? '' : ` (${levelLabels[_browseLevel]})`;
+    countLabel = `${words.length}語${levelStr}`;
   }
 
   container.innerHTML = `
     <div class="page page--wide">
       <h1 class="page-title">単語帳</h1>
+
+      <div style="display:flex;gap:var(--space-2);margin-bottom:var(--space-3);flex-wrap:wrap">
+        ${['all','novice1','novice2'].map(lv => `
+          <button class="category-pill ${_browseLevel === lv ? 'active' : ''}" data-level="${lv}">
+            ${levelLabels[lv]}
+          </button>`).join('')}
+      </div>
 
       <div id="browse-filter" style="margin-bottom:var(--space-3)"></div>
 
@@ -534,6 +575,14 @@ function renderBrowse() {
       renderBrowse();
     }
   );
+
+  // レベルフィルターボタン
+  container.querySelectorAll('[data-level]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      _browseLevel = btn.dataset.level;
+      renderBrowse();
+    });
+  });
 
   // ソートボタン
   container.querySelectorAll('[data-sort]').forEach(btn => {
@@ -628,6 +677,21 @@ function renderSettings() {
       <h1 class="page-title">設定</h1>
 
       <div class="surface-card" style="margin-bottom:var(--space-4)">
+        <div class="section-title" style="margin-bottom:var(--space-4)">学習レベル</div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-row__label">対象レベル</div>
+            <div class="settings-row__desc">学習・復習するカードの範囲</div>
+          </div>
+          <select class="select" id="setting-study-level">
+            <option value="all"      ${settings.studyLevel === 'all'      ? 'selected' : ''}>全体（N1 + N2）</option>
+            <option value="novice1"  ${settings.studyLevel === 'novice1'  ? 'selected' : ''}>準備級一級（Novice 1）</option>
+            <option value="novice2"  ${settings.studyLevel === 'novice2'  ? 'selected' : ''}>準備級二級（Novice 2）</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="surface-card" style="margin-bottom:var(--space-4)">
         <div class="settings-row">
           <div>
             <div class="settings-row__label">1日の新規カード数</div>
@@ -710,6 +774,11 @@ function renderSettings() {
   `;
 
   // 設定変更ハンドラー
+  container.querySelector('#setting-study-level')?.addEventListener('change', e => {
+    Store.updateSettings({ studyLevel: e.target.value });
+    toast('学習レベルを変更しました', 'success');
+  });
+
   container.querySelector('#setting-daily-new')?.addEventListener('change', e => {
     Store.updateSettings({ dailyNewLimit: Number(e.target.value) });
     toast('設定を保存しました', 'success');
