@@ -478,24 +478,29 @@ function renderBrowse() {
     ? Vocab.getByCategory(_browseCategory)
     : Vocab.getAllWords().slice(0, 200);
 
-  // ソート
+  // ソート／フィルター
+  const MATURE_INTERVAL = 21;
   if (_browseSort === 'learned') {
-    words = [...words].sort((a, b) => {
-      const aHas = !!allCards[String(a.id)];
-      const bHas = !!allCards[String(b.id)];
-      if (aHas && !bHas) return -1;
-      if (!aHas && bHas) return 1;
-      return 0;
-    });
+    // SRSデータがある単語のみ（覚えたことがある）
+    words = words.filter(w => !!allCards[String(w.id)]);
   } else if (_browseSort === 'mastered') {
-    words = [...words].sort((a, b) => {
-      const aI = allCards[String(a.id)]?.interval || 0;
-      const bI = allCards[String(b.id)]?.interval || 0;
-      return bI - aI;
-    });
+    // インターバル21日以上（習得済み）のみ
+    words = words.filter(w => (allCards[String(w.id)]?.interval || 0) >= MATURE_INTERVAL);
   }
 
   const sortLabels = { rank: '頻度順', learned: '覚えた順', mastered: '習得順' };
+
+  // 件数ラベル
+  let countLabel;
+  if (_browseSort === 'learned') {
+    countLabel = `覚えた単語: ${words.length}語`;
+  } else if (_browseSort === 'mastered') {
+    countLabel = `習得済み: ${words.length}語`;
+  } else if (_browseCategory) {
+    countLabel = `${words.length}語`;
+  } else {
+    countLabel = `全 ${Vocab.getLoadedCount()} 語（上位200語）`;
+  }
 
   container.innerHTML = `
     <div class="page page--wide">
@@ -511,7 +516,7 @@ function renderBrowse() {
       </div>
 
       <p class="text-sm text-muted" style="margin-bottom:var(--space-3)">
-        ${_browseCategory ? `${words.length}語` : `全 ${Vocab.getLoadedCount()} 語（上位200語）`}
+        ${countLabel}
       </p>
 
       <div class="card-grid" id="browse-grid"></div>
