@@ -4,7 +4,7 @@
  * GitHub Pages（サブパス）にも対応
  */
 
-const CACHE_NAME = 'cmf-v7';
+const CACHE_NAME = 'cmf-v8';
 
 // sw.js の置き場所からベースパスを動的に取得
 // localhost: '/'  /  GitHub Pages: '/Claude/'
@@ -12,7 +12,9 @@ const BASE = new URL('./', self.location.href).pathname;
 
 const CORE_ASSETS = [
   `${BASE}index.html`,
+  `${BASE}manifest.json`,
   `${BASE}css/base.css`,
+  `${BASE}css/layout.css`,
   `${BASE}css/flashcard.css`,
   `${BASE}css/components.css`,
   `${BASE}js/app.js`,

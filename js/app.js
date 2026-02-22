@@ -312,7 +312,7 @@ async function renderStudySetup() {
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-3)">
             <div class="section-title" style="font-size:0.9rem;margin-bottom:0">カテゴリフィルター</div>
             <span class="level-badge level-badge--sm" style="cursor:pointer" onclick="location.hash='#settings'" title="設定でレベルを変更">
-              ${{ all: '全体', novice1: 'Novice 1', novice2: 'Novice 2' }[settings.studyLevel] || '全体'}
+              ${{ all: '全体', novice1: 'Novice 1', novice2: 'Novice 2', level1: '入門級', level2: '基礎級' }[settings.studyLevel] || '全体'}
             </span>
           </div>
           <div id="category-filter-container"></div>
