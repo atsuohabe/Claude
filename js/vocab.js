@@ -86,12 +86,14 @@ export const Vocab = {
 
   /**
    * studyLevel 設定に基づいてフィルタした単語一覧を返す
-   * @param {'all'|'novice1'|'novice2'} studyLevel
+   * @param {'all'|'novice1'|'novice2'|'level1'|'level2'} studyLevel
    */
   getFilteredWords(studyLevel) {
     if (!studyLevel || studyLevel === 'all') return this.getAllWords();
     if (studyLevel === 'novice1') return this.getByNoviceLevel(1);
     if (studyLevel === 'novice2') return this.getByNoviceLevel(2);
+    if (studyLevel === 'level1')  return this.getByDifficulty(2);
+    if (studyLevel === 'level2')  return this.getByDifficulty(3);
     return this.getAllWords();
   },
 
