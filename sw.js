@@ -4,12 +4,13 @@
  * GitHub Pages（サブパス）にも対応
  */
 
-const CACHE_NAME = 'cmf-v9';
+const CACHE_NAME = 'cmf-v10';
 
 // sw.js の置き場所からベースパスを動的に取得
 // localhost: '/'  /  GitHub Pages: '/Claude/'
 const BASE = new URL('./', self.location.href).pathname;
 
+// 起動時に全ファイルを await するため、語彙 JSON も全てプリキャッシュ対象にする
 const CORE_ASSETS = [
   `${BASE}index.html`,
   `${BASE}manifest.json`,
@@ -27,9 +28,6 @@ const CORE_ASSETS = [
   `${BASE}js/gestures.js`,
   `${BASE}js/ui.js`,
   `${BASE}data/vocab-core.json`,
-];
-
-const LAZY_ASSETS = [
   `${BASE}data/vocab-everyday.json`,
   `${BASE}data/vocab-advanced.json`,
 ];
