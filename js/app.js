@@ -36,11 +36,8 @@ async function init() {
   applyStoredTheme();
   buildNav();
 
-  // コア語彙をロード（ページ表示に必要なため優先）
-  await Vocab.loadCore();
-
-  // 残りの語彙を非同期でバックグラウンドロード
-  Vocab.loadEveryday().then(() => Vocab.loadAdvanced());
+  // 全語彙を一括ロード（レベル別の単語数を正確に表示するため）
+  await Vocab.loadAll();
 
   // ルーター初期化
   window.addEventListener('hashchange', handleRoute);
