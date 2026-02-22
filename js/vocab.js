@@ -77,10 +77,10 @@ export const Vocab = {
     return Object.values(wordsMap).filter(w => w.difficulty === level);
   },
 
-  /** 準備級レベルでフィルタ（1=一級/Novice 1, 2=二級/Novice 2） */
-  getByNoviceLevel(level) {
+  /** TOCFLレベルでフィルタ（1=N1, 2=N2, 3=L1/入門級, 4=L2/基礎級） */
+  getByTocflLevel(level) {
     return Object.values(wordsMap)
-      .filter(w => (w.novice_level || 1) === level)
+      .filter(w => w.tocfl_level === level)
       .sort((a, b) => (a.frequency_rank || a.id) - (b.frequency_rank || b.id));
   },
 
@@ -90,10 +90,10 @@ export const Vocab = {
    */
   getFilteredWords(studyLevel) {
     if (!studyLevel || studyLevel === 'all') return this.getAllWords();
-    if (studyLevel === 'novice1') return this.getByNoviceLevel(1);
-    if (studyLevel === 'novice2') return this.getByNoviceLevel(2);
-    if (studyLevel === 'level1')  return this.getByDifficulty(2);
-    if (studyLevel === 'level2')  return this.getByDifficulty(3);
+    if (studyLevel === 'novice1') return this.getByTocflLevel(1);
+    if (studyLevel === 'novice2') return this.getByTocflLevel(2);
+    if (studyLevel === 'level1')  return this.getByTocflLevel(3);
+    if (studyLevel === 'level2')  return this.getByTocflLevel(4);
     return this.getAllWords();
   },
 
