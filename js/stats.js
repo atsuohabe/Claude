@@ -110,10 +110,10 @@ export function renderStats(container) {
   const grid = _el('div', 'stats-grid');
   grid.style.marginBottom = 'var(--space-6)';
 
-  _appendStatTile(grid, String(overview.mastered), '習得済み語数', '#4CAF50');
-  _appendStatTile(grid, `${retention}%`, '直近保持率', '#2196F3');
-  _appendStatTile(grid, `${streak.current}日`, '現在のストリーク', '#FF9800');
-  _appendStatTile(grid, `${totalMin}分`, '総学習時間', '#9C27B0');
+  _appendStatTile(grid, String(overview.totalSeen), '覚えた語数');
+  _appendStatTile(grid, String(overview.mastered), '習得済み語数');
+  _appendStatTile(grid, `${streak.current}日`, '現在のストリーク');
+  _appendStatTile(grid, `${totalMin}分`, '総学習時間');
 
   container.appendChild(grid);
 
@@ -127,11 +127,11 @@ export function renderStats(container) {
   stateCard.appendChild(stateTitle);
 
   const stateDefs = [
-    { key: 'new',      label: '未学習',   color: '#9E9E9E' },
-    { key: 'learning', label: '学習中',   color: '#FF9800' },
-    { key: 'young',    label: '若い',     color: '#2196F3' },
-    { key: 'mature',   label: '成熟（習得済み）', color: '#4CAF50' },
-    { key: 'burned',   label: '定着済み', color: '#9C27B0' },
+    { key: 'new',      label: '未学習',         color: '#E0E0E0' },
+    { key: 'learning', label: '学習中',          color: '#9E9E9E' },
+    { key: 'young',    label: '若い',            color: '#616161' },
+    { key: 'mature',   label: '成熟（習得済み）', color: '#212121' },
+    { key: 'burned',   label: '定着済み',        color: '#000000' },
   ];
 
   const total = Object.values(stateCounts).reduce((a, b) => a + b, 0) || 1;
@@ -250,7 +250,7 @@ export function renderStats(container) {
  * @param {SVGElement} svg
  * @param {{ mastered: number, learning: number }} counts
  */
-export function updateProgressRing(svg, { mastered, learning }) {
+export function updateProgressRing(svg, { mastered, learning, totalSeen }) {
   const TOTAL = Vocab.getLoadedCount() || 160;
   const CIRCUMFERENCE = 2 * Math.PI * 52; // r=52
 
@@ -272,9 +272,10 @@ export function updateProgressRing(svg, { mastered, learning }) {
     learningTrack.style.transformOrigin = '60px 60px';
   }
 
+  // 中央には「覚えた」総数（学習中 + 習得済み）を表示
   const numberEl = svg.querySelector('.progress-ring__number');
   if (numberEl) {
-    animateCounter(numberEl, 0, mastered, 800);
+    animateCounter(numberEl, 0, totalSeen ?? mastered, 800);
   }
 }
 
@@ -290,7 +291,7 @@ function _appendStatTile(parent, number, label, color) {
   const tile = _el('div', 'stat-tile');
   const numEl = _el('div', 'stat-tile__number');
   numEl.textContent = number;
-  numEl.style.color = color;
+  if (color) numEl.style.color = color;
   const labelEl = _el('div', 'stat-tile__label');
   labelEl.textContent = label;
   tile.appendChild(numEl);

@@ -142,7 +142,7 @@
 }
 
 .progress-bar__fill--green {
-  background: linear-gradient(90deg, #43A047, #1B5E20);
+  background: var(--color-text);
 }
 
 .progress-bar__fill--primary {
@@ -178,7 +178,7 @@
 
 .progress-ring__track--learning {
   fill: none;
-  stroke: #FF9800;
+  stroke: #C8C8C8;
   stroke-width: 10;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -186,7 +186,7 @@
 
 .progress-ring__track--mastered {
   fill: none;
-  stroke: #43A047;
+  stroke: #1A1A1A;
   stroke-width: 10;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -335,11 +335,11 @@
   margin-top: var(--space-2);
 }
 
-.word-card__state--new { background: var(--color-border); }
-.word-card__state--learning { background: #FF9800; }
-.word-card__state--young { background: #2196F3; }
-.word-card__state--mature { background: #4CAF50; }
-.word-card__state--burned { background: #9C27B0; }
+.word-card__state--new     { background: #D8D8D8; }
+.word-card__state--learning { background: #9E9E9E; }
+.word-card__state--young    { background: #616161; }
+.word-card__state--mature   { background: #1A1A1A; }
+.word-card__state--burned   { background: #000000; }
 
 /* ===== TOAST NOTIFICATIONS ===== */
 .toast-container {
@@ -456,10 +456,10 @@
   min-width: 10px;
 }
 
-.heatmap__cell[data-level="1"] { background: #C8E6C9; }
-.heatmap__cell[data-level="2"] { background: #81C784; }
-.heatmap__cell[data-level="3"] { background: #43A047; }
-.heatmap__cell[data-level="4"] { background: #1B5E20; }
+.heatmap__cell[data-level="1"] { background: #D0D0D0; }
+.heatmap__cell[data-level="2"] { background: #909090; }
+.heatmap__cell[data-level="3"] { background: #505050; }
+.heatmap__cell[data-level="4"] { background: #1A1A1A; }
 
 /* ===== MILESTONE BADGE ===== */
 .milestone-badge {
