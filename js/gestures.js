@@ -9,10 +9,8 @@
  * @param {{
  *   onTap?: () => void,
  *   onFlip?: () => void,
- *   onAgain?: () => void,
- *   onHard?: () => void,
- *   onGood?: () => void,
- *   onEasy?: () => void,
+ *   onRemembered?: () => void,
+ *   onNotYet?: () => void,
  *   onDrag?: (dx: number, dy: number) => void,
  * }} handlers
  * @returns {{ detach: () => void }}
@@ -83,18 +81,14 @@ export function attachGestures(element, handlers) {
     // 水平スワイプ
     else if (absDx > absDy && (absDx > SWIPE_THRESHOLD || speedX > SWIPE_SPEED)) {
       if (dx > 0) {
-        handlers.onGood?.();   // 右スワイプ → 良い
+        handlers.onRemembered?.();  // 右スワイプ → 覚えた
       } else {
-        handlers.onAgain?.();  // 左スワイプ → もう一度
+        handlers.onNotYet?.();      // 左スワイプ → まだまだ
       }
     }
     // 上スワイプ（フリップ）
     else if (dy < -SWIPE_THRESHOLD && absDy > absDx) {
       handlers.onFlip?.();
-    }
-    // 下スワイプ → 難しい
-    else if (dy > SWIPE_THRESHOLD && absDy > absDx) {
-      handlers.onHard?.();
     }
 
     // リセット
@@ -134,10 +128,8 @@ export function attachGestures(element, handlers) {
  * キーボードショートカットをアタッチする
  * @param {{
  *   onFlip?: () => void,
- *   onAgain?: () => void,
- *   onHard?: () => void,
- *   onGood?: () => void,
- *   onEasy?: () => void,
+ *   onNotYet?: () => void,
+ *   onRemembered?: () => void,
  *   onUndo?: () => void,
  * }} handlers
  * @returns {{ detach: () => void }}
@@ -154,16 +146,10 @@ export function attachKeyboard(handlers) {
         handlers.onFlip?.();
         break;
       case '1':
-        handlers.onAgain?.();
+        handlers.onNotYet?.();
         break;
       case '2':
-        handlers.onHard?.();
-        break;
-      case '3':
-        handlers.onGood?.();
-        break;
-      case '4':
-        handlers.onEasy?.();
+        handlers.onRemembered?.();
         break;
       case 'z':
       case 'Z':

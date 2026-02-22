@@ -308,7 +308,7 @@ async function renderStudySetup() {
       <div class="surface-card surface-card--sm">
         <p class="text-sm text-muted">
           ショートカット: <strong>スペース/Enter</strong> でカードをめくる、
-          <strong>1-4</strong> で評価、<strong>Ctrl+Z</strong> で元に戻す
+          <strong>1</strong> まだまだ / <strong>2</strong> 覚えた、<strong>Ctrl+Z</strong> で元に戻す
         </p>
       </div>
     </div>
@@ -385,10 +385,8 @@ async function startStudySession(container, wordIds = null) {
   // キーボードショートカット
   _keyboardDetach = attachKeyboard({
     onFlip: () => _currentFlashcard?.flip(),
-    onAgain: () => container.querySelector('.rating-btn--again')?.click(),
-    onHard: () => container.querySelector('.rating-btn--hard')?.click(),
-    onGood: () => container.querySelector('.rating-btn--good')?.click(),
-    onEasy: () => container.querySelector('.rating-btn--easy')?.click(),
+    onNotYet: () => container.querySelector('.rating-btn--not-yet')?.click(),
+    onRemembered: () => container.querySelector('.rating-btn--remembered')?.click(),
     onUndo: () => handleUndo(),
   });
 
