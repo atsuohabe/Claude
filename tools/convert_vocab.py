@@ -7,7 +7,7 @@ Excel (TOCFL 華語八千詞) → vocab JSON 変換スクリプト
       --sheet "準備級一級(Novice 1)"    # 対象シート名（省略時は全シート）
       --out  data/vocab-core.json      # 出力ファイル（省略時は自動分割）
 """
-import argparse, json, sys
+import argparse, json, re, sys
 from pathlib import Path
 
 try:
@@ -72,6 +72,12 @@ CONTEXT_TO_CATEGORY: dict[str, str] = {
 
 def context_to_category(context: str) -> str:
     return CONTEXT_TO_CATEGORY.get(context.strip(), "greetings")
+
+# 注音（ボポモフォ）括弧注記を除去: 例 "名字(˙ㄗ)" → "名字"
+_BOPOMOFO_RE = re.compile(r'[（(][˙ˊˇˋ\u02C9ㄅ-ㄩ\uF8F0-\uF8FF]+[）)]')
+
+def strip_bopomofo(text: str) -> str:
+    return _BOPOMOFO_RE.sub('', text).strip()
 
 # ────────────────────────────────────────────────
 # 詞類（品詞）→ 英語 POS マッピング
@@ -202,7 +208,7 @@ def parse_sheet(sheet, difficulty: int, start_id: int, tocfl_level: int = 0) -> 
     for row in rows[header_idx + 1:]:
         if not row:
             continue
-        hanzi = cell(row, ci_hanzi)
+        hanzi = strip_bopomofo(cell(row, ci_hanzi))
         if not hanzi:
             continue
 

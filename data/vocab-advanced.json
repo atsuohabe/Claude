@@ -1093,7 +1093,7 @@
   },
   {
     "id": 653,
-    "hanzi": "舒服(˙ㄈㄨ)",
+    "hanzi": "舒服",
     "pinyin": "shūfu",
     "pinyin_tones": "shufu1",
     "meaning_ja": "気持ちよい、快適だ",
@@ -3130,7 +3130,7 @@
   },
   {
     "id": 750,
-    "hanzi": "白天(˙ㄊㄧㄢ)",
+    "hanzi": "白天",
     "pinyin": "báitian",
     "pinyin_tones": "baitian2",
     "meaning_ja": "昼間、日中",
@@ -3529,7 +3529,7 @@
   },
   {
     "id": 769,
-    "hanzi": "伯伯(˙ㄅㄛ)/伯",
+    "hanzi": "伯伯/伯",
     "pinyin": "bóbo/bó",
     "pinyin_tones": "bobo/bo2",
     "meaning_ja": "おじさん（父の兄）",
@@ -3592,7 +3592,7 @@
   },
   {
     "id": 772,
-    "hanzi": "叔叔(˙ㄕㄨ)/叔",
+    "hanzi": "叔叔/叔",
     "pinyin": "shúshu/shú",
     "pinyin_tones": "shushu/shu2",
     "meaning_ja": "おじさん（父の弟）",
@@ -3613,7 +3613,7 @@
   },
   {
     "id": 773,
-    "hanzi": "姑姑(˙ㄍㄨ)",
+    "hanzi": "姑姑",
     "pinyin": "gūgu",
     "pinyin_tones": "gugu1",
     "meaning_ja": "おばさん（父の姉妹）",
@@ -5482,7 +5482,7 @@
   },
   {
     "id": 862,
-    "hanzi": "有意思(˙ㄙ)",
+    "hanzi": "有意思",
     "pinyin": "yŏuyìsi",
     "pinyin_tones": "yŏuyisi4",
     "meaning_ja": "意味がある、面白い",
@@ -6112,7 +6112,7 @@
   },
   {
     "id": 892,
-    "hanzi": "熱鬧(˙ㄋㄠ)",
+    "hanzi": "熱鬧",
     "pinyin": "rènao",
     "pinyin_tones": "renao4",
     "meaning_ja": "賑やかだ",
@@ -6700,7 +6700,7 @@
   },
   {
     "id": 920,
-    "hanzi": "底下(˙ㄒㄧㄚ)",
+    "hanzi": "底下",
     "pinyin": "dĭxia",
     "pinyin_tones": "dĭxia5",
     "meaning_ja": "下、底",
@@ -6931,7 +6931,7 @@
   },
   {
     "id": 931,
-    "hanzi": "枕頭(˙ㄊㄡ)",
+    "hanzi": "枕頭",
     "pinyin": "zhěntou",
     "pinyin_tones": "zhentou3",
     "meaning_ja": "枕",
@@ -8674,7 +8674,7 @@
   },
   {
     "id": 1014,
-    "hanzi": "老太太(˙ㄊㄞ)",
+    "hanzi": "老太太",
     "pinyin": "lăotàitai",
     "pinyin_tones": "lăotaitai4",
     "meaning_ja": "お年寄りの女性、おばあさん",
@@ -11194,7 +11194,7 @@
   },
   {
     "id": 1134,
-    "hanzi": "豆腐(˙ㄈㄨ)",
+    "hanzi": "豆腐",
     "pinyin": "dòufu",
     "pinyin_tones": "doufu4",
     "meaning_ja": "豆腐",
@@ -11236,7 +11236,7 @@
   },
   {
     "id": 1136,
-    "hanzi": "葡萄(˙ㄊㄠ)",
+    "hanzi": "葡萄",
     "pinyin": "pútao",
     "pinyin_tones": "putao2",
     "meaning_ja": "ぶどう",
@@ -11635,7 +11635,7 @@
   },
   {
     "id": 1155,
-    "hanzi": "新鮮(˙ㄒㄧㄢ)",
+    "hanzi": "新鮮",
     "pinyin": "xīnxian",
     "pinyin_tones": "xinxian1",
     "meaning_ja": "新鮮だ",
@@ -17431,7 +17431,7 @@
   },
   {
     "id": 1431,
-    "hanzi": "多多(˙ㄉㄨㄛ)少少",
+    "hanzi": "多多少少",
     "pinyin": "duōduoshăoshăo",
     "pinyin_tones": "duoduoshăoshăo1",
     "meaning_ja": "多かれ少なかれ",
@@ -17452,7 +17452,7 @@
   },
   {
     "id": 1432,
-    "hanzi": "嗯(˙ㄣ)",
+    "hanzi": "嗯",
     "pinyin": "en",
     "pinyin_tones": "en5",
     "meaning_ja": "うん（返事）、ん",
@@ -19300,7 +19300,7 @@
   },
   {
     "id": 1520,
-    "hanzi": "姑娘（˙ㄋㄧㄤ）",
+    "hanzi": "姑娘",
     "pinyin": "gūniang",
     "pinyin_tones": "guniang1",
     "meaning_ja": "娘、若い女性",
@@ -22807,7 +22807,7 @@
   },
   {
     "id": 1687,
-    "hanzi": "舅舅(˙ㄐㄧㄡ) /舅",
+    "hanzi": "舅舅 /舅",
     "pinyin": "jiùjiu",
     "pinyin_tones": "jiujiu4",
     "meaning_ja": "母方の叔父",
@@ -28771,7 +28771,7 @@
   },
   {
     "id": 1971,
-    "hanzi": "石頭(˙ㄊㄡ) /石",
+    "hanzi": "石頭 /石",
     "pinyin": "shítou/shí",
     "pinyin_tones": "shitou/shi2",
     "meaning_ja": "石、岩",
@@ -31648,7 +31648,7 @@
   },
   {
     "id": 2108,
-    "hanzi": "娃娃(˙ㄨㄚ)",
+    "hanzi": "娃娃",
     "pinyin": "wáwa",
     "pinyin_tones": "wawa2",
     "meaning_ja": "赤ちゃん、人形",
@@ -36226,7 +36226,7 @@
   },
   {
     "id": 2326,
-    "hanzi": "著(ㄓㄠ)急",
+    "hanzi": "著急",
     "pinyin": "zhāojí",
     "pinyin_tones": "zhaoji2",
     "meaning_ja": "焦る、いらいらする",
@@ -58675,7 +58675,7 @@
   },
   {
     "id": 3395,
-    "hanzi": "看看(˙ㄎㄢ)",
+    "hanzi": "看看",
     "pinyin": "kànkan",
     "pinyin_tones": "kankan4",
     "meaning_ja": "ちょっと見てみる",
@@ -61699,7 +61699,7 @@
   },
   {
     "id": 3539,
-    "hanzi": "馬虎(ㄏㄨ)",
+    "hanzi": "馬虎",
     "pinyin": "măhū",
     "pinyin_tones": "măhu1",
     "meaning_ja": "いい加減な、ずさんな",
@@ -67264,7 +67264,7 @@
   },
   {
     "id": 3804,
-    "hanzi": "群/羣(ㄑㄩㄣˊ)",
+    "hanzi": "群/羣",
     "pinyin": "qún",
     "pinyin_tones": "qun2",
     "meaning_ja": "群れ（量詞）",
@@ -92947,7 +92947,7 @@
   },
   {
     "id": 5027,
-    "hanzi": "出息(˙ㄒㄧ)",
+    "hanzi": "出息",
     "pinyin": "chūxi",
     "pinyin_tones": "chuxi1",
     "meaning_ja": "息を吐く",
@@ -107689,7 +107689,7 @@
   },
   {
     "id": 5729,
-    "hanzi": "攪和(ㄏㄨㄛˋ)",
+    "hanzi": "攪和",
     "pinyin": "jiăohuò",
     "pinyin_tones": "jiăohuo4",
     "meaning_ja": "混ぜる、かき乱す",
@@ -108193,7 +108193,7 @@
   },
   {
     "id": 5753,
-    "hanzi": "結實(˙ㄕ)",
+    "hanzi": "結實",
     "pinyin": "jiéshi",
     "pinyin_tones": "jieshi2",
     "meaning_ja": "しっかりした",
@@ -122704,7 +122704,7 @@
   },
   {
     "id": 6444,
-    "hanzi": "剎(ㄕㄚ)車/煞車",
+    "hanzi": "剎車/煞車",
     "pinyin": "shāchē",
     "pinyin_tones": "shache1",
     "meaning_ja": "ブレーキをかける",
