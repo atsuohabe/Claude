@@ -4,7 +4,7 @@
  * GitHub Pages（サブパス）にも対応
  */
 
-const CACHE_NAME = 'cmf-v14';
+const CACHE_NAME = 'cmf-v15';
 
 // sw.js の置き場所からベースパスを動的に取得
 // localhost: '/'  /  GitHub Pages: '/Claude/'
@@ -70,13 +70,7 @@ self.addEventListener('fetch', event => {
   // GET のみキャッシュ
   if (event.request.method !== 'GET') return;
 
-  // 語彙 JSON は Cache First（大きいファイルのため）
-  if (url.pathname.startsWith(BASE + 'data/')) {
-    event.respondWith(cacheFirst(event.request));
-    return;
-  }
-
-  // JS/CSS/HTML は Network First（最新版を優先）
+  // 全ファイルを Network First（データ更新を確実に反映するため）
   event.respondWith(networkFirst(event.request));
 });
 
