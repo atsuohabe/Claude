@@ -515,7 +515,7 @@ function renderBrowse() {
   const allCards = Store.getAllCards();
   let words = _browseCategory
     ? Vocab.getByCategory(_browseCategory)
-    : Vocab.getFilteredWords(_browseLevel).slice(0, 600);
+    : Vocab.getFilteredWords(_browseLevel);
 
   // カテゴリ選択中かつレベル指定あり → レベルでさらに絞る
   if (_browseCategory && _browseLevel !== 'all') {

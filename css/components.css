@@ -250,6 +250,27 @@
   border-color: var(--color-primary);
 }
 
+@media (prefers-color-scheme: dark) {
+  .category-pill.active {
+    background: var(--color-surface-raised);
+    color: var(--color-text);
+    border-color: var(--color-text-muted);
+  }
+  .category-pill:hover {
+    border-color: var(--color-text-muted);
+    color: var(--color-text);
+  }
+}
+[data-theme="dark"] .category-pill.active {
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+  border-color: var(--color-text-muted);
+}
+[data-theme="dark"] .category-pill:hover {
+  border-color: var(--color-text-muted);
+  color: var(--color-text);
+}
+
 .category-pills-scroll {
   display: flex;
   gap: var(--space-2);
