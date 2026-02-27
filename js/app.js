@@ -503,7 +503,6 @@ function showSessionComplete(container) {
 
 // ─── 単語帳（ブラウズ）────────────────────────────────────────────────
 
-let _browseCategory = '';
 let _browseSort = 'rank'; // 'rank' | 'learned' | 'mastered'
 let _browseLevel = 'all'; // 'all' | 'novice1' | 'novice2' | 'level1' | 'level2' | 'level3' | 'level4' | 'level5'
 
@@ -511,17 +510,8 @@ function renderBrowse() {
   const container = $('view-browse');
   if (!container) return;
 
-  const categories = Vocab.getCategories();
   const allCards = Store.getAllCards();
-  let words = _browseCategory
-    ? Vocab.getByCategory(_browseCategory)
-    : Vocab.getFilteredWords(_browseLevel);
-
-  // カテゴリ選択中かつレベル指定あり → レベルでさらに絞る
-  if (_browseCategory && _browseLevel !== 'all') {
-    const levelFiltered = new Set(Vocab.getFilteredWordIds(_browseLevel).map(String));
-    words = words.filter(w => levelFiltered.has(String(w.id)));
-  }
+  let words = Vocab.getFilteredWords(_browseLevel);
 
   // ソート／フィルター
   const MATURE_INTERVAL = 21;
@@ -542,8 +532,6 @@ function renderBrowse() {
     countLabel = `覚えた単語: ${words.length}語`;
   } else if (_browseSort === 'mastered') {
     countLabel = `習得済み: ${words.length}語`;
-  } else if (_browseCategory) {
-    countLabel = `${words.length}語`;
   } else {
     const levelStr = _browseLevel === 'all' ? '' : ` (${levelLabels[_browseLevel]})`;
     countLabel = `${words.length}語${levelStr}`;
@@ -560,8 +548,6 @@ function renderBrowse() {
           </button>`).join('')}
       </div>
 
-      <div id="browse-filter" style="margin-bottom:var(--space-3)"></div>
-
       <div style="display:flex;gap:var(--space-2);margin-bottom:var(--space-4);flex-wrap:wrap">
         ${['rank','learned','mastered'].map(s => `
           <button class="category-pill ${_browseSort === s ? 'active' : ''}" data-sort="${s}">
@@ -576,18 +562,6 @@ function renderBrowse() {
       <div class="card-grid" id="browse-grid"></div>
     </div>
   `;
-
-  // カテゴリフィルター
-  const filterEl = container.querySelector('#browse-filter');
-  renderCategoryFilters(
-    filterEl,
-    categories,
-    _browseCategory ? [_browseCategory] : [],
-    (selected) => {
-      _browseCategory = selected[selected.length - 1] || '';
-      renderBrowse();
-    }
-  );
 
   // レベルフィルターボタン
   container.querySelectorAll('[data-level]').forEach(btn => {
