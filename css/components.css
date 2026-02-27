@@ -48,8 +48,13 @@
   color: var(--color-primary);
   border-color: var(--color-primary);
 }
-.btn--outline:hover {
-  background: var(--color-primary-light);
+@media (hover: hover) and (pointer: fine) {
+  .btn--outline:hover {
+    background: var(--color-primary-light);
+  }
+}
+.btn:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .btn--ghost {

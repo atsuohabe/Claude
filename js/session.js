@@ -55,7 +55,8 @@ export const Session = {
       dueIds = dueIds.filter(id => filteredSet.has(String(id)));
     }
 
-    const newIds = getNewCardIds(allWordIds, remainingNew);
+    const cardOrder = settings.cardOrder || 'sequential';
+    const newIds = _selectNewCards(allWordIds, remainingNew, cardOrder, studyLevel);
 
     // キューを構築（復習 → 新規を散りばめる）
     _queue = _buildQueue(dueIds, newIds);
@@ -268,6 +269,36 @@ function _buildQueue(dueIds, newIds) {
   }
 
   return queue;
+}
+
+/**
+ * cardOrder 設定に従って新規カード ID を選択する
+ * random + all レベルの場合は最も低い tocfl_level から選ぶ
+ */
+function _selectNewCards(allWordIds, limit, cardOrder, studyLevel) {
+  const allCards = Store.getAllCards();
+  const unseenIds = allWordIds.filter(id => !allCards[String(id)]);
+
+  if (cardOrder !== 'random') {
+    return unseenIds.slice(0, limit);
+  }
+
+  // ランダムモード
+  if (studyLevel !== 'all') {
+    return _shuffle([...unseenIds]).slice(0, limit);
+  }
+
+  // 全体 + ランダム: 最低の tocfl_level から選ぶ（一巡したら上のレベルへ）
+  for (let lvl = 1; lvl <= 7; lvl++) {
+    const lvlUnseen = unseenIds.filter(id => {
+      const word = Vocab.getWord(id);
+      return word && word.tocfl_level === lvl;
+    });
+    if (lvlUnseen.length > 0) {
+      return _shuffle([...lvlUnseen]).slice(0, limit);
+    }
+  }
+  return _shuffle([...unseenIds]).slice(0, limit);
 }
 
 /** 今日の新規カード導入数を記録から取得 */
