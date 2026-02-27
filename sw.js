@@ -7,7 +7,7 @@
 const CACHE_NAME = 'cmf-v16';
 
 // sw.js の置き場所からベースパスを動的に取得
-// localhost: '/'  /  GitHub Pages: '/Claude/'
+// localhost: '/'  /  GitHub Pages: '/taiwan-flashcard/'
 const BASE = new URL('./', self.location.href).pathname;
 
 // プリキャッシュ対象（基本レベル語彙のみ先行キャッシュ）
