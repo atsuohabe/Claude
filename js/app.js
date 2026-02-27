@@ -35,12 +35,23 @@ async function init() {
   applyStoredTheme();
   buildNav();
 
-  // 全語彙を一括ロード（レベル別の単語数を正確に表示するため）
-  await Vocab.loadAll();
+  // studyLevel に必要なレベルだけをロード（起動高速化）
+  const _initSettings = Store.getSettings();
+  const _initLevel = _initSettings.studyLevel || 'all';
+  if (_initLevel === 'all') {
+    await Vocab.loadAllProgressive();
+  } else {
+    await Vocab.loadForLevel(_initLevel);
+  }
 
   // ルーター初期化
   window.addEventListener('hashchange', handleRoute);
   handleRoute();
+
+  // バックグラウンドロード完了時にホーム画面を更新
+  window.addEventListener('vocab-loaded', () => {
+    if ((location.hash || '#home') === '#home') renderHome();
+  });
 
   // Service Worker 登録
   if ('serviceWorker' in navigator) {
@@ -515,22 +526,23 @@ function showSessionComplete(container) {
 
 let _browseSort = 'rank'; // 'rank' | 'learned' | 'mastered'
 let _browseLevel = 'all'; // 'all' | 'novice1' | 'novice2' | 'level1' | 'level2' | 'level3' | 'level4' | 'level5'
+const BROWSE_PAGE_SIZE = 50;
+let _browseWords = [];
+let _browseRendered = 0;
 
 function renderBrowse() {
   const container = $('view-browse');
   if (!container) return;
 
   const allCards = Store.getAllCards();
-  let words = Vocab.getFilteredWords(_browseLevel);
+  _browseWords = Vocab.getFilteredWords(_browseLevel);
 
   // ソート／フィルター
   const MATURE_INTERVAL = 21;
   if (_browseSort === 'learned') {
-    // SRSデータがある単語のみ（覚えたことがある）
-    words = words.filter(w => !!allCards[String(w.id)]);
+    _browseWords = _browseWords.filter(w => !!allCards[String(w.id)]);
   } else if (_browseSort === 'mastered') {
-    // インターバル21日以上（習得済み）のみ
-    words = words.filter(w => (allCards[String(w.id)]?.interval || 0) >= MATURE_INTERVAL);
+    _browseWords = _browseWords.filter(w => (allCards[String(w.id)]?.interval || 0) >= MATURE_INTERVAL);
   }
 
   const sortLabels = { rank: '頻度順', learned: '覚えた順', mastered: '習得順' };
@@ -539,12 +551,12 @@ function renderBrowse() {
   // 件数ラベル
   let countLabel;
   if (_browseSort === 'learned') {
-    countLabel = `覚えた単語: ${words.length}語`;
+    countLabel = `覚えた単語: ${_browseWords.length}語`;
   } else if (_browseSort === 'mastered') {
-    countLabel = `習得済み: ${words.length}語`;
+    countLabel = `習得済み: ${_browseWords.length}語`;
   } else {
     const levelStr = _browseLevel === 'all' ? '' : ` (${levelLabels[_browseLevel]})`;
-    countLabel = `${words.length}語${levelStr}`;
+    countLabel = `${_browseWords.length}語${levelStr}`;
   }
 
   container.innerHTML = `
@@ -573,10 +585,15 @@ function renderBrowse() {
     </div>
   `;
 
-  // レベルフィルターボタン
+  // レベルフィルターボタン（オンデマンドロード対応）
   container.querySelectorAll('[data-level]').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', async () => {
       _browseLevel = btn.dataset.level;
+      if (!Vocab.isLevelReady(_browseLevel)) {
+        const grid = container.querySelector('#browse-grid');
+        if (grid) grid.innerHTML = '<p class="text-muted" style="padding:var(--space-4)">読み込み中...</p>';
+        await Vocab.loadForLevel(_browseLevel);
+      }
       renderBrowse();
     });
   });
@@ -589,32 +606,79 @@ function renderBrowse() {
     });
   });
 
-  // 単語カードを描画
+  // イベント委譲（grid にリスナー1つ）
   const grid = container.querySelector('#browse-grid');
-  for (const word of words) {
+  grid.addEventListener('click', (e) => {
+    const speakBtn = e.target.closest('.word-card__speak-btn');
+    if (speakBtn) {
+      e.stopPropagation();
+      const hanzi = speakBtn.dataset.hanzi;
+      if (hanzi) speakWord(hanzi);
+      return;
+    }
+    const card = e.target.closest('.word-card');
+    if (card) {
+      const wordId = Number(card.dataset.wordId);
+      const word = Vocab.getWord(wordId);
+      if (word) {
+        const srs = Store.getAllCards()[String(wordId)];
+        showWordDetail(word, srs);
+      }
+    }
+  });
+
+  // ページネーション描画（50語ずつ）
+  _browseRendered = 0;
+  _appendBrowsePage(container);
+}
+
+function _appendBrowsePage(container) {
+  const grid = container.querySelector('#browse-grid');
+  if (!grid) return;
+
+  const allCards = Store.getAllCards();
+  const start = _browseRendered;
+  const end = Math.min(start + BROWSE_PAGE_SIZE, _browseWords.length);
+
+  const fragment = document.createDocumentFragment();
+  for (let i = start; i < end; i++) {
+    const word = _browseWords[i];
     const srs = allCards[String(word.id)];
     const state = srs?.state || 'new';
 
     const card = document.createElement('div');
     card.className = 'word-card';
+    card.dataset.wordId = word.id;
     card.innerHTML = `
       <div class="word-card__top">
         <div>
           <div class="word-card__hanzi">${escapeHtml(word.hanzi)}</div>
           <div class="word-card__pinyin">${escapeHtml(word.pinyin)}</div>
         </div>
-        <button class="word-card__speak-btn" aria-label="発音を聴く" title="発音を聴く">🔊</button>
+        <button class="word-card__speak-btn" data-hanzi="${escapeHtml(word.hanzi)}" aria-label="発音を聴く" title="発音を聴く">🔊</button>
       </div>
       <div class="word-card__meaning">${escapeHtml(word.meaning_ja || '')}</div>
       ${word.meaning_en ? `<div class="word-card__meaning-en">${escapeHtml(word.meaning_en)}</div>` : ''}
       <div class="word-card__state word-card__state--${state}"></div>
     `;
-    card.addEventListener('click', () => showWordDetail(word, srs));
-    card.querySelector('.word-card__speak-btn').addEventListener('click', e => {
-      e.stopPropagation();
-      speakWord(word.hanzi);
-    });
-    grid.appendChild(card);
+    fragment.appendChild(card);
+  }
+  grid.appendChild(fragment);
+  _browseRendered = end;
+
+  // 既存の「もっと見る」ボタンを削除
+  container.querySelector('#browse-load-more')?.remove();
+
+  // まだ残りがあれば「もっと見る」ボタンを追加
+  if (_browseRendered < _browseWords.length) {
+    const remaining = _browseWords.length - _browseRendered;
+    const btn = document.createElement('button');
+    btn.id = 'browse-load-more';
+    btn.className = 'btn btn--secondary btn--full';
+    btn.style.marginTop = 'var(--space-4)';
+    btn.textContent = `もっと見る（残り ${remaining} 語）`;
+    btn.addEventListener('click', () => _appendBrowsePage(container));
+    grid.parentNode.insertBefore(btn, grid.nextSibling);
   }
 }
 
@@ -787,8 +851,13 @@ function renderSettings() {
   `;
 
   // 設定変更ハンドラー
-  container.querySelector('#setting-study-level')?.addEventListener('change', e => {
-    Store.updateSettings({ studyLevel: e.target.value });
+  container.querySelector('#setting-study-level')?.addEventListener('change', async e => {
+    const newLevel = e.target.value;
+    Store.updateSettings({ studyLevel: newLevel });
+    if (!Vocab.isLevelReady(newLevel)) {
+      toast('単語データを読み込み中...', 'info');
+      await Vocab.loadForLevel(newLevel);
+    }
     toast('学習レベルを変更しました', 'success');
   });
 

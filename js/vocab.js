@@ -1,6 +1,6 @@
 /**
  * vocab.js - 単語データローダー・フィルター
- * JSON ファイルの遅延読み込みと単語クエリを担当する
+ * TOCFL レベル別 JSON の遅延読み込みと単語クエリを担当する
  */
 
 import { Store } from './store.js';
@@ -8,42 +8,76 @@ import { Store } from './store.js';
 // ─── データキャッシュ ────────────────────────────────────────────────
 
 let wordsMap = {};     // id → word object
-let categories = [];
 let loadedChunks = new Set();
 
+// TOCFL レベル別チャンクファイル
 const CHUNK_FILES = {
-  core: './data/vocab-core.json',
-  everyday: './data/vocab-everyday.json',
-  advanced: './data/vocab-advanced.json',
+  novice1: './data/vocab-novice1.json',
+  novice2: './data/vocab-novice2.json',
+  level1:  './data/vocab-level1.json',
+  level2:  './data/vocab-level2.json',
+  level3:  './data/vocab-level3.json',
+  level4:  './data/vocab-level4.json',
+  level5:  './data/vocab-level5.json',
+};
+
+// studyLevel → 必要チャンク名
+const LEVEL_CHUNKS = {
+  novice1: ['novice1'],
+  novice2: ['novice2'],
+  level1:  ['level1'],
+  level2:  ['level2'],
+  level3:  ['level3'],
+  level4:  ['level4'],
+  level5:  ['level5'],
+  all:     ['novice1', 'novice2', 'level1', 'level2', 'level3', 'level4', 'level5'],
 };
 
 // ─── 読み込み ────────────────────────────────────────────────────────
 
 export const Vocab = {
-  /** コア語彙（1-300）をロード */
-  async loadCore() {
-    await _loadChunk('core');
-    await _loadCategories();
+  /**
+   * studyLevel に必要なチャンクをロード
+   * @param {string} studyLevel
+   */
+  async loadForLevel(studyLevel) {
+    const chunks = LEVEL_CHUNKS[studyLevel] || LEVEL_CHUNKS.all;
+    await Promise.all(chunks.map(name => _loadChunk(name)));
   },
 
-  /** 日常語彙（301-600）をロード */
-  async loadEveryday() {
-    await _loadChunk('everyday');
-  },
-
-  /** 上級語彙（601-1000）をロード */
-  async loadAdvanced() {
-    await _loadChunk('advanced');
-  },
-
-  /** 全単語をロード */
-  async loadAll() {
+  /**
+   * studyLevel='all' の段階的ロード
+   * まず基本レベル (1-4) をロード → 残り (5-7) をバックグラウンドで追加
+   */
+  async loadAllProgressive() {
+    // Phase 1: levels 1-4 (587 KB, 1,226語) — 起動をブロック
     await Promise.all([
-      _loadChunk('core'),
-      _loadChunk('everyday'),
-      _loadChunk('advanced'),
-      _loadCategories(),
+      _loadChunk('novice1'),
+      _loadChunk('novice2'),
+      _loadChunk('level1'),
+      _loadChunk('level2'),
     ]);
+
+    // Phase 2: levels 5-7 (2,970 KB, 6,291語) — バックグラウンド
+    _loadChunk('level3')
+      .then(() => _loadChunk('level4'))
+      .then(() => _loadChunk('level5'))
+      .then(() => {
+        window.dispatchEvent(new CustomEvent('vocab-loaded'));
+      });
+  },
+
+  /** 全単語を一括ロード（後方互換） */
+  async loadAll() {
+    await Promise.all(
+      Object.keys(CHUNK_FILES).map(name => _loadChunk(name))
+    );
+  },
+
+  /** 指定 studyLevel の全チャンクがロード済みか */
+  isLevelReady(studyLevel) {
+    const chunks = LEVEL_CHUNKS[studyLevel] || LEVEL_CHUNKS.all;
+    return chunks.every(name => loadedChunks.has(name));
   },
 
   // ─── クエリ ────────────────────────────────────────────────────
@@ -65,19 +99,7 @@ export const Vocab = {
     return wordsMap[id] || null;
   },
 
-  /** カテゴリでフィルタ */
-  getByCategory(categoryId) {
-    return Object.values(wordsMap)
-      .filter(w => w.category === categoryId)
-      .sort((a, b) => (a.frequency_rank || a.id) - (b.frequency_rank || b.id));
-  },
-
-  /** 難易度でフィルタ（1=初級, 2=中級, 3=上級） */
-  getByDifficulty(level) {
-    return Object.values(wordsMap).filter(w => w.difficulty === level);
-  },
-
-  /** TOCFLレベルでフィルタ（1=Novice1, 2=Novice2, 3=入門級, 4=基礎級, 5=進階級, 6=高階級, 7=流利級） */
+  /** TOCFLレベルでフィルタ */
   getByTocflLevel(level) {
     return Object.values(wordsMap)
       .filter(w => w.tocfl_level === level)
@@ -86,7 +108,6 @@ export const Vocab = {
 
   /**
    * studyLevel 設定に基づいてフィルタした単語一覧を返す
-   * @param {'all'|'novice1'|'novice2'|'level1'|'level2'|'level3'|'level4'|'level5'} studyLevel
    */
   getFilteredWords(studyLevel) {
     if (!studyLevel || studyLevel === 'all') return this.getAllWords();
@@ -105,14 +126,8 @@ export const Vocab = {
     return this.getFilteredWords(studyLevel).map(w => w.id);
   },
 
-  /** 台湾特有語彙のみ */
-  getTaiwanSpecific() {
-    return Object.values(wordsMap).filter(w => w.taiwan_specific);
-  },
-
   /**
    * フルテキスト検索（漢字・ピンイン・日本語意味）
-   * @param {string} query
    */
   search(query) {
     if (!query) return [];
@@ -127,7 +142,6 @@ export const Vocab = {
 
   /**
    * SRS データを付与した単語オブジェクトを返す
-   * @param {number} wordId
    */
   getWordWithSRS(wordId) {
     const word = this.getWord(wordId);
@@ -147,8 +161,9 @@ export const Vocab = {
 async function _loadChunk(name) {
   if (loadedChunks.has(name)) return;
   const url = CHUNK_FILES[name];
+  if (!url) return;
   try {
-    const resp = await fetch(url, { cache: 'force-cache' });
+    const resp = await fetch(url);
     if (!resp.ok) throw new Error(`HTTP ${resp.status} for ${url}`);
     const data = await resp.json();
     const words = Array.isArray(data) ? data : data.words || [];
@@ -158,17 +173,5 @@ async function _loadChunk(name) {
     loadedChunks.add(name);
   } catch (e) {
     console.error(`Failed to load vocab chunk "${name}":`, e);
-  }
-}
-
-async function _loadCategories() {
-  if (categories.length > 0) return;
-  try {
-    const resp = await fetch('./data/categories.json', { cache: 'force-cache' });
-    if (!resp.ok) return;
-    const data = await resp.json();
-    categories = data.categories || [];
-  } catch (e) {
-    console.error('Failed to load categories:', e);
   }
 }

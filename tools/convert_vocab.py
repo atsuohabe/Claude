@@ -285,13 +285,18 @@ def main() -> None:
         out_path.write_text(json.dumps(words, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"✅  {out_path}: {len(words)} 語")
     else:
-        # 自動分割: 1-300, 301-600, 601+
-        chunks = [
-            ("vocab-core.json",     words[:300]),
-            ("vocab-everyday.json", words[300:600]),
-            ("vocab-advanced.json", words[600:]),
-        ]
-        for fname, chunk in chunks:
+        # TOCFL レベル別に7ファイルに分割
+        level_files = {
+            1: "vocab-novice1.json",
+            2: "vocab-novice2.json",
+            3: "vocab-level1.json",
+            4: "vocab-level2.json",
+            5: "vocab-level3.json",
+            6: "vocab-level4.json",
+            7: "vocab-level5.json",
+        }
+        for tocfl_lvl, fname in level_files.items():
+            chunk = [w for w in words if w["tocfl_level"] == tocfl_lvl]
             if chunk:
                 path = out_dir / fname
                 path.write_text(json.dumps(chunk, ensure_ascii=False, indent=2), encoding="utf-8")
