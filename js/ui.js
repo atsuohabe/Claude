@@ -164,40 +164,6 @@ export function applyStoredTheme() {
   setTheme(settings.theme || 'auto');
 }
 
-// ─── カテゴリフィルター ───────────────────────────────────────────────
-
-/**
- * カテゴリピルを描画する
- * @param {HTMLElement} container
- * @param {object[]} categories
- * @param {string[]} selected
- * @param {(selected: string[]) => void} onChange
- */
-export function renderCategoryFilters(container, categories, selected, onChange) {
-  container.innerHTML = '';
-  container.className = 'category-pills-scroll';
-
-  // 「すべて」ピル
-  const allPill = document.createElement('button');
-  allPill.className = `category-pill${selected.length === 0 ? ' active' : ''}`;
-  allPill.textContent = 'すべて';
-  allPill.addEventListener('click', () => onChange([]));
-  container.appendChild(allPill);
-
-  for (const cat of categories) {
-    const pill = document.createElement('button');
-    const isActive = selected.includes(cat.id);
-    pill.className = `category-pill${isActive ? ' active' : ''}`;
-    pill.textContent = cat.name_ja || cat.id;
-    pill.addEventListener('click', () => {
-      const next = isActive
-        ? selected.filter(s => s !== cat.id)
-        : [...selected, cat.id];
-      onChange(next);
-    });
-    container.appendChild(pill);
-  }
-}
 
 // ─── 数値カウンターアニメーション ────────────────────────────────────
 

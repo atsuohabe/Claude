@@ -13,7 +13,6 @@ import {
   checkMilestones,
   setTheme,
   applyStoredTheme,
-  renderCategoryFilters,
   ICONS,
   modal,
 } from './ui.js';
@@ -267,7 +266,6 @@ function renderHome() {
 
 // ─── 学習セットアップ → セッション ──────────────────────────────────
 
-let _selectedCategories = [];
 
 async function renderStudySetup() {
   const container = $('view-study');
@@ -307,16 +305,6 @@ async function renderStudySetup() {
           </div>
         </div>
 
-        <div style="margin-bottom:var(--space-4)">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-3)">
-            <div class="section-title" style="font-size:0.9rem;margin-bottom:0">カテゴリフィルター</div>
-            <span class="level-badge level-badge--sm" style="cursor:pointer" onclick="location.hash='#settings'" title="設定でレベルを変更">
-              ${{ all: '全体', novice1: 'Novice 1', novice2: 'Novice 2', level1: '入門級', level2: '基礎級', level3: '進階級', level4: '高階級', level5: '流利級' }[settings.studyLevel] || '全体'}
-            </span>
-          </div>
-          <div id="category-filter-container"></div>
-        </div>
-
         <button class="btn btn--primary btn--full" id="begin-session-btn">
           ${dueIds.length === 0 && newToday === 0 ? 'ランダムな10枚を復習する' : '学習開始'}
         </button>
@@ -336,14 +324,6 @@ async function renderStudySetup() {
       </div>
     </div>
   `;
-
-  // カテゴリフィルター描画
-  const filterContainer = container.querySelector('#category-filter-container');
-  const categories = Vocab.getCategories();
-  renderCategoryFilters(filterContainer, categories, _selectedCategories, (selected) => {
-    _selectedCategories = selected;
-    renderStudySetup();
-  });
 
   // 学習開始ボタン
   container.querySelector('#begin-session-btn')?.addEventListener('click', async () => {
@@ -377,7 +357,7 @@ async function renderStudySetup() {
 async function startStudySession(container, wordIds = null) {
   const started = wordIds
     ? await Session.startWithIds(wordIds)
-    : await Session.start({ categories: _selectedCategories });
+    : await Session.start();
 
   if (!started) {
     toast('学習するカードがありません。明日また来てください！', 'info');
