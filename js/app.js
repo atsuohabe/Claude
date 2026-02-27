@@ -343,14 +343,44 @@ async function renderStudySetup() {
   });
 
   // 新しいカードを覚えるボタン
-  container.querySelector('#learn-new-btn')?.addEventListener('click', async () => {
-    const unseenIds = filteredWordIds.filter(id => !Store.getAllCards()[String(id)]);
+  container.querySelector('#learn-new-btn')?.addEventListener('click', async (e) => {
+    e.currentTarget.blur();
+    const allCardsNow = Store.getAllCards();
+    const unseenIds = filteredWordIds.filter(id => !allCardsNow[String(id)]);
     if (unseenIds.length === 0) {
       toast('このレベルの未学習カードはありません。', 'info');
       return;
     }
-    const batch = unseenIds.slice(0, settings.dailyNewLimit || 10);
-    await startStudySession(container, batch);
+    const limit = settings.dailyNewLimit || 10;
+    const cardOrder = settings.cardOrder || 'sequential';
+    let batch;
+    if (cardOrder === 'random') {
+      if (settings.studyLevel !== 'all') {
+        batch = [...unseenIds].sort(() => Math.random() - 0.5).slice(0, limit);
+      } else {
+        // 全体: 最低 tocfl_level から選ぶ
+        batch = null;
+        for (let lvl = 1; lvl <= 7; lvl++) {
+          const lvlUnseen = unseenIds.filter(id => {
+            const w = Vocab.getWord(id);
+            return w && w.tocfl_level === lvl;
+          });
+          if (lvlUnseen.length > 0) {
+            batch = [...lvlUnseen].sort(() => Math.random() - 0.5).slice(0, limit);
+            break;
+          }
+        }
+        if (!batch) batch = [...unseenIds].sort(() => Math.random() - 0.5).slice(0, limit);
+      }
+    } else {
+      batch = unseenIds.slice(0, limit);
+    }
+    // 学習済みカードから2枚を復習として追加（合計 limit+2 枚）
+    const learnedIds = Object.keys(allCardsNow).map(Number);
+    const reviewIds = learnedIds.length >= 2
+      ? [...learnedIds].sort(() => Math.random() - 0.5).slice(0, 2)
+      : [...learnedIds];
+    await startStudySession(container, [...batch, ...reviewIds]);
   });
 }
 
@@ -679,6 +709,17 @@ function renderSettings() {
 
         <div class="settings-row">
           <div>
+            <div class="settings-row__label">単語カードのルール</div>
+            <div class="settings-row__desc">新規カードを導入する順番</div>
+          </div>
+          <select class="select" id="setting-card-order">
+            <option value="sequential" ${(settings.cardOrder || 'sequential') === 'sequential' ? 'selected' : ''}>番号順</option>
+            <option value="random"     ${settings.cardOrder === 'random' ? 'selected' : ''}>ランダム</option>
+          </select>
+        </div>
+
+        <div class="settings-row">
+          <div>
             <div class="settings-row__label">テーマ</div>
             <div class="settings-row__desc">アプリの外観</div>
           </div>
@@ -753,6 +794,11 @@ function renderSettings() {
 
   container.querySelector('#setting-daily-new')?.addEventListener('change', e => {
     Store.updateSettings({ dailyNewLimit: Number(e.target.value) });
+    toast('設定を保存しました', 'success');
+  });
+
+  container.querySelector('#setting-card-order')?.addEventListener('change', e => {
+    Store.updateSettings({ cardOrder: e.target.value });
     toast('設定を保存しました', 'success');
   });
 
