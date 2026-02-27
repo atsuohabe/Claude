@@ -4,7 +4,7 @@
  * GitHub Pages（サブパス）にも対応
  */
 
-const CACHE_NAME = 'cmf-v11';
+const CACHE_NAME = 'cmf-v12';
 
 // sw.js の置き場所からベースパスを動的に取得
 // localhost: '/'  /  GitHub Pages: '/Claude/'
