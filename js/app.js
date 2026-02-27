@@ -281,6 +281,8 @@ async function renderStudySetup() {
   const newLimit = settings.dailyNewLimit;
 
   const newAvailable = allWordIds.filter(id => !allCards[String(id)]).length;
+  const filteredWordIds = Vocab.getFilteredWordIds(settings.studyLevel || 'all');
+  const filteredNewAvailable = filteredWordIds.filter(id => !allCards[String(id)]).length;
   // 今日すでに導入した新規カード数を引いて、残り枠を正確に計算
   const today = new Date().toDateString();
   const todayNewCount = Store.getHistory()
@@ -316,10 +318,13 @@ async function renderStudySetup() {
         </div>
 
         <button class="btn btn--primary btn--full" id="begin-session-btn">
-          ${dueIds.length === 0 && newToday === 0 ? 'ランダム10枚を復習する' : '学習開始'}
+          ${dueIds.length === 0 && newToday === 0 ? 'ランダムな10枚を復習する' : '学習開始'}
         </button>
         ${dueIds.length === 0 && newToday === 0
           ? '<p class="text-muted text-sm" style="text-align:center;margin-top:var(--space-3)">今日の学習は完了しています。学習済みカードからランダムに10枚を復習します。</p>'
+          : ''}
+        ${filteredNewAvailable > 0
+          ? `<button class="btn btn--outline btn--full" id="learn-new-btn" style="margin-top:var(--space-3)">新しいカードを覚える</button>`
           : ''}
       </div>
 
@@ -355,6 +360,17 @@ async function renderStudySetup() {
     } else {
       await startStudySession(container);
     }
+  });
+
+  // 新しいカードを覚えるボタン
+  container.querySelector('#learn-new-btn')?.addEventListener('click', async () => {
+    const unseenIds = filteredWordIds.filter(id => !Store.getAllCards()[String(id)]);
+    if (unseenIds.length === 0) {
+      toast('このレベルの未学習カードはありません。', 'info');
+      return;
+    }
+    const batch = unseenIds.slice(0, settings.dailyNewLimit || 10);
+    await startStudySession(container, batch);
   });
 }
 
