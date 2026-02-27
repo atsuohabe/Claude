@@ -136,16 +136,6 @@ export const Vocab = {
     return { ...word, srs };
   },
 
-  /** カテゴリ一覧を返す */
-  getCategories() {
-    return categories;
-  },
-
-  /** カテゴリを ID で取得 */
-  getCategory(id) {
-    return categories.find(c => c.id === id) || null;
-  },
-
   /** ロード済みの単語数を返す */
   getLoadedCount() {
     return Object.keys(wordsMap).length;

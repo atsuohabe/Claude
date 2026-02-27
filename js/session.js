@@ -31,7 +31,7 @@ let _lastSessionWordIds = []; // 直前のセッションで学習した単語 I
 export const Session = {
   /**
    * 新しい学習セッションを開始する
-   * @param {{ categories?: string[], dailyNewLimit?: number }} options
+   * @param {{ dailyNewLimit?: number, studyLevel?: string }} options
    * @returns {boolean} セッションを開始できたか
    */
   async start(options = {}) {
@@ -45,27 +45,9 @@ export const Session = {
     // Due カードを取得
     let dueIds = getDueCardIds(200);
 
-    // カテゴリフィルター
-    const filterCategories = options.categories?.length > 0
-      ? options.categories
-      : settings.studyCategories;
-
-    if (filterCategories?.length > 0) {
-      dueIds = dueIds.filter(id => {
-        const word = Vocab.getWord(Number(id));
-        return word && filterCategories.includes(word.category);
-      });
-    }
-
     // 新規カードを取得（studyLevel でフィルタ）
     const studyLevel = options.studyLevel ?? settings.studyLevel ?? 'all';
     let allWordIds = Vocab.getFilteredWordIds(studyLevel);
-    if (filterCategories?.length > 0) {
-      allWordIds = allWordIds.filter(id => {
-        const word = Vocab.getWord(id);
-        return word && filterCategories.includes(word.category);
-      });
-    }
 
     // studyLevel に基づいて due カードもフィルタ
     if (studyLevel !== 'all') {

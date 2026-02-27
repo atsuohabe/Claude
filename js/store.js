@@ -19,7 +19,6 @@ const DEFAULT_SETTINGS = {
   showPinyinOnFront: false,
   autoplayAudio: false,
   ttsRate: 0.8,         // 読み上げ速度（0.5〜1.5）
-  studyCategories: [],  // [] = all categories
   studyLevel: 'all',   // 'all' | 'novice1' | 'novice2' | 'level1' | 'level2' | 'level3' | 'level4' | 'level5'
 };
 

@@ -13,7 +13,6 @@ import {
   checkMilestones,
   setTheme,
   applyStoredTheme,
-  renderCategoryFilters,
   ICONS,
   modal,
 } from './ui.js';
