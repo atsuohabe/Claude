@@ -167,7 +167,7 @@ function renderHome() {
     filteredWordIds.filter(id => !allCards[String(id)]).length
   );
 
-  const levelLabels = { all: '全体', novice1: 'Novice 1', novice2: 'Novice 2', level1: '入門級', level2: '基礎級' };
+  const levelLabels = { all: '全体', novice1: 'Novice 1', novice2: 'Novice 2', level1: '入門級', level2: '基礎級', level3: '進階級', level4: '高階級', level5: '流利級' };
   const levelLabel = levelLabels[studyLevel] || '全体';
   const filteredTotal = filteredWordIds.length;
   const filteredSeen = filteredWordIds.filter(id => !!allCards[String(id)]).length;
@@ -311,7 +311,7 @@ async function renderStudySetup() {
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-3)">
             <div class="section-title" style="font-size:0.9rem;margin-bottom:0">カテゴリフィルター</div>
             <span class="level-badge level-badge--sm" style="cursor:pointer" onclick="location.hash='#settings'" title="設定でレベルを変更">
-              ${{ all: '全体', novice1: 'Novice 1', novice2: 'Novice 2', level1: '入門級', level2: '基礎級' }[settings.studyLevel] || '全体'}
+              ${{ all: '全体', novice1: 'Novice 1', novice2: 'Novice 2', level1: '入門級', level2: '基礎級', level3: '進階級', level4: '高階級', level5: '流利級' }[settings.studyLevel] || '全体'}
             </span>
           </div>
           <div id="category-filter-container"></div>
@@ -505,7 +505,7 @@ function showSessionComplete(container) {
 
 let _browseCategory = '';
 let _browseSort = 'rank'; // 'rank' | 'learned' | 'mastered'
-let _browseLevel = 'all'; // 'all' | 'novice1' | 'novice2' | 'level1' | 'level2'
+let _browseLevel = 'all'; // 'all' | 'novice1' | 'novice2' | 'level1' | 'level2' | 'level3' | 'level4' | 'level5'
 
 function renderBrowse() {
   const container = $('view-browse');
@@ -534,7 +534,7 @@ function renderBrowse() {
   }
 
   const sortLabels = { rank: '頻度順', learned: '覚えた順', mastered: '習得順' };
-  const levelLabels = { all: '全体', novice1: 'Novice 1', novice2: 'Novice 2', level1: '入門級', level2: '基礎級' };
+  const levelLabels = { all: '全体', novice1: 'Novice 1', novice2: 'Novice 2', level1: '入門級', level2: '基礎級', level3: '進階級', level4: '高階級', level5: '流利級' };
 
   // 件数ラベル
   let countLabel;
@@ -554,7 +554,7 @@ function renderBrowse() {
       <h1 class="page-title">単語帳</h1>
 
       <div style="display:flex;gap:var(--space-2);margin-bottom:var(--space-3);flex-wrap:wrap">
-        ${['all','novice1','novice2','level1','level2'].map(lv => `
+        ${['all','novice1','novice2','level1','level2','level3','level4','level5'].map(lv => `
           <button class="category-pill ${_browseLevel === lv ? 'active' : ''}" data-level="${lv}">
             ${levelLabels[lv]}
           </button>`).join('')}
@@ -697,11 +697,14 @@ function renderSettings() {
             <div class="settings-row__desc">学習・復習するカードの範囲</div>
           </div>
           <select class="select" id="setting-study-level">
-            <option value="all"     ${settings.studyLevel === 'all'     ? 'selected' : ''}>全体（全レベル：1,226語）</option>
+            <option value="all"     ${settings.studyLevel === 'all'     ? 'selected' : ''}>全体（全レベル：7,517語）</option>
             <option value="novice1" ${settings.studyLevel === 'novice1' ? 'selected' : ''}>準備級一級（Novice 1）・160語</option>
             <option value="novice2" ${settings.studyLevel === 'novice2' ? 'selected' : ''}>準備級二級（Novice 2）・234語</option>
             <option value="level1"  ${settings.studyLevel === 'level1'  ? 'selected' : ''}>入門級（Level 1）・347語</option>
             <option value="level2"  ${settings.studyLevel === 'level2'  ? 'selected' : ''}>基礎級（Level 2）・485語</option>
+            <option value="level3"  ${settings.studyLevel === 'level3'  ? 'selected' : ''}>進階級（Level 3）・1,173語</option>
+            <option value="level4"  ${settings.studyLevel === 'level4'  ? 'selected' : ''}>高階級（Level 4）・2,342語</option>
+            <option value="level5"  ${settings.studyLevel === 'level5'  ? 'selected' : ''}>流利級（Level 5）・2,776語</option>
           </select>
         </div>
       </div>

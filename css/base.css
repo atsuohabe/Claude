@@ -81,6 +81,9 @@
     --color-text-muted: #9CA3AF;
     --color-text-subtle: #6B7280;
     --color-card-shadow: rgba(0, 0, 0, 0.40);
+    --color-primary: #EFEFEF;
+    --color-primary-light: #2A2A2A;
+    --color-primary-dark: #FFFFFF;
   }
 }
 
@@ -93,6 +96,9 @@
   --color-text-muted: #9CA3AF;
   --color-text-subtle: #6B7280;
   --color-card-shadow: rgba(0, 0, 0, 0.40);
+  --color-primary: #EFEFEF;
+  --color-primary-light: #2A2A2A;
+  --color-primary-dark: #FFFFFF;
 }
 
 [data-theme="light"] {
