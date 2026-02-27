@@ -239,3 +239,17 @@
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+/* ─── ダークモード: ナビゲーション アクティブ色上書き ─────────────────── */
+@media (prefers-color-scheme: dark) {
+  .nav-bottom__item.active { color: var(--color-text); }
+  .nav-sidebar__item.active {
+    background: var(--color-surface-raised);
+    color: var(--color-text);
+  }
+}
+[data-theme="dark"] .nav-bottom__item.active { color: var(--color-text); }
+[data-theme="dark"] .nav-sidebar__item.active {
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+}
