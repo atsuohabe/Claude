@@ -4,13 +4,14 @@
  * GitHub Pages（サブパス）にも対応
  */
 
-const CACHE_NAME = 'cmf-v15';
+const CACHE_NAME = 'cmf-v16';
 
 // sw.js の置き場所からベースパスを動的に取得
 // localhost: '/'  /  GitHub Pages: '/Claude/'
 const BASE = new URL('./', self.location.href).pathname;
 
-// 起動時に全ファイルを await するため、語彙 JSON も全てプリキャッシュ対象にする
+// プリキャッシュ対象（基本レベル語彙のみ先行キャッシュ）
+// 大容量の level3-5 は使用時にキャッシュ
 const CORE_ASSETS = [
   `${BASE}index.html`,
   `${BASE}manifest.json`,
@@ -27,9 +28,13 @@ const CORE_ASSETS = [
   `${BASE}js/stats.js`,
   `${BASE}js/gestures.js`,
   `${BASE}js/ui.js`,
-  `${BASE}data/vocab-core.json`,
-  `${BASE}data/vocab-everyday.json`,
-  `${BASE}data/vocab-advanced.json`,
+  `${BASE}data/vocab-novice1.json`,
+  `${BASE}data/vocab-novice2.json`,
+  `${BASE}data/vocab-level1.json`,
+  `${BASE}data/vocab-level2.json`,
+  `${BASE}data/vocab-level3.json`,
+  `${BASE}data/vocab-level4.json`,
+  `${BASE}data/vocab-level5.json`,
   `${BASE}apple-touch-icon.png`,
   `${BASE}icon-192.png`,
   `${BASE}icon-512.png`,
@@ -70,8 +75,9 @@ self.addEventListener('fetch', event => {
   // GET のみキャッシュ
   if (event.request.method !== 'GET') return;
 
-  // 全ファイルを Network First（データ更新を確実に反映するため）
-  event.respondWith(networkFirst(event.request));
+  // 語彙 JSON は Cache First（バージョン番号で更新管理）、その他は Network First
+  const isVocabJson = url.pathname.match(/\/data\/vocab-.*\.json$/);
+  event.respondWith(isVocabJson ? cacheFirst(event.request) : networkFirst(event.request));
 });
 
 async function networkFirst(request) {
