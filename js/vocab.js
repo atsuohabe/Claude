@@ -77,7 +77,7 @@ export const Vocab = {
     return Object.values(wordsMap).filter(w => w.difficulty === level);
   },
 
-  /** TOCFLレベルでフィルタ（1=N1, 2=N2, 3=L1/入門級, 4=L2/基礎級） */
+  /** TOCFLレベルでフィルタ（1=Novice1, 2=Novice2, 3=入門級, 4=基礎級, 5=進階級, 6=高階級, 7=流利級） */
   getByTocflLevel(level) {
     return Object.values(wordsMap)
       .filter(w => w.tocfl_level === level)
@@ -86,7 +86,7 @@ export const Vocab = {
 
   /**
    * studyLevel 設定に基づいてフィルタした単語一覧を返す
-   * @param {'all'|'novice1'|'novice2'|'level1'|'level2'} studyLevel
+   * @param {'all'|'novice1'|'novice2'|'level1'|'level2'|'level3'|'level4'|'level5'} studyLevel
    */
   getFilteredWords(studyLevel) {
     if (!studyLevel || studyLevel === 'all') return this.getAllWords();
@@ -94,6 +94,9 @@ export const Vocab = {
     if (studyLevel === 'novice2') return this.getByTocflLevel(2);
     if (studyLevel === 'level1')  return this.getByTocflLevel(3);
     if (studyLevel === 'level2')  return this.getByTocflLevel(4);
+    if (studyLevel === 'level3')  return this.getByTocflLevel(5);
+    if (studyLevel === 'level4')  return this.getByTocflLevel(6);
+    if (studyLevel === 'level5')  return this.getByTocflLevel(7);
     return this.getAllWords();
   },
 

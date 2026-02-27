@@ -28,12 +28,30 @@ LEVEL_MAP: list[tuple[str, int]] = [
     ("流利級",     5), ("level 5",  5),
 ]
 
+# シート名 → tocfl_level（1〜7の一意な番号）
+TOCFL_LEVEL_MAP: list[tuple[str, int]] = [
+    ("準備級一級", 1), ("novice 1", 1), ("novice1", 1),
+    ("準備級二級", 2), ("novice 2", 2), ("novice2", 2),
+    ("入門級",     3), ("level 1",  3),
+    ("基礎級",     4), ("level 2",  4),
+    ("進階級",     5), ("level 3",  5),
+    ("高階級",     6), ("level 4",  6),
+    ("流利級",     7), ("level 5",  7),
+]
+
 def sheet_difficulty(sheet_name: str) -> int:
     key = sheet_name.lower()
     for pattern, level in LEVEL_MAP:
         if pattern.lower() in key:
             return level
     return 2
+
+def sheet_tocfl_level(sheet_name: str) -> int:
+    key = sheet_name.lower()
+    for pattern, level in TOCFL_LEVEL_MAP:
+        if pattern.lower() in key:
+            return level
+    return 0
 
 # ────────────────────────────────────────────────
 # 任務領域（コンテキスト）→ カテゴリ ID マッピング
@@ -141,7 +159,7 @@ EN_ALIASES      = ["英語", "english", "meaning_en", "英語意味", "英訳"]
 # シート解析
 # ────────────────────────────────────────────────
 
-def parse_sheet(sheet, difficulty: int, start_id: int) -> list[dict]:
+def parse_sheet(sheet, difficulty: int, start_id: int, tocfl_level: int = 0) -> list[dict]:
     rows = list(sheet.iter_rows(values_only=True))
     if not rows:
         return []
@@ -205,6 +223,7 @@ def parse_sheet(sheet, difficulty: int, start_id: int) -> list[dict]:
             "context":       context,         # 元の任務領域を保持
             "frequency_rank": word_id,
             "difficulty":    difficulty,
+            "tocfl_level":   tocfl_level,
             "example_sentence": {"hanzi": "", "pinyin": "", "meaning_ja": ""},
             "notes_ja":      "",
             "taiwan_specific": False,
@@ -239,8 +258,9 @@ def main() -> None:
         if args.sheet and sheet.title != args.sheet:
             continue
         diff = sheet_difficulty(sheet.title)
-        print(f"   処理中: 「{sheet.title}」 (difficulty={diff})")
-        sheet_words = parse_sheet(sheet, diff, word_id)
+        tocfl = sheet_tocfl_level(sheet.title)
+        print(f"   処理中: 「{sheet.title}」 (difficulty={diff}, tocfl_level={tocfl})")
+        sheet_words = parse_sheet(sheet, diff, word_id, tocfl)
         print(f"   → {len(sheet_words)} 語")
         words.extend(sheet_words)
         word_id += len(sheet_words)
