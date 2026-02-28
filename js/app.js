@@ -846,6 +846,9 @@ function renderSettings() {
           台湾華語フラッシュカード v1.0<br>
           SM-2 アルゴリズムによる間隔反復学習
         </p>
+        <div style="margin-top:var(--space-3)">
+          <button class="btn btn--secondary btn--full" id="btn-update-app">アプリを更新する</button>
+        </div>
       </div>
     </div>
   `;
@@ -925,6 +928,22 @@ function renderSettings() {
       toast('データをリセットしました', 'warning');
       renderHome();
       location.hash = '#home';
+    }
+  });
+
+  // アプリ更新（PWA ホーム画面登録時にブラウザの再読み込みが使えない場合向け）
+  container.querySelector('#btn-update-app')?.addEventListener('click', async () => {
+    const btn = container.querySelector('#btn-update-app');
+    btn.disabled = true;
+    btn.textContent = '更新を確認中...';
+    try {
+      const reg = await navigator.serviceWorker?.getRegistration();
+      if (reg) await reg.update();
+      location.reload();
+    } catch {
+      btn.disabled = false;
+      btn.textContent = 'アプリを更新する';
+      toast('更新の確認に失敗しました', 'warning');
     }
   });
 }
