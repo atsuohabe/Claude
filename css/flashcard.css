@@ -110,10 +110,11 @@
   font-size: var(--size-hanzi-lg);
   font-family: var(--font-hanzi);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.15;
   text-align: center;
   color: var(--color-text);
-  white-space: nowrap;
+  white-space: nowrap;       /* JS側で長い単語は normal に上書きされる */
+  word-break: break-all;
 }
 
 .card__hint {
