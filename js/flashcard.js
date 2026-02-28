@@ -180,11 +180,13 @@ export class Flashcard {
    * 単語を描画する
    * @param {object} wordData - 単語オブジェクト
    * @param {object|null} srsData - SRS データ（null = 新規）
+   * @param {boolean} isNew - 新規カードかどうか（false = 復習カード）
    */
-  render(wordData, srsData = null) {
+  render(wordData, srsData = null, isNew = true) {
     this._currentWord = wordData;
     this._currentSRS = srsData;
     this._flipped = false;
+    this._isNew = isNew;
 
     // カードをリセット
     this.card.classList.remove('is-flipped', 'dismiss-right', 'dismiss-left');
@@ -192,11 +194,6 @@ export class Flashcard {
 
     this._renderFront(wordData);
     this._renderBack(wordData, srsData);
-
-    // 自動読み上げ（設定で有効な場合）
-    if (Store.getSettings().autoplayAudio) {
-      setTimeout(() => speakWord(wordData.hanzi), 50);
-    }
   }
 
   _renderFront(word) {
@@ -224,25 +221,20 @@ export class Flashcard {
     else if (len <= 6) hanzi.style.fontSize = 'clamp(36px, 9vw, 54px)';
     else hanzi.style.fontSize = 'clamp(24px, 6vw, 40px)';
 
-    // ピンイン（表面）
-    const pinyinEl = el('div', 'card__pinyin card__pinyin--front');
-    pinyinEl.innerHTML = parsePinyinToHTML(word.pinyin);
-
-    // 発声ボタン
-    const speakBtn = el('button', 'speak-btn');
-    speakBtn.setAttribute('aria-label', '発音を聴く');
-    speakBtn.setAttribute('title', '発音を聴く');
-    speakBtn.textContent = '🔊';
-    speakBtn.addEventListener('click', () => speakWord(word.hanzi));
-
     // ヒント
     const hint = el('div', 'card__hint');
     hint.innerHTML = `<span>タップして答えを見る</span>`;
 
     this.front.appendChild(meta);
     this.front.appendChild(hanzi);
-    this.front.appendChild(pinyinEl);
-    this.front.appendChild(speakBtn);
+
+    // ピンイン（表面）：新規カードのみ表示、復習では非表示
+    if (this._isNew) {
+      const pinyinEl = el('div', 'card__pinyin card__pinyin--front');
+      pinyinEl.innerHTML = parsePinyinToHTML(word.pinyin);
+      this.front.appendChild(pinyinEl);
+    }
+
     this.front.appendChild(hint);
   }
 
@@ -260,6 +252,14 @@ export class Flashcard {
     const pinyinEl = el('div', 'card__pinyin');
     pinyinEl.innerHTML = parsePinyinToHTML(word.pinyin);
     backInner.appendChild(pinyinEl);
+
+    // 発声ボタン（表面から移動）
+    const speakBtn = el('button', 'speak-btn');
+    speakBtn.setAttribute('aria-label', '発音を聴く');
+    speakBtn.setAttribute('title', '発音を聴く');
+    speakBtn.textContent = '🔊';
+    speakBtn.addEventListener('click', () => speakWord(word.hanzi));
+    backInner.appendChild(speakBtn);
 
     // 日本語意味（大、中央）
     const meaning = el('div', 'card__meaning');
@@ -318,6 +318,10 @@ export class Flashcard {
     this._flipped = true;
     this.card.classList.add('is-flipped');
     this.ratingContainer.classList.add('visible');
+    // 自動読み上げ（設定で有効な場合、フリップアニメーション後）
+    if (Store.getSettings().autoplayAudio) {
+      setTimeout(() => speakWord(this._currentWord?.hanzi), 300);
+    }
   }
 
   // ─── ドラッグ視覚フィードバック ─────────────────────────────────
