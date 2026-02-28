@@ -213,14 +213,23 @@ export class Flashcard {
       meta.insertBefore(twBadge, num);
     }
 
-    // 漢字（大）- 文字数に応じてフォントサイズを調整して1行表示
+    // 漢字（大）- 文字数に応じてフォントサイズを調整
     const hanzi = el('div', 'card__hanzi-main hanzi');
     hanzi.textContent = word.hanzi;
     const len = (word.hanzi || '').length;
-    if (len <= 2) hanzi.style.fontSize = 'clamp(64px, 15vw, 96px)';
-    else if (len <= 4) hanzi.style.fontSize = 'clamp(48px, 12vw, 72px)';
-    else if (len <= 6) hanzi.style.fontSize = 'clamp(36px, 9vw, 54px)';
-    else hanzi.style.fontSize = 'clamp(24px, 6vw, 40px)';
+    if (len === 1) {
+      hanzi.style.fontSize = 'clamp(72px, 18vw, 96px)';
+    } else if (len <= 2) {
+      hanzi.style.fontSize = 'clamp(60px, 14vw, 80px)';
+    } else if (len <= 4) {
+      hanzi.style.fontSize = 'clamp(44px, 11vw, 60px)';
+    } else if (len <= 6) {
+      hanzi.style.fontSize = 'clamp(36px, 9vw, 48px)';
+      hanzi.style.whiteSpace = 'normal';
+    } else {
+      hanzi.style.fontSize = 'clamp(32px, 8vw, 42px)';
+      hanzi.style.whiteSpace = 'normal';
+    }
 
     // ヒント
     const hint = el('div', 'card__hint');
