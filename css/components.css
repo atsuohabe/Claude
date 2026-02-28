@@ -700,7 +700,7 @@
   align-items: center;
   padding: var(--space-1) var(--space-3);
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-bg);
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 600;
