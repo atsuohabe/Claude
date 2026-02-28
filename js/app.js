@@ -835,7 +835,7 @@ function renderSettings() {
             ${ICONS.upload} 進捗をインポート
           </button>
           <input type="file" id="import-file" accept=".json" style="display:none">
-          <button class="btn btn--secondary" id="btn-reset" style="color:var(--color-primary)">
+          <button class="btn btn--secondary" id="btn-reset">
             全データをリセット
           </button>
         </div>
