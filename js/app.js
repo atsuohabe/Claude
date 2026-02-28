@@ -423,7 +423,7 @@ async function startStudySession(container, wordIds = null) {
 
       const card = Session.getCurrentCard();
       if (card) {
-        _currentFlashcard.render(card.word, card.srsData);
+        _currentFlashcard.render(card.word, card.srsData, card.isNew);
         _currentFlashcard.updateProgress(
           Session.getTotalCount() - Session.getRemainingCount(),
           Session.getTotalCount()
@@ -450,7 +450,7 @@ async function startStudySession(container, wordIds = null) {
   // 最初のカードを描画
   const card = Session.getCurrentCard();
   if (card) {
-    _currentFlashcard.render(card.word, card.srsData);
+    _currentFlashcard.render(card.word, card.srsData, card.isNew);
     _currentFlashcard.updateProgress(0, Session.getTotalCount());
     _currentFlashcard.setHeaderLeft(
       `<button class="btn btn--ghost btn--sm" onclick="history.back()">✕</button>`
@@ -466,7 +466,7 @@ function handleUndo() {
   if (Session.undo()) {
     const card = Session.getCurrentCard();
     if (card && _currentFlashcard) {
-      _currentFlashcard.render(card.word, card.srsData);
+      _currentFlashcard.render(card.word, card.srsData, card.isNew);
       _currentFlashcard.updateProgress(
         Session.getTotalCount() - Session.getRemainingCount(),
         Session.getTotalCount()
