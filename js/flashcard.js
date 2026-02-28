@@ -21,6 +21,7 @@ export function speakWord(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'zh-TW';
     utterance.rate = rate;
+    utterance.volume = 1.0;
     speechSynthesis.speak(utterance);
   }
 
@@ -320,7 +321,7 @@ export class Flashcard {
     this.ratingContainer.classList.add('visible');
     // 自動読み上げ（設定で有効な場合、フリップアニメーション後）
     if (Store.getSettings().autoplayAudio) {
-      setTimeout(() => speakWord(this._currentWord?.hanzi), 300);
+      setTimeout(() => speakWord(this._currentWord?.hanzi), 150);
     }
   }
 

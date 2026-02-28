@@ -170,7 +170,8 @@ export const Session = {
     const allCards = Store.getAllCards();
     _queue = wordIds.map(id => {
       const srsData = allCards[String(id)] || newCardData(Number(id));
-      return { wordId: Number(id), srsData, isNew: false };
+      const isNew = !allCards[String(id)]; // 学習履歴なし = 新規カード
+      return { wordId: Number(id), srsData, isNew };
     });
     _lastSessionWordIds = [...wordIds];
     _currentIndex = 0;
