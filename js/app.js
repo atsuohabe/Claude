@@ -846,7 +846,10 @@ function renderSettings() {
           台湾華語フラッシュカード v1.0<br>
           SM-2 アルゴリズムによる間隔反復学習
         </p>
-        <div style="margin-top:var(--space-3)">
+        <div style="margin-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-2)">
+          <button class="btn btn--primary btn--full" id="btn-share-app">
+            ${ICONS.share} アプリを共有する
+          </button>
           <button class="btn btn--secondary btn--full" id="btn-update-app">アプリを更新する</button>
         </div>
       </div>
@@ -928,6 +931,26 @@ function renderSettings() {
       toast('データをリセットしました', 'warning');
       renderHome();
       location.hash = '#home';
+    }
+  });
+
+  // アプリを共有する
+  container.querySelector('#btn-share-app')?.addEventListener('click', async () => {
+    const url = location.href.replace(/#.*$/, '');
+    try {
+      await navigator.clipboard.writeText(url);
+      toast('URLをコピーしました', 'success');
+    } catch {
+      // clipboard API 非対応ブラウザ向けフォールバック
+      const el = document.createElement('textarea');
+      el.value = url;
+      el.style.position = 'fixed';
+      el.style.opacity = '0';
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      toast('URLをコピーしました', 'success');
     }
   });
 
