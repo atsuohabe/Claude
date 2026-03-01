@@ -777,6 +777,9 @@ function renderSettings() {
             <div class="settings-row__desc">大量学習翌日の復習集中を防ぐ</div>
           </div>
           <select class="select" id="setting-daily-review">
+            <option value="10"   ${(settings.dailyReviewLimit ?? 100) === 10   ? 'selected' : ''}>10枚</option>
+            <option value="20"   ${(settings.dailyReviewLimit ?? 100) === 20   ? 'selected' : ''}>20枚</option>
+            <option value="30"   ${(settings.dailyReviewLimit ?? 100) === 30   ? 'selected' : ''}>30枚</option>
             <option value="50"   ${(settings.dailyReviewLimit ?? 100) === 50   ? 'selected' : ''}>50枚</option>
             <option value="100"  ${(settings.dailyReviewLimit ?? 100) === 100  ? 'selected' : ''}>100枚</option>
             <option value="150"  ${(settings.dailyReviewLimit ?? 100) === 150  ? 'selected' : ''}>150枚</option>
