@@ -92,7 +92,9 @@ export function calculateNextReview(card, rating) {
   } else if (repetitions === 1) {
     interval = 6;
   } else {
-    interval = Math.round(interval * easeFactor);
+    // ±10% のジッターで同日にカードが集中するのを防ぐ
+    const jitter = 0.9 + Math.random() * 0.2;
+    interval = Math.max(1, Math.round(interval * easeFactor * jitter));
   }
 
   // Easy ボーナス

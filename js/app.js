@@ -773,6 +773,20 @@ function renderSettings() {
 
         <div class="settings-row">
           <div>
+            <div class="settings-row__label">1日の復習上限</div>
+            <div class="settings-row__desc">大量学習翌日の復習集中を防ぐ</div>
+          </div>
+          <select class="select" id="setting-daily-review">
+            <option value="50"   ${(settings.dailyReviewLimit ?? 100) === 50   ? 'selected' : ''}>50枚</option>
+            <option value="100"  ${(settings.dailyReviewLimit ?? 100) === 100  ? 'selected' : ''}>100枚</option>
+            <option value="150"  ${(settings.dailyReviewLimit ?? 100) === 150  ? 'selected' : ''}>150枚</option>
+            <option value="200"  ${(settings.dailyReviewLimit ?? 100) === 200  ? 'selected' : ''}>200枚</option>
+            <option value="9999" ${(settings.dailyReviewLimit ?? 100) === 9999 ? 'selected' : ''}>上限なし</option>
+          </select>
+        </div>
+
+        <div class="settings-row">
+          <div>
             <div class="settings-row__label">単語カードのルール</div>
             <div class="settings-row__desc">新規カードを導入する順番</div>
           </div>
@@ -869,6 +883,11 @@ function renderSettings() {
 
   container.querySelector('#setting-daily-new')?.addEventListener('change', e => {
     Store.updateSettings({ dailyNewLimit: Number(e.target.value) });
+    toast('設定を保存しました', 'success');
+  });
+
+  container.querySelector('#setting-daily-review')?.addEventListener('change', e => {
+    Store.updateSettings({ dailyReviewLimit: Number(e.target.value) });
     toast('設定を保存しました', 'success');
   });
 

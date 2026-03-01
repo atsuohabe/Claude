@@ -42,8 +42,13 @@ export const Session = {
     const todayNewCount = _getTodayNewCount();
     const remainingNew = Math.max(0, dailyNewLimit - todayNewCount);
 
-    // Due カードを取得
-    let dueIds = getDueCardIds(200);
+    // 1日の復習上限を適用（大量の新規学習翌日に復習が集中するのを防ぐ）
+    const dailyReviewLimit = settings.dailyReviewLimit ?? 100;
+    const todayReviewCount = _getTodayReviewCount();
+    const remainingReviews = Math.max(0, dailyReviewLimit - todayReviewCount);
+
+    // Due カードを取得（残り上限枚数まで）
+    let dueIds = getDueCardIds(remainingReviews);
 
     // 新規カードを取得（studyLevel でフィルタ）
     const studyLevel = options.studyLevel ?? settings.studyLevel ?? 'all';
@@ -310,4 +315,17 @@ function _getTodayNewCount() {
     r => new Date(r.date).toDateString() === today
   );
   return todayRecords.reduce((sum, r) => sum + (r.newCards || 0), 0);
+}
+
+/** 今日すでに行った復習カード数を記録から取得 */
+function _getTodayReviewCount() {
+  const history = Store.getHistory();
+  const today = new Date().toDateString();
+  const todayRecords = history.filter(
+    r => new Date(r.date).toDateString() === today
+  );
+  return todayRecords.reduce(
+    (sum, r) => sum + Math.max(0, (r.reviewed || 0) - (r.newCards || 0)),
+    0
+  );
 }

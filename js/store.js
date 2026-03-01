@@ -15,6 +15,7 @@ const SCHEMA_VERSION = 1;
 
 const DEFAULT_SETTINGS = {
   dailyNewLimit: 10,
+  dailyReviewLimit: 100,    // 1日の復習カード上限
   theme: 'auto',        // 'auto' | 'light' | 'dark'
   showPinyinOnFront: false,
   autoplayAudio: false,
