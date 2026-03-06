@@ -283,22 +283,18 @@ async function renderStudySetup() {
   if (!container) return;
 
   const overview = getOverview();
-  const dueIds = getDueCardIds(999);
-  const allWordIds = Vocab.getAllWordIds();
   const allCards = Store.getAllCards();
   const settings = Store.getSettings();
-  const newLimit = settings.dailyNewLimit;
-
-  const newAvailable = allWordIds.filter(id => !allCards[String(id)]).length;
   const filteredWordIds = Vocab.getFilteredWordIds(settings.studyLevel || 'all');
+  const allLearnedCount = Object.keys(allCards).length;
+
+  // studyLevel でフィルタした due カード（Session.start() と一致させる）
+  let dueIds = getDueCardIds(999);
+  if ((settings.studyLevel || 'all') !== 'all') {
+    const filteredSet = new Set(filteredWordIds.map(String));
+    dueIds = dueIds.filter(id => filteredSet.has(id));
+  }
   const filteredNewAvailable = filteredWordIds.filter(id => !allCards[String(id)]).length;
-  // 今日すでに導入した新規カード数を引いて、残り枠を正確に計算
-  const today = new Date().toDateString();
-  const todayNewCount = Store.getHistory()
-    .filter(r => new Date(r.date).toDateString() === today)
-    .reduce((sum, r) => sum + (r.newCards || 0), 0);
-  const remainingNewLimit = Math.max(0, newLimit - todayNewCount);
-  const newToday = Math.min(remainingNewLimit, newAvailable);
 
   container.innerHTML = `
     <div class="page page--study">
@@ -317,10 +313,10 @@ async function renderStudySetup() {
         </div>
 
         <button class="btn btn--primary btn--full" id="begin-session-btn">
-          ${dueIds.length === 0 && newToday === 0 ? 'ランダムな10枚を復習する' : '学習開始'}
+          ${dueIds.length === 0 && allLearnedCount > 0 ? 'ランダムな10枚を復習する' : '学習開始'}
         </button>
-        ${dueIds.length === 0 && newToday === 0
-          ? '<p class="text-muted text-sm" style="text-align:center;margin-top:var(--space-3)">今日の学習は完了しています。学習済みカードからランダムに10枚を復習します。</p>'
+        ${dueIds.length === 0 && allLearnedCount > 0
+          ? '<p class="text-muted text-sm" style="text-align:center;margin-top:var(--space-3)">今日の復習は完了しています。学習済みカードからランダムに10枚を復習します。</p>'
           : ''}
         ${filteredNewAvailable > 0
           ? `<button class="btn btn--outline btn--full" id="learn-new-btn" style="margin-top:var(--space-3)">新しいカードを覚える</button>`
@@ -338,13 +334,9 @@ async function renderStudySetup() {
 
   // 学習開始ボタン
   container.querySelector('#begin-session-btn')?.addEventListener('click', async () => {
-    if (dueIds.length === 0 && newToday === 0) {
-      // 今日の分は完了 → 学習済みからランダム10枚を復習
+    if (dueIds.length === 0 && allLearnedCount > 0) {
+      // 復習カードなし → 学習済みからランダム10枚を復習
       const allLearnedIds = Object.keys(Store.getAllCards()).map(Number);
-      if (allLearnedIds.length === 0) {
-        toast('まだ学習したカードがありません。', 'info');
-        return;
-      }
       const shuffled = [...allLearnedIds].sort(() => Math.random() - 0.5);
       const learnedIds = shuffled.slice(0, 10);
       await startStudySession(container, learnedIds);
