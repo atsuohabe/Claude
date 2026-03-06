@@ -53,8 +53,9 @@ async function init() {
     if ((location.hash || '#home') === '#home') renderHome();
   });
 
-  // Service Worker 登録
-  if ('serviceWorker' in navigator) {
+  // Service Worker 登録（Electron 内では不要なのでスキップ）
+  const _isElectron = navigator.userAgent.includes('Electron');
+  if ('serviceWorker' in navigator && !_isElectron) {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
   }
 }
