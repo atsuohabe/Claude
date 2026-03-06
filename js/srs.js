@@ -11,6 +11,7 @@ const MIN_EASE = 1.3;
 const DEFAULT_EASE = 2.5;
 const MATURE_INTERVAL = 21;   // 21日以上 = 成熟（習得済み）
 const BURNED_INTERVAL = 90;   // 90日以上 = 定着済み
+const MAX_INTERVAL = 180;     // 最大インターバル（半年）：習得済み・完全定着カードも必ず半年以内に復習
 
 /** 評価値（0-3）の定義 */
 export const RATING = { AGAIN: 0, HARD: 1, GOOD: 2, EASY: 3 };
@@ -106,6 +107,9 @@ export function calculateNextReview(card, rating) {
   if (rating === RATING.HARD) {
     interval = Math.max(1, Math.round(interval * 0.8));
   }
+
+  // 最大インターバル上限（習得済み・完全定着カードも半年以内に必ず復習）
+  interval = Math.min(MAX_INTERVAL, interval);
 
   repetitions += 1;
 
@@ -253,7 +257,9 @@ export function getForecast(days = 14) {
  * @returns {object} 更新された SRS データ
  */
 export function calculateNextReviewSimple(card, sessionAttempts) {
-  const rating = sessionAttempts <= 1 ? RATING.EASY
+  // EASY は ease factor を毎回増加させインターバルが急増するため、
+  // 1回正解は GOOD として計算する（EASY は明示的な上級評価時のみ使用）
+  const rating = sessionAttempts <= 1 ? RATING.GOOD
                : sessionAttempts === 2 ? RATING.GOOD
                : sessionAttempts === 3 ? RATING.HARD
                : RATING.AGAIN;
