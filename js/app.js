@@ -296,6 +296,17 @@ async function renderStudySetup() {
   }
   const filteredNewAvailable = filteredWordIds.filter(id => !allCards[String(id)]).length;
 
+  // 今日の復習実績を確認（上限に達していたら「ランダム復習」モードへ）
+  const today = new Date().toDateString();
+  const todayHistory = Store.getHistory().filter(r => new Date(r.date).toDateString() === today);
+  const todayReviewCount = todayHistory.reduce(
+    (sum, r) => sum + Math.max(0, (r.reviewed || 0) - (r.newCards || 0)), 0
+  );
+  const dailyReviewLimit = settings.dailyReviewLimit ?? 100;
+  // 復習完了条件：due カードなし OR 当日の復習上限に達している
+  const reviewsDone = dueIds.length === 0 || todayReviewCount >= dailyReviewLimit;
+  const showRandomReview = reviewsDone && allLearnedCount > 0;
+
   container.innerHTML = `
     <div class="page page--study">
       <h1 class="page-title">学習セッション</h1>
@@ -313,9 +324,9 @@ async function renderStudySetup() {
         </div>
 
         <button class="btn btn--primary btn--full" id="begin-session-btn">
-          ${dueIds.length === 0 && allLearnedCount > 0 ? 'ランダムな10枚を復習する' : '学習開始'}
+          ${showRandomReview ? 'ランダムな10枚を復習する' : '学習開始'}
         </button>
-        ${dueIds.length === 0 && allLearnedCount > 0
+        ${showRandomReview
           ? '<p class="text-muted text-sm" style="text-align:center;margin-top:var(--space-3)">今日の復習は完了しています。学習済みカードからランダムに10枚を復習します。</p>'
           : ''}
         ${filteredNewAvailable > 0
@@ -334,8 +345,8 @@ async function renderStudySetup() {
 
   // 学習開始ボタン
   container.querySelector('#begin-session-btn')?.addEventListener('click', async () => {
-    if (dueIds.length === 0 && allLearnedCount > 0) {
-      // 復習カードなし → 学習済みからランダム10枚を復習
+    if (showRandomReview) {
+      // 今日の復習完了 or 上限到達 → 学習済みからランダム10枚を復習
       const allLearnedIds = Object.keys(Store.getAllCards()).map(Number);
       const shuffled = [...allLearnedIds].sort(() => Math.random() - 0.5);
       const learnedIds = shuffled.slice(0, 10);
