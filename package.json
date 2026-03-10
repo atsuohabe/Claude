@@ -11,7 +11,8 @@
   },
   "devDependencies": {
     "electron":         "^28.0.0",
-    "electron-builder": "^24.0.0"
+    "electron-builder": "^24.0.0",
+    "electron-updater": "^6.1.7"
   },
   "build": {
     "appId": "com.atsuohabe.taiwan-flashcard",
@@ -26,6 +27,11 @@
       "!node_modules/**/test",
       "!node_modules/**/tests"
     ],
+    "publish": {
+      "provider": "github",
+      "owner":    "atsuohabe",
+      "repo":     "Claude"
+    },
     "mac": {
       "category": "public.app-category.education",
       "icon": "icon-512.png",

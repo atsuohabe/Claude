@@ -23,6 +23,7 @@ function createWindow() {
 
   win.setMenuBarVisibility(false);
   win.loadURL('app://localhost/index.html');
+  return win;
 }
 
 app.whenReady().then(() => {
@@ -33,7 +34,32 @@ app.whenReady().then(() => {
     return net.fetch('file://' + filePath);
   });
 
-  createWindow();
+  const win = createWindow();
+
+  // 自動アップデート（パッケージ済みビルドのみ）
+  if (app.isPackaged) {
+    const { autoUpdater } = require('electron-updater');
+
+    // サイレントチェック：バックグラウンドで確認、利用可能になったらダウンロード
+    autoUpdater.autoDownload = true;
+    autoUpdater.autoInstallOnAppQuit = true;
+
+    // ダウンロード完了 → ウィンドウに通知（ユーザーが再起動を選べる）
+    autoUpdater.on('update-downloaded', (info) => {
+      win.webContents.executeJavaScript(`
+        if (window.__showUpdateToast) {
+          window.__showUpdateToast('${info.version}');
+        }
+      `).catch(() => {});
+    });
+
+    autoUpdater.on('error', (err) => {
+      console.error('[updater] error:', err.message);
+    });
+
+    // 起動から30秒後にチェック（起動直後の負荷を避ける）
+    setTimeout(() => autoUpdater.checkForUpdates().catch(() => {}), 30_000);
+  }
 
   // macOS: Dock アイコンクリックでウィンドウを再表示
   app.on('activate', () => {

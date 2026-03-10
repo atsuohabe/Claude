@@ -1020,6 +1020,13 @@ function stateLabel(state) {
   return labels[state] || state;
 }
 
+// ─── Electron 自動アップデート通知 ───────────────────────────────────
+
+// main.js からアップデート完了時に呼ばれる（Electron ビルド時のみ）
+window.__showUpdateToast = (version) => {
+  toast(`v${version} に更新されました。再起動で適用されます`, 'success', 8000);
+};
+
 // ─── 起動 ────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', init);
