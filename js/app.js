@@ -53,8 +53,9 @@ async function init() {
     if ((location.hash || '#home') === '#home') renderHome();
   });
 
-  // Service Worker 登録
-  if ('serviceWorker' in navigator) {
+  // Service Worker 登録（Electron 内では不要なのでスキップ）
+  const _isElectron = navigator.userAgent.includes('Electron');
+  if ('serviceWorker' in navigator && !_isElectron) {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
   }
 }
@@ -1018,6 +1019,13 @@ function stateLabel(state) {
   };
   return labels[state] || state;
 }
+
+// ─── Electron 自動アップデート通知 ───────────────────────────────────
+
+// main.js からアップデート完了時に呼ばれる（Electron ビルド時のみ）
+window.__showUpdateToast = (version) => {
+  toast(`v${version} に更新されました。再起動で適用されます`, 'success', 8000);
+};
 
 // ─── 起動 ────────────────────────────────────────────────────────────
 

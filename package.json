@@ -1,0 +1,48 @@
+{
+  "name": "taiwan-flashcard",
+  "version": "1.0.0",
+  "description": "台湾華語フラッシュカード",
+  "main": "main.js",
+  "scripts": {
+    "start":       "electron .",
+    "build:mac":   "electron-builder --mac",
+    "build:win":   "electron-builder --win",
+    "build:linux": "electron-builder --linux"
+  },
+  "devDependencies": {
+    "electron":         "^28.0.0",
+    "electron-builder": "^24.0.0",
+    "electron-updater": "^6.1.7"
+  },
+  "build": {
+    "appId": "com.atsuohabe.taiwan-flashcard",
+    "productName": "台湾華語フラッシュカード",
+    "files": [
+      "**/*",
+      "!tools/**",
+      "!data/*.xlsx",
+      "!*.md",
+      "!.git/**",
+      "!node_modules/**/.bin",
+      "!node_modules/**/test",
+      "!node_modules/**/tests"
+    ],
+    "publish": {
+      "provider": "github",
+      "owner":    "atsuohabe",
+      "repo":     "Claude"
+    },
+    "mac": {
+      "category": "public.app-category.education",
+      "icon": "icon-512.png",
+      "target": "dmg"
+    },
+    "win": {
+      "icon": "icon-512.png",
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
