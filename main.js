@@ -1,4 +1,4 @@
-const { app, BrowserWindow, protocol, net } = require('electron');
+const { app, BrowserWindow, protocol, net, ipcMain } = require('electron');
 const path = require('path');
 
 // app:// を secure・standard スキームとして登録（fetch API 対応）
@@ -33,6 +33,10 @@ app.whenReady().then(() => {
     const url = new URL(request.url);
     const filePath = path.join(__dirname, url.pathname);
     return net.fetch('file://' + filePath);
+  });
+
+  ipcMain.on('app:version', (event) => {
+    event.returnValue = app.getVersion();
   });
 
   const win = createWindow();
