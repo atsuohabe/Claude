@@ -25,12 +25,23 @@ export function speakWord(text) {
     speechSynthesis.speak(utterance);
   }
 
-  // Desktop Chrome loads voices asynchronously
+  // Desktop Chrome / Electron loads voices asynchronously.
+  // voiceschanged fires once at startup, so if we missed it we fall back to polling.
   const voices = speechSynthesis.getVoices();
   if (voices.length > 0) {
     speak();
   } else {
-    speechSynthesis.addEventListener('voiceschanged', speak, { once: true });
+    let spoken = false;
+    function speakOnce() {
+      if (spoken) return;
+      spoken = true;
+      speak();
+    }
+    speechSynthesis.addEventListener('voiceschanged', speakOnce, { once: true });
+    // Fallback: voiceschanged may have already fired (Electron)
+    setTimeout(() => {
+      if (speechSynthesis.getVoices().length > 0) speakOnce();
+    }, 250);
   }
 }
 
