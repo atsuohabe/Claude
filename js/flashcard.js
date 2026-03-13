@@ -8,6 +8,12 @@ import { Store } from './store.js';
 
 // ─── 発声機能（Web Speech API） ──────────────────────────────────────
 
+// Electron では voiceschanged が非同期で一度だけ発火する。
+// モジュール読み込み時に getVoices() を呼んでロードを開始しておく。
+if (window.speechSynthesis) {
+  speechSynthesis.getVoices();
+}
+
 /**
  * 台湾華語（zh-TW）で指定テキストを読み上げる
  * @param {string} text - 読み上げるテキスト（漢字）
@@ -25,8 +31,6 @@ export function speakWord(text) {
     speechSynthesis.speak(utterance);
   }
 
-  // Desktop Chrome / Electron loads voices asynchronously.
-  // voiceschanged fires once at startup, so if we missed it we fall back to polling.
   const voices = speechSynthesis.getVoices();
   if (voices.length > 0) {
     speak();
@@ -38,10 +42,17 @@ export function speakWord(text) {
       speak();
     }
     speechSynthesis.addEventListener('voiceschanged', speakOnce, { once: true });
-    // Fallback: voiceschanged may have already fired (Electron)
-    setTimeout(() => {
-      if (speechSynthesis.getVoices().length > 0) speakOnce();
-    }, 250);
+    // voiceschanged が既に発火済みの場合に備えて 200ms 間隔で最大 3 秒ポーリング
+    let retries = 0;
+    function poll() {
+      if (spoken) return;
+      if (speechSynthesis.getVoices().length > 0) {
+        speakOnce();
+      } else if (retries++ < 15) {
+        setTimeout(poll, 200);
+      }
+    }
+    setTimeout(poll, 200);
   }
 }
 
@@ -206,6 +217,11 @@ export class Flashcard {
 
     this._renderFront(wordData);
     this._renderBack(wordData, srsData);
+
+    // 新規カードは表面表示時に自動発音（設定が有効な場合）
+    if (isNew && Store.getSettings().autoplayAudio) {
+      setTimeout(() => speakWord(wordData?.hanzi), 300);
+    }
   }
 
   _renderFront(word) {
