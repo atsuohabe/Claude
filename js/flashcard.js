@@ -206,6 +206,11 @@ export class Flashcard {
 
     this._renderFront(wordData);
     this._renderBack(wordData, srsData);
+
+    // 新規カードは表面表示時に自動発音（設定が有効な場合）
+    if (isNew && Store.getSettings().autoplayAudio) {
+      setTimeout(() => speakWord(wordData?.hanzi), 300);
+    }
   }
 
   _renderFront(word) {
