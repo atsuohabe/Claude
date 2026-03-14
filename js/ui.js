@@ -68,6 +68,18 @@ const MILESTONES = [
 let _lastMilestoneCount = 0;
 
 /**
+ * アプリ起動時に現在の習得済みマイルストーンを初期化する（起動時の誤表示を防ぐ）
+ * @param {number} currentCount
+ */
+export function initMilestones(currentCount) {
+  for (const m of MILESTONES) {
+    if (currentCount >= m.count) {
+      _lastMilestoneCount = m.count;
+    }
+  }
+}
+
+/**
  * 習得語数に応じてマイルストーントーストを表示する
  * @param {number} masteredCount
  */

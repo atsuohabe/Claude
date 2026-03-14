@@ -11,6 +11,7 @@ import { renderStats, getOverview, updateProgressRing } from './stats.js';
 import {
   toast,
   checkMilestones,
+  initMilestones,
   setTheme,
   applyStoredTheme,
   ICONS,
@@ -43,6 +44,9 @@ async function init() {
   } else {
     await Vocab.loadForLevel(_initLevel);
   }
+
+  // 起動時に習得済みマイルストーンを初期化（再表示防止）
+  initMilestones(getMasteredCount());
 
   // ルーター初期化
   window.addEventListener('hashchange', handleRoute);
