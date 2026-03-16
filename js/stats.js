@@ -218,6 +218,13 @@ export function renderStats(container) {
   const heatData = getHeatmapData();
   const heatGrid = _el('div', 'heatmap');
 
+  // 最初の日の曜日（0=日〜6=土）に合わせて空セルで埋める
+  const firstDate = new Date(heatData[0].date);
+  const startDow = firstDate.getDay(); // 0(日)〜6(土)
+  for (let i = 0; i < startDow; i++) {
+    heatGrid.appendChild(_el('div', 'heatmap__cell heatmap__cell--empty'));
+  }
+
   for (const cell of heatData) {
     const c = _el('div', 'heatmap__cell');
     c.dataset.level = cell.level;
