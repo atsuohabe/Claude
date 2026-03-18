@@ -534,6 +534,7 @@ function showSessionComplete(container) {
 
 let _browseSort = 'rank'; // 'rank' | 'learned' | 'mastered'
 let _browseLevel = 'all'; // 'all' | 'novice1' | 'novice2' | 'level1' | 'level2' | 'level3' | 'level4' | 'level5'
+let _browseQuery = '';    // 検索クエリ
 const BROWSE_PAGE_SIZE = 50;
 let _browseWords = [];
 let _browseRendered = 0;
@@ -553,12 +554,25 @@ function renderBrowse() {
     _browseWords = _browseWords.filter(w => (allCards[String(w.id)]?.interval || 0) >= MATURE_INTERVAL);
   }
 
+  // 検索フィルター（漢字・ピンイン・日本語訳・英語訳）
+  if (_browseQuery) {
+    const q = _browseQuery.toLowerCase();
+    _browseWords = _browseWords.filter(w =>
+      w.hanzi.includes(q) ||
+      w.pinyin.toLowerCase().includes(q) ||
+      (w.meaning_ja || '').toLowerCase().includes(q) ||
+      (w.meaning_en || '').toLowerCase().includes(q)
+    );
+  }
+
   const sortLabels = { rank: '頻度順', learned: '覚えた順', mastered: '習得順' };
   const levelLabels = { all: '全体', novice1: 'Novice 1', novice2: 'Novice 2', level1: '入門級', level2: '基礎級', level3: '進階級', level4: '高階級', level5: '流利級' };
 
   // 件数ラベル
   let countLabel;
-  if (_browseSort === 'learned') {
+  if (_browseQuery) {
+    countLabel = `「${_browseQuery}」の検索結果: ${_browseWords.length}語`;
+  } else if (_browseSort === 'learned') {
     countLabel = `覚えた単語: ${_browseWords.length}語`;
   } else if (_browseSort === 'mastered') {
     countLabel = `習得済み: ${_browseWords.length}語`;
@@ -570,6 +584,17 @@ function renderBrowse() {
   container.innerHTML = `
     <div class="page page--wide">
       <h1 class="page-title">単語帳</h1>
+
+      <div class="browse-search-wrap">
+        <input
+          id="browse-search"
+          type="search"
+          class="browse-search"
+          placeholder="漢字・ピンイン・意味で検索…"
+          value="${escapeHtml(_browseQuery)}"
+          autocomplete="off"
+        >
+      </div>
 
       <div style="display:flex;gap:var(--space-2);margin-bottom:var(--space-3);flex-wrap:wrap">
         ${['all','novice1','novice2','level1','level2','level3','level4','level5'].map(lv => `
@@ -593,10 +618,22 @@ function renderBrowse() {
     </div>
   `;
 
+  // 検索ボックス
+  const searchInput = container.querySelector('#browse-search');
+  searchInput.addEventListener('input', (e) => {
+    _browseQuery = e.target.value;
+    renderBrowse();
+  });
+  if (_browseQuery) {
+    searchInput.focus();
+    searchInput.setSelectionRange(_browseQuery.length, _browseQuery.length);
+  }
+
   // レベルフィルターボタン（オンデマンドロード対応）
   container.querySelectorAll('[data-level]').forEach(btn => {
     btn.addEventListener('click', async () => {
       _browseLevel = btn.dataset.level;
+      _browseQuery = '';
       if (!Vocab.isLevelReady(_browseLevel)) {
         const grid = container.querySelector('#browse-grid');
         if (grid) grid.innerHTML = '<p class="text-muted" style="padding:var(--space-4)">読み込み中...</p>';

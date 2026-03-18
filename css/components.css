@@ -224,6 +224,31 @@
   fill: var(--color-text-muted);
 }
 
+/* ===== BROWSE SEARCH ===== */
+.browse-search-wrap {
+  margin-bottom: var(--space-4);
+}
+
+.browse-search {
+  width: 100%;
+  padding: var(--space-2) var(--space-4);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.browse-search:focus {
+  border-color: var(--color-text);
+}
+
+.browse-search::placeholder {
+  color: var(--color-text-muted);
+}
+
 /* ===== CATEGORY PILL ===== */
 .category-pill {
   display: inline-flex;
