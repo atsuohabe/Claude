@@ -539,25 +539,20 @@ const BROWSE_PAGE_SIZE = 50;
 let _browseWords = [];
 let _browseRendered = 0;
 
-function renderBrowse() {
-  const container = $('view-browse');
-  if (!container) return;
-
+function _computeBrowseWords() {
   const allCards = Store.getAllCards();
-  _browseWords = Vocab.getFilteredWords(_browseLevel);
+  let words = Vocab.getFilteredWords(_browseLevel);
 
-  // ソート／フィルター
   const MATURE_INTERVAL = 21;
   if (_browseSort === 'learned') {
-    _browseWords = _browseWords.filter(w => !!allCards[String(w.id)]);
+    words = words.filter(w => !!allCards[String(w.id)]);
   } else if (_browseSort === 'mastered') {
-    _browseWords = _browseWords.filter(w => (allCards[String(w.id)]?.interval || 0) >= MATURE_INTERVAL);
+    words = words.filter(w => (allCards[String(w.id)]?.interval || 0) >= MATURE_INTERVAL);
   }
 
-  // 検索フィルター（漢字・ピンイン・日本語訳・英語訳）
   if (_browseQuery) {
     const q = _browseQuery.toLowerCase();
-    _browseWords = _browseWords.filter(w =>
+    words = words.filter(w =>
       w.hanzi.includes(q) ||
       w.pinyin.toLowerCase().includes(q) ||
       (w.meaning_ja || '').toLowerCase().includes(q) ||
@@ -565,21 +560,39 @@ function renderBrowse() {
     );
   }
 
+  return words;
+}
+
+function _browseCountLabel(count) {
+  const levelLabels = { all: '全体', novice1: 'Novice 1', novice2: 'Novice 2', level1: '入門級', level2: '基礎級', level3: '進階級', level4: '高階級', level5: '流利級' };
+  if (_browseQuery) return `「${_browseQuery}」の検索結果: ${count}語`;
+  if (_browseSort === 'learned') return `覚えた単語: ${count}語`;
+  if (_browseSort === 'mastered') return `習得済み: ${count}語`;
+  const levelStr = _browseLevel === 'all' ? '' : ` (${levelLabels[_browseLevel]})`;
+  return `${count}語${levelStr}`;
+}
+
+function _renderBrowseGrid(container) {
+  _browseWords = _computeBrowseWords();
+
+  const countEl = container.querySelector('#browse-count');
+  if (countEl) countEl.textContent = _browseCountLabel(_browseWords.length);
+
+  const grid = container.querySelector('#browse-grid');
+  if (grid) grid.innerHTML = '';
+  container.querySelector('#browse-load-more')?.remove();
+  _browseRendered = 0;
+  _appendBrowsePage(container);
+}
+
+function renderBrowse() {
+  const container = $('view-browse');
+  if (!container) return;
+
+  _browseWords = _computeBrowseWords();
+
   const sortLabels = { rank: '頻度順', learned: '覚えた順', mastered: '習得順' };
   const levelLabels = { all: '全体', novice1: 'Novice 1', novice2: 'Novice 2', level1: '入門級', level2: '基礎級', level3: '進階級', level4: '高階級', level5: '流利級' };
-
-  // 件数ラベル
-  let countLabel;
-  if (_browseQuery) {
-    countLabel = `「${_browseQuery}」の検索結果: ${_browseWords.length}語`;
-  } else if (_browseSort === 'learned') {
-    countLabel = `覚えた単語: ${_browseWords.length}語`;
-  } else if (_browseSort === 'mastered') {
-    countLabel = `習得済み: ${_browseWords.length}語`;
-  } else {
-    const levelStr = _browseLevel === 'all' ? '' : ` (${levelLabels[_browseLevel]})`;
-    countLabel = `${_browseWords.length}語${levelStr}`;
-  }
 
   container.innerHTML = `
     <div class="page page--wide">
@@ -591,7 +604,6 @@ function renderBrowse() {
           type="search"
           class="browse-search"
           placeholder="漢字・ピンイン・意味で検索…"
-          value="${escapeHtml(_browseQuery)}"
           autocomplete="off"
         >
       </div>
@@ -610,24 +622,21 @@ function renderBrowse() {
           </button>`).join('')}
       </div>
 
-      <p class="text-sm text-muted" style="margin-bottom:var(--space-3)">
-        ${countLabel}
+      <p id="browse-count" class="text-sm text-muted" style="margin-bottom:var(--space-3)">
+        ${_browseCountLabel(_browseWords.length)}
       </p>
 
       <div class="card-grid" id="browse-grid"></div>
     </div>
   `;
 
-  // 検索ボックス
+  // 検索ボックス（ページ全体を再描画せずグリッドだけ更新）
   const searchInput = container.querySelector('#browse-search');
+  searchInput.value = _browseQuery;
   searchInput.addEventListener('input', (e) => {
     _browseQuery = e.target.value;
-    renderBrowse();
+    _renderBrowseGrid(container);
   });
-  if (_browseQuery) {
-    searchInput.focus();
-    searchInput.setSelectionRange(_browseQuery.length, _browseQuery.length);
-  }
 
   // レベルフィルターボタン（オンデマンドロード対応）
   container.querySelectorAll('[data-level]').forEach(btn => {
