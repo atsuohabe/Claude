@@ -1,6 +1,6 @@
 {
   "name": "taiwan-flashcard",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "台湾華語フラッシュカード",
   "main": "main.js",
   "scripts": {
