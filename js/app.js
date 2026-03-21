@@ -3,6 +3,8 @@
  * 全モジュールを協調させてアプリを動かす
  */
 
+const APP_VERSION = '1.1.2';
+
 import { Store } from './store.js';
 import { Vocab } from './vocab.js';
 import { Session } from './session.js';
@@ -914,7 +916,7 @@ function renderSettings() {
 
       <div class="surface-card surface-card--sm">
         <p class="text-xs text-muted" style="text-align:center">
-          台湾華語フラッシュカード v${window.electronAPI?.version || '1.0.0'}<br>
+          台湾華語フラッシュカード v${window.electronAPI?.version || APP_VERSION}<br>
           SM-2 アルゴリズムによる間隔反復学習
         </p>
         <div style="margin-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-2)">
