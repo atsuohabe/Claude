@@ -3,7 +3,7 @@
  * 全モジュールを協調させてアプリを動かす
  */
 
-const APP_VERSION = '1.1.2';
+const APP_VERSION = '1.1.3';
 
 import { Store } from './store.js';
 import { Vocab } from './vocab.js';
@@ -147,8 +147,11 @@ function handleRoute() {
   _keyboardDetach?.detach();
   _keyboardDetach = null;
 
-  // 現在のフラッシュカードを破棄
+  // 現在のフラッシュカードを破棄（途中退出時も学習履歴を保存）
   if (hash !== '#study' && _currentFlashcard) {
+    if (!Session.isComplete() && Session.getSessionStats().reviewed > 0) {
+      Session.end();
+    }
     _currentFlashcard.destroy();
     _currentFlashcard = null;
   }
