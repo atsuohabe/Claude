@@ -3,7 +3,7 @@
  * 全モジュールを協調させてアプリを動かす
  */
 
-const APP_VERSION = '1.1.3';
+const APP_VERSION = '1.1.4';
 
 import { Store } from './store.js';
 import { Vocab } from './vocab.js';
@@ -57,6 +57,13 @@ async function init() {
   // バックグラウンドロード完了時にホーム画面を更新
   window.addEventListener('vocab-loaded', () => {
     if ((location.hash || '#home') === '#home') renderHome();
+  });
+
+  // タブを閉じる・外部URLへ遷移した場合でも学習データを保存（フォールバック）
+  window.addEventListener('beforeunload', () => {
+    if (_currentFlashcard && !Session.isComplete() && Session.getSessionStats().reviewed > 0) {
+      Session.end();
+    }
   });
 
   // Service Worker 登録（Electron 内では不要なのでスキップ）
@@ -466,7 +473,7 @@ async function startStudySession(container, wordIds = null) {
     _currentFlashcard.render(card.word, card.srsData, card.isNew);
     _currentFlashcard.updateProgress(0, Session.getTotalCount());
     _currentFlashcard.setHeaderLeft(
-      `<button class="btn btn--ghost btn--sm" onclick="history.back()">✕</button>`
+      `<button class="btn btn--ghost btn--sm" onclick="location.hash='#home'">✕</button>`
     );
     _currentFlashcard.setHeaderRight(
       `<button class="btn btn--ghost btn--sm" id="undo-btn">${ICONS.undo} 戻る</button>`
@@ -493,6 +500,10 @@ function showSessionComplete(container) {
   const stats = Session.end();
   _keyboardDetach?.detach();
   _keyboardDetach = null;
+
+  // Flashcard インスタンスを破棄して null にする（handleRoute での二重処理防止）
+  _currentFlashcard?.destroy();
+  _currentFlashcard = null;
 
   checkMilestones(getMasteredCount());
 
