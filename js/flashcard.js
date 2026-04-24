@@ -14,17 +14,26 @@ if (window.speechSynthesis) {
   speechSynthesis.getVoices();
 }
 
+// 同一漢字で複数の読みがある場合、TTSに正しい読みを強制するための文脈語マッピング
+// キー: `漢字|pinyin_tones`, 値: 正しい読みが確定する文脈語
+const READING_DISAMBIG = {
+  '行|xing2': '行走',  // xíng: TTS が háng と読むのを防ぐ
+};
+
 /**
  * 台湾華語（zh-TW）で指定テキストを読み上げる
  * @param {string} text - 読み上げるテキスト（漢字）
+ * @param {string} [pinyinTones] - pinyin_tones（複数読み文字の読み分けに使用）
  */
-export function speakWord(text) {
+export function speakWord(text, pinyinTones) {
   if (!text || !window.speechSynthesis) return;
+  const key = pinyinTones ? `${text}|${pinyinTones}` : null;
+  const speakText = (key && READING_DISAMBIG[key]) ? READING_DISAMBIG[key] : text;
   const rate = Store.getSettings().ttsRate ?? 0.8;
   window.speechSynthesis.cancel();
 
   function speak() {
-    const utterance = new SpeechSynthesisUtterance(text);
+    const utterance = new SpeechSynthesisUtterance(speakText);
     utterance.lang = 'zh-TW';
     utterance.rate = rate;
     utterance.volume = 1.0;
@@ -220,7 +229,7 @@ export class Flashcard {
 
     // 新規カードは表面表示時に自動発音（設定が有効な場合）
     if (isNew && Store.getSettings().autoplayAudio) {
-      setTimeout(() => speakWord(wordData?.hanzi), 300);
+      setTimeout(() => speakWord(wordData?.hanzi, wordData?.pinyin_tones), 300);
     }
   }
 
@@ -295,7 +304,7 @@ export class Flashcard {
     speakBtn.setAttribute('aria-label', '発音を聴く');
     speakBtn.setAttribute('title', '発音を聴く');
     speakBtn.textContent = '🔊';
-    speakBtn.addEventListener('click', () => speakWord(word.hanzi));
+    speakBtn.addEventListener('click', () => speakWord(word.hanzi, word.pinyin_tones));
     backInner.appendChild(speakBtn);
 
     // 日本語意味（大、中央）
@@ -357,7 +366,7 @@ export class Flashcard {
     this.ratingContainer.classList.add('visible');
     // 自動読み上げ（設定で有効な場合、フリップアニメーション後）
     if (Store.getSettings().autoplayAudio) {
-      setTimeout(() => speakWord(this._currentWord?.hanzi), 150);
+      setTimeout(() => speakWord(this._currentWord?.hanzi, this._currentWord?.pinyin_tones), 150);
     }
   }
 

@@ -683,7 +683,7 @@ function renderBrowse() {
     if (speakBtn) {
       e.stopPropagation();
       const hanzi = speakBtn.dataset.hanzi;
-      if (hanzi) speakWord(hanzi);
+      if (hanzi) speakWord(hanzi, speakBtn.dataset.pinyinTones);
       return;
     }
     const card = e.target.closest('.word-card');
@@ -725,7 +725,7 @@ function _appendBrowsePage(container) {
           <div class="word-card__hanzi">${escapeHtml(word.hanzi)}</div>
           <div class="word-card__pinyin">${escapeHtml(word.pinyin)}</div>
         </div>
-        <button class="word-card__speak-btn" data-hanzi="${escapeHtml(word.hanzi)}" aria-label="発音を聴く" title="発音を聴く">🔊</button>
+        <button class="word-card__speak-btn" data-hanzi="${escapeHtml(word.hanzi)}" data-pinyin-tones="${escapeHtml(word.pinyin_tones || '')}" aria-label="発音を聴く" title="発音を聴く">🔊</button>
       </div>
       <div class="word-card__meaning">${escapeHtml(word.meaning_ja || '')}</div>
       ${word.meaning_en ? `<div class="word-card__meaning-en">${escapeHtml(word.meaning_en)}</div>` : ''}
