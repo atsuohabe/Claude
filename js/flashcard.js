@@ -16,8 +16,9 @@ if (window.speechSynthesis) {
 
 // 同一漢字で複数の読みがある場合、TTSに正しい読みを強制するための文脈語マッピング
 // キー: `漢字|pinyin_tones`, 値: 正しい読みが確定する文脈語
+// 注音符号を使うことで、単一文字を正確な読みで発音させる
 const READING_DISAMBIG = {
-  '行|xing2': '行走',  // xíng: TTS が háng と読むのを防ぐ
+  '行|xing2': 'ㄒㄧㄥˊ',
 };
 
 /**
